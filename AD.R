@@ -1,9 +1,9 @@
 library("PearsonDS")
 
-###AD Controls
+###AD Controls %remaining dataset
 control <- read.table("ADcontrolsredist.txt")
 
-###0-1 dataset
+###0-1 AD Control extracted each individual taxa dataset
 Firm <- as.numeric(control[1,])
 Actino <- as.numeric(control[2,])
 Proteo <- as.numeric(control[3,])
@@ -16,19 +16,19 @@ unlist(pearsonFitML(Proteo))
 unlist(pearsonFitML(Bacter))
 
 
-###fitted distribution dataset generation 0-1
+###fitted distribution taxa generation 0-1
 Firmicutes <- rpearsonI(n=1000, a=0.9977008, b=2.1005555, location=0.1063188, scale=0.9611892)
 Actinobacteria<- rpearsonI(n=1000, a=0.99874103, b=2.47718315, location=0.09764036, scale=1.03623409)
 Proteobacteria <- rpearsonI(n=1000, a=1.3711653, b=1.4778528, location=0.4542903, scale=0.4134097)
 Bacteroidetes <- rpearsonI(n=1000, a=2.2113205, b=0.6628346, location=-0.2730789, scale=1.2522455)
 
-###Histograms 0-1
+###Histograms of generated taxa 0-1
 hist(Firmicutes,100)
 hist(Actinobacteria,100)
 hist(Proteobacteria,100)
 hist(Bacteroidetes, 100)
 
-###0-100 dataset
+###0-100 AD Control extracted individual taxa dataset
 Firm1 <- as.numeric(control[1,])*100
 Actino1 <- as.numeric(control[2,])*100
 Proteo1 <- as.numeric(control[3,])*100
@@ -40,7 +40,7 @@ unlist(pearsonFitML(Actino1))
 unlist(pearsonFitML(Proteo1))
 unlist(pearsonFitML(Bacter1))
 
-###fitted distribution dataset generation 0-100
+###fitted distribution taxa generation 0-100
 Firmicutes1 <- rpearsonI(n=1000, a=0.9970149, b=2.0062602, location=10.6318818, scale=89.3067879)
 Actinobacteria1 <- rpearsonII(n=1000, a=0.840323, location=9.764036, scale=81.726210)
 Proteobacteria1 <- rpearsonI(n=1000, a=1.371166,  b=1.477854, location=45.429029, scale=41.340968)
@@ -56,11 +56,10 @@ hist(Bacteroidetes1, 100)
 
 ##########################
 
-###AD Flares with No Treatment
-
+###AD Flares with No Treatment %remaining dataset
 ADFlaresNT <- read.table("ADFlareNoTreatment.txt")
 
-###0-1 AD Flare No Treatment
+###0-1 AD Flare No Treatment extracted each individual taxa dataset
 FirmFNT <- as.numeric(ADFlaresNT[1,])
 ActinoFNT <- as.numeric(ADFlaresNT[2,])
 ProteoFNT <- as.numeric(ADFlaresNT[3,])
@@ -72,7 +71,7 @@ unlist(pearsonFitML(ActinoFNT))
 unlist(pearsonFitML(ProteoFNT))
 unlist(pearsonFitML(BacterFNT))
 
-###Fitted distribution dataset generation
+###Fitted distribution taxa generation
 
 FirmicutesFNT <- rpearsonI(n=1000, a=0.1166093, b=0.1248777, location=0.5898664, scale=0.3871436)
 ActinobacteriaFNT <- rpearsonI(n=1000, a=0.81383910,  b=0.34911813, location=-0.02031676, scale=0.73061272)
@@ -85,7 +84,7 @@ hist(ActinobacteriaFNT, 100)
 hist(ProteobacteriaFNT, 100)
 hist(BacteroidetesFNT, 100)
 
-###0-100 AD Flare No Treatment
+###0-100 AD Flare No Treatment extracted individual taxa dataset
 FirmFNT1 <- as.numeric(ADFlaresNT[1,])*100
 ActinoFNT1 <- as.numeric(ADFlaresNT[2,])*100
 ProteoFNT1 <- as.numeric(ADFlaresNT[3,])*100

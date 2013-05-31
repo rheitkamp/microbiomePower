@@ -17,7 +17,7 @@ ActinoADCparam <- pearsonFitML(Actino1)
 ProteoADCparam <- pearsonFitML(Proteo1)
 BacterADCparam <- pearsonFitML(Bacter1)
 
-#####################Backbone of AD loop#######################
+###Loop
 numrow <- 100
 numcol <- 5
 ADControl <- matrix(nrow=numrow,ncol=numcol)

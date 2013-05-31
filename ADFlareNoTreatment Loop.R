@@ -20,7 +20,7 @@ ActinobacteriaFNT <- rpearson(n=1000, params=ActinoFNTparam)
 ProteobacteriaFNT <- rpearson(n=1000, params=ProteoFNTparam)
 BacteroidetesFNT <- rpearson(n=1000, params=BacterFNTparam)
 
-numrow=1000
+numrow=100
 numcol=5
 ADFlareNT <- matrix(nrow=numrow,ncol=numcol)
 ADFlareNT <- data.frame(ADFlareNT)

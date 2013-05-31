@@ -1,4 +1,4 @@
-###This loop is not yet complete
+###AD Control Loop
 
 library("PearsonDS")
 
@@ -29,6 +29,8 @@ for (i in 1:size){
   ###Generate number for Bacteridetes
   rBacter <- rpearsonI(n=1, a=2.2098166, b=0.6798847, location=-12.4973479, scale=110.4140148)
   ADControl$Bacteroidetes[i] <- (total*rBacter)/100
+  
+  ###Remainder is placed in Others
   ADControl$Others[i] <- total - ADControl$Bacteroidetes[i]
   
 }

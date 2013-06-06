@@ -38,10 +38,11 @@ Planctomycetes <- rpearsonI(n=1000, a=1.95312e7, b=1.95312e7, location=0, scale=
 
 ###Loop
 numrow <- 100
-numcol <- 
-ADControl <- matrix(nrow=numrow,ncol=numcol)
-ADControl <- data.frame(ADControl)
-colnames(ADControl) <- c("Firmicutes", "Actinobacteria", "Proteobacteria", "Bacteroidetes", "Others")
+numcol <- dim(PRemainder)[2]
+names <- dimnames(PRemainder)[2]
+UpperRep <- matrix(nrow=numrow,ncol=numcol, dimnames=list(c(1:numrow),
+                                                          c(names)))
+
 size <- dim(ADControl)[1]
 
 for (i in 1:size){

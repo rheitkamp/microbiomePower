@@ -37,35 +37,74 @@ Nitrospira <- rpearsonI(n=1000, a=1.01231e7, b=4.04924e6, location=0, scale=1)
 Planctomycetes <- rpearsonI(n=1000, a=1.95312e7, b=1.95312e7, location=0, scale=1)
 
 ###Loop
-numrow <- 100
+numrow <- 50
 numcol <- dim(PRemainder)[2]
 names <- dimnames(PRemainder)[2]
-UpperRep <- matrix(nrow=numrow,ncol=numcol, dimnames=list(c(1:numrow),
-                                                          c(names)))
+UpperRep <- matrix(nrow=numrow,ncol=numcol)
 
-size <- dim(ADControl)[1]
+size <- dim(UpperRep)[1]
 
 for (i in 1:size){
-  total <- 100
-  ###Generate number for Firmicutes
-  ADControl$Firmicutes[i] <- rpearson(n=1, params=FirmADCparam)
-  total <- total - ADControl$Firmicutes[i]
+  total <- 1
+  ###Proteobacteria
+  UpperRep[i,1] <- rpearsonI(n=1, a=1.71339, b=0.559312, location=0, scale=1)  
+  total <- total - UpperRep[i,1]
   
-  ###Generate number for Actinobacteria
-  rActino <- rpearson(n=1, params=ActinoADCparam)
-  ADControl$Actinobacteria[i] <- (total*rActino)/100
-  total <- total - ADControl$Actinobacteria[i]
+  ###Firmicutes
+  r <- rpearsonI(n=1, a=4.65184, b=2.00553, location=0, scale=1)
+  UpperRep[i,2] <- total*r
+  total <- total - UpperRep[i,2]
   
-  ###Generate number for Proteobacteria
-  rProteo <- rpearson(n=1, params=ProteoADCparam)
-  ADControl$Proteobacteria[i] <- (total*rProteo)/100
-  total <- total - ADControl$Proteobacteria[i]
   
-  ###Generate number for Bacteridetes
-  rBacter <- rpearson(n=1, params=BacterADCparam)
-  ADControl$Bacteroidetes[i] <- (total*rBacter)/100
+  ###Bacteroidetes
+  r <- rpearsonI(n=1, a=13.5619, b=16.1382, location=0, scale=1)
+  UpperRep[i,3] <- total*r
+  total <- total - UpperRep[i,3]
   
-  ###Remainder is placed in Others
-  ADControl$Others[i] <- total - ADControl$Bacteroidetes[i]
+  ###Actinobacteria
+  r <- rpearsonI(n=1, a=102.259, b=117.162, location=0, scale=1)
+  UpperRep[i,4] <- total*r
+  total <- total - UpperRep[i,4]
   
+  ###Fusobacteria
+  r <- rpearsonI(n=1, a=17.8716, b=4.12579, location=0, scale=1)
+  UpperRep[i,5] <- total*r
+  total <- total - UpperRep[i,5]
+  
+  ###Cyanobacteria
+  r <- rpearsonI(n=1, a=7651.47, b=3797.4, location=0, scale=1)
+  UpperRep[i,6] <- total*r
+  total <- total - UpperRep[i,6]
+  
+  ###OD1
+  r <- rpearsonI(n=1, a=169010, b=169010, location=0, scale=1)
+  UpperRep[i,7] <- total*r
+  total <- total - UpperRep[i,7]
+  
+  ###TM7
+  r <- rpearsonI(n=1, a=15922.3, b=7784.23, location=0, scale=1)
+  UpperRep[i,8] <- total*r
+  total <- total - UpperRep[i,8]
+  
+  ###Deinococcus-Thermus
+  r <- rpearsonI(n=1, a=1.6435e6, b=766967, location=0, scale=1)
+  UpperRep[i,9] <- total*r
+  total <- total - UpperRep[i,9]
+ 
+  ###Nitrospira
+  r <- rpearsonI(n=1, a=1.01231e7, b=4.04924e6, location=0, scale=1)
+  UpperRep[i,10] <- total*r
+  total <- total - UpperRep[i,10]
+  
+  ###Planctomycetes
+  r <- rpearsonI(n=1, a=1.95312e7, b=1.95312e7, location=0, scale=1)
+  UpperRep[i,11] <- total*r
+  
+  ###Chloroflexi
+  UpperRep[i,12] <- total - UpperRep[i,11]
+  
+  ###BRC1
+  UpperRep[1:numrow,13] <- 0
 }
+
+barchart(x=UpperRep,horizontal=FALSE)

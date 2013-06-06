@@ -50,3 +50,5 @@ for (i in 1:size){
   
 }
 
+library(HMP)
+Barchart.data(ADControl)

@@ -39,8 +39,9 @@ Planctomycetes <- rpearsonI(n=1000, a=1.95312e7, b=1.95312e7, location=0, scale=
 ###Loop
 numrow <- 50
 numcol <- dim(PRemainder)[2]
-names <- dimnames(PRemainder)[2]
 UpperRep <- matrix(nrow=numrow,ncol=numcol)
+colnames(UpperRep) <- dimnames(PRemainder)[2]
+
 
 size <- dim(UpperRep)[1]
 
@@ -108,3 +109,37 @@ for (i in 1:size){
 }
 
 barchart(x=UpperRep,horizontal=FALSE)
+
+
+######################
+
+Proteobacteria <- rpearsonI(n=1000, a=1.7133906, b=0.5593122, location=0, scale=1)
+hist(Proteobacteria)
+Firmicutes <- rpearsonI(n=1000, a=0.7207408, b=3.4647458, location=0, scale=1)
+hist(Firmicutes)
+Bacteroidetes <- rpearsonI(n=1000, a=0.1034732, b=2.9488343, location=0, scale=1)
+hist(Bacteroidetes)
+Actinobacteria <- rpearsonI(n=1000, a=0.2883812, b=15.0510462, location=0, scale=1)
+hist(Actinobacteria)
+Fusobacteria <- rpearsonI(n=1000, a=0.02791087, b=1.56699613, location=0, scale=1)
+hist(Fusobacteria)
+Cyanobacteria <- rpearsonI(n=1000, a=0.3728329, b=137.7134274, location=0, scale=1)
+hist(Cyanobacteria)
+OD1 <- rpearsonI(n=1000, a=0.605873, b=903.682256, location=0, scale=1)
+hist(OD1)
+TM7 <- rpearsonI(n=1000, a=0.02130855, b=47.33101610, location=0, scale=1)
+hist(TM7)
+DT <- rpearsonI(n=1000, a=0.2498125, b=1665.1668542, location=0, scale=1)
+hist(DT)
+Nitrospira <- rpearsonI(n=1000, a=0.1735524, b=3470.8750587, location=0, scale=1)
+hist(Nitrospira)
+Planctomycetes <- rpearsonI(n=1000, a=1.561484e-02, b=1.561469e+03, location=0, scale=1)
+hist(Planctomycetes)
+Chloroflexi <- rpearsonI(n=1000, a=3.99896e-02, b=3.99892e+03, location=0, scale=1)
+hist(Chloroflexi)
+
+
+numrow <- 100
+numcol <- dim(PRemainder)[2]
+data <- matrix(nrow=numrow, ncol=numcol)
+names <- colnames(PRemainder)

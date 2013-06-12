@@ -40,7 +40,8 @@ Planctomycetes <- rpearsonI(n=1000, a=1.95312e7, b=1.95312e7, location=0, scale=
 numrow <- 50
 numcol <- dim(PRemainder)[2]
 UpperRep <- matrix(nrow=numrow,ncol=numcol)
-colnames(UpperRep) <- dimnames(PRemainder)[2]
+colnames(UpperRep) <- dimnames(PRemainder)[[2]]
+rownames(UpperRep) <- rownames(UpperRep, do.NULL= FALSE, prefix= "Sample")
 
 
 size <- dim(UpperRep)[1]
@@ -108,7 +109,8 @@ for (i in 1:size){
   UpperRep[1:numrow,13] <- 0
 }
 
-barchart(x=UpperRep,horizontal=FALSE)
+
+barchart(x=UpperRep,horizontal=FALSE, col=rainbow(13))
 
 
 ######################
@@ -139,7 +141,71 @@ Chloroflexi <- rpearsonI(n=1000, a=3.99896e-02, b=3.99892e+03, location=0, scale
 hist(Chloroflexi)
 
 
-numrow <- 100
+numrow <- 50
 numcol <- dim(PRemainder)[2]
 data <- matrix(nrow=numrow, ncol=numcol)
-names <- colnames(PRemainder)
+colnames(data) <- dimnames(PRemainder)[[2]]
+rownames(data) <- rownames(data, do.NULL= FALSE, prefix= "Sample")
+
+
+size <- dim(data)[1]
+
+for (i in 1:size){
+  total <- 1
+  
+  ###BRC1
+  data[i,13] <- 0
+  total <- total - data[i,13]
+  
+  ###Chloroflexi
+  data[i,12] <- rpearsonI(n=1, a=3.99896e-02, b=3.99892e+03, location=0, scale=1)
+  total <- total - data[i,12]
+  
+  ###Planctomycetes
+  data[i,11] <- rpearsonI(n=1, a=1.561484e-02, b=1.561469e+03, location=0, scale=1)
+  total <- total - data[i,11]
+  
+  ###Nitrospira
+  data[i,10] <- rpearsonI(n=1, a=0.1735524, b=3470.8750587, location=0, scale=1)
+  total <- total - data[i,10]
+  
+  ###Deinococcus-Thermus
+  data[i,9] <- rpearsonI(n=1, a=0.2498125, b=1665.1668542, location=0, scale=1)
+  total <- total - data[i,9]
+  
+  ###TM7
+  data[i,8] <- rpearsonI(n=1, a=0.02130855, b=47.33101610, location=0, scale=1)
+  total <- total - data[i,8]
+  
+  ###OD1
+  data[i,7] <- rpearsonI(n=1, a=0.605873, b=903.682256, location=0, scale=1)
+  total <- total - data[i,7]
+  
+  ###Cyanobacteria
+  data[i,6] <- rpearsonI(n=1, a=0.3728329, b=137.7134274, location=0, scale=1)
+  total <- total - data[i,6]
+  
+  ###Fusobacteria
+  data[i,5] <- rpearsonI(n=1, a=0.02791087, b=1.56699613, location=0, scale=1)
+  total <- total - data[i, 5]
+  
+  ###Bacteroidetes
+  data[i,3] <- rpearsonI(n=1, a=0.1034732, b=2.9488343, location=0, scale=1)
+  total <- total - data[i,3]
+  
+  ###Actinobacteria
+  data[i,4] <- rpearsonI(n=1, a=0.2883812, b=15.0510462, location=0, scale=1)
+  total <- total - data[i,4]
+  
+  ###Firmicutes
+  data[i,2] <- rpearsonI(n=1, a=0.7207408, b=3.4647458, location=0, scale=1)  
+  total <- total - data[i,2]
+  
+  ###Proteobacteria
+  data[i,1] <- total
+  
+  ###data[i,1] <- rpearsonI(n=1, a=1.7133906, b=0.5593122, location=0, scale=1)
+  
+}
+
+barchart(data,horizontal=FALSE, col=rainbow(13))

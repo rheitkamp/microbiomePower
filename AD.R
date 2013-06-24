@@ -135,7 +135,7 @@ numrow <- 100 ###Number of subjects/samples you want to generate
 numcol <- 5 ###Number of taxa
 ADFNT <- matrix(nrow=numrow,ncol=numcol)
 ADFNT <- data.frame(ADFNT)
-colnames(ADFNTl) <- c("Firmicutes", "Actinobacteria", "Proteobacteria", "Bacteroidetes", "Others") ###Names of columns
+colnames(ADFNT) <- c("Firmicutes", "Actinobacteria", "Proteobacteria", "Bacteroidetes", "Others") ###Names of columns
 size <- dim(ADFNT)[1]
 
 for (i in 1:size){

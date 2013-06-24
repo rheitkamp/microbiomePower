@@ -113,7 +113,7 @@ for (i in 1:size){
 barchart(x=UpperRep,horizontal=FALSE, col=rainbow(13))
 
 
-######################
+######Working#Backward######
 
 Proteobacteria <- rpearsonI(n=1000, a=1.7133906, b=0.5593122, location=0, scale=1)
 hist(Proteobacteria)
@@ -203,8 +203,6 @@ for (i in 1:size){
   
   ###Proteobacteria
   data[i,1] <- total
-  
-  ###data[i,1] <- rpearsonI(n=1, a=1.7133906, b=0.5593122, location=0, scale=1)
   
 }
 

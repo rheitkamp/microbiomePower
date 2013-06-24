@@ -6,4 +6,3 @@ getBetaParams <- function(mean, sd) {
   params <- c(alpha, beta)
   return(params)
 }
-getBetaParams(.7539, .2381)

@@ -1,0 +1,512 @@
+library("PearsonDS")
+ADFlaresNT <- read.table("ADFlareNoTreatment.txt")
+###0-100 AD Flare No Treatment extracted individual taxa dataset
+FirmFNT1 <- as.numeric(ADFlaresNT[1,])*100
+ActinoFNT1 <- as.numeric(ADFlaresNT[2,])*100
+ProteoFNT1 <- as.numeric(ADFlaresNT[3,])*100
+BacterFNT1 <- as.numeric(ADFlaresNT[4,])*100
+###Fitting distribution 0-100
+FirmFNTparam <- pearsonFitML(FirmFNT1)
+ActinoFNTparam <-pearsonFitML(ActinoFNT1)
+ProteoFNTparam <- pearsonFitML(ProteoFNT1)
+BacterFNTparam <- pearsonFitML(BacterFNT1)
+###Fitted distribution dataset generation
+FirmicutesFNT <- rpearson(n=1000, params=FirmFNTparam)
+ActinobacteriaFNT <- rpearson(n=1000, params=ActinoFNTparam)
+ProteobacteriaFNT <- rpearson(n=1000, params=ProteoFNTparam)
+BacteroidetesFNT <- rpearson(n=1000, params=BacterFNTparam)
+numrow=1000
+numcol=5
+ADFlareNT <- matrix(nrow=numrow,ncol=numcol)
+ADFlareNT <- data.frame(ADFlareNT)
+colnames(ADFlareNT) <- c("Firmicutes", "Actinobacteria", "Proteobacteria", "Bacteroidetes", "Others")
+size <- dim(ADFlareNT)[1]
+for (i in 1:size){
+total <- 100
+###Generate number for Firmicute and place into table
+ADFlareNT$Firmicutes[i] <- rpearson(n=1, params=FirmFNTparam)
+total <- total - ADFlareNT$Firmicutes[i]
+###Generate number for Actinobacteria and place into table
+rActinoFNT <- rpearson(n=1, params=ActinoFNTparam)
+ADFlareNT$Actinobacteria[i] <- (total*rActinoFNT)/100
+total <- total - ADFlareNT$Actinobacteria[i]
+###Generate number for Proteobacteria and place into table
+rProteoFNT <- rpearson(n=1, params=ProteoFNTparam)
+ADFlareNT$Proteobacteria[i] <- (total*rProteoFNT)/100
+total <- total - ADFlareNT$Proteobacteria[i]
+###Generate number for Bacteroidetes and place into table
+rBacterFNT <- rpearson(n=1, params=BacterFNTparam)
+ADFlareNT$Bacteroidetes[i] <- (total*rBacterFNT)/100
+###Remainder is placed into Others
+ADFlareNT$Others[i] <- total - ADFlareNT$Bacteroidetes[i]
+}
+Barchart.data(ADFlareNT)
+View(ADFlareNT)
+###AD Flare No Treatment Loop
+library("PearsonDS")
+ADFlaresNT <- read.table("ADFlareNoTreatment.txt")
+###0-100 AD Flare No Treatment extracted individual taxa dataset
+FirmFNT1 <- as.numeric(ADFlaresNT[1,])*100
+ActinoFNT1 <- as.numeric(ADFlaresNT[2,])*100
+ProteoFNT1 <- as.numeric(ADFlaresNT[3,])*100
+BacterFNT1 <- as.numeric(ADFlaresNT[4,])*100
+###Fitting distribution 0-100
+FirmFNTparam <- pearsonFitML(FirmFNT1)
+ActinoFNTparam <-pearsonFitML(ActinoFNT1)
+ProteoFNTparam <- pearsonFitML(ProteoFNT1)
+BacterFNTparam <- pearsonFitML(BacterFNT1)
+###Fitted distribution dataset generation
+FirmicutesFNT <- rpearson(n=1000, params=FirmFNTparam)
+ActinobacteriaFNT <- rpearson(n=1000, params=ActinoFNTparam)
+ProteobacteriaFNT <- rpearson(n=1000, params=ProteoFNTparam)
+BacteroidetesFNT <- rpearson(n=1000, params=BacterFNTparam)
+numrow=100
+numcol=5
+ADFlareNT <- matrix(nrow=numrow,ncol=numcol)
+ADFlareNT <- data.frame(ADFlareNT)
+colnames(ADFlareNT) <- c("Firmicutes", "Actinobacteria", "Proteobacteria", "Bacteroidetes", "Others")
+size <- dim(ADFlareNT)[1]
+for (i in 1:size){
+total <- 100
+###Generate number for Firmicute and place into table
+ADFlareNT$Firmicutes[i] <- rpearson(n=1, params=FirmFNTparam)
+total <- total - ADFlareNT$Firmicutes[i]
+###Generate number for Actinobacteria and place into table
+rActinoFNT <- rpearson(n=1, params=ActinoFNTparam)
+ADFlareNT$Actinobacteria[i] <- (total*rActinoFNT)/100
+total <- total - ADFlareNT$Actinobacteria[i]
+###Generate number for Proteobacteria and place into table
+rProteoFNT <- rpearson(n=1, params=ProteoFNTparam)
+ADFlareNT$Proteobacteria[i] <- (total*rProteoFNT)/100
+total <- total - ADFlareNT$Proteobacteria[i]
+###Generate number for Bacteroidetes and place into table
+rBacterFNT <- rpearson(n=1, params=BacterFNTparam)
+ADFlareNT$Bacteroidetes[i] <- (total*rBacterFNT)/100
+###Remainder is placed into Others
+ADFlareNT$Others[i] <- total - ADFlareNT$Bacteroidetes[i]
+}
+Barchart.data(ADFlareNT)
+rpearsonI(10,.5,.5)
+rpearsonI(10,.5,.5, 1, 1)
+rpearsonI(10,.5,.5, 1, 0)
+rpearsonI(10,.5,.5, 0,1)
+rpearsonI(100,.5,.5, 0,1)
+mean(rpearsonI(100,.5,.5, 0,1))
+sd(rpearsonI(100,.5,.5, 0,1))
+.5/(.5+.5)
+(.25)/2
+sqrt(.125)
+rpearsonI(10, 6.9523,2.2695,0,1)
+library("PearsonDS")
+rpearsonI(10, 6.9523,2.2695,0,1)
+a <- rpearsonI(10, 6.9523,2.2695,0,1)
+a <- rpearsonI(100, 6.9523,2.2695,0,1)
+hist(a,100)
+a <- rpearsonI(1000, 6.9523,2.2695,0,1)
+hist(a,100)
+mean(a)
+sd(a)
+help(sd)
+a <- rpearsonI(1000, -.1664,-.0543,0,1)
+hist(a)
+hist(a,10)
+a <- rpearsonI(1000, 6.9523,2.2695,0,1)
+hist(a,10)
+mean(a)
+sd(a)
+a <- rpearsonI(1000, .395865,.1292245,0,1)
+mean(a)
+sd(a)
+hist(a,10)
+a <- rpearsonI(1000, .812235,.26514,0,1)
+hist(a,10)
+sd(a)
+mean(a)
+hist(a,100)
+a <- rpearsonI(1000, .395865,.1.50857,0,1)
+a <- rpearsonI(1000, .395865,1.50857,0,1)
+hist(a,100)
+mean(a)
+sd(a)
+a <- rpearsonI(1000, 1.71339,.559312,0,1)
+mean(a)
+sd(a)
+hist(a,100)
+a <- rpearsonI(1000, 0.288381,15.051,0,1)
+hist(a,100)
+sd(a)
+mean(a)
+a <- rpearsonI(1000, 0.149222,3.59069,0,1)
+mean(a)
+sd(a)
+a <- rpearsonI(1000, 0.149222,3.59069,0,1)
+hist(a,100)
+hilbert <- function(n) { i <- 1:n; 1 / outer(i - 1, i, "+") }
+fix(hilbert)
+h8 <- hilbert(8); h8
+sh8 <- solve(h8)
+round(sh8 %*% h8, 3)
+A <- hilbert(4)
+A[] <- as.complex(A)
+## might not be supported on all platforms
+try(solve(A))
+a <- rpearsonI(1000, 1.71339,.559312,0,1)
+hist(a,100)
+b <- rpearsonI(1000, .720741, 3.46475,0,1)
+hist(b,100)
+a <- rpearsonI(10, 1.71339,.559312,0,1)
+a <- rpearsonI(1000, 1.71339,.559312,0,1)
+hist(a,10)
+a <- rpearsonI(10, 1.71339,.559312,0,1)
+hist(a,10)
+a
+a <- rpearsonI(50, 1.71339,.559312,0,1)
+hist(a,10)
+a
+mean(a)
+sd(a)
+a <- rpearsonI(100, 1.71339,.559312,0,1)
+a <- rpearsonI(1000, 1.71339,.559312,0,1)
+mean(a)
+a <- rpearsonI(5, 1.71339,.559312,0,1)
+b <- rpearsonI(5, .720741, 3.46475,0,1)
+a
+b
+library("PearsonDS")
+###AD Controls %remaining dataset
+control <- read.table("ADcontrolsredist.txt")
+###0-1 AD Control extracted each individual taxa dataset (proportions)
+Firm <- as.numeric(control[1,])
+Actino <- as.numeric(control[2,])
+Proteo <- as.numeric(control[3,])
+Bacter <- as.numeric(control[4,])
+###Distribution parameters 0-1 (proportions)
+FirmADCparam <- pearsonFitML(Firm)
+ActinoADCparam <- pearsonFitML(Actino)
+ProteoADCparam <- pearsonFitML(Proteo)
+BacterADCparam <- pearsonFitML(Bacter)
+###Histogram of taxa distributions
+hist(rpearson(n=1000, params=FirmADCparam), breaks=100)
+hist(rpearson(n=1000, params=ActinoADCparam), breaks=100)
+hist(rpearson(n=1000, params=ProteoADCparam), breaks=100)
+hist(rpearson(n=1000, params=BacterADCparam), breaks=100)
+###Generates AD Control dataset (proportions)###
+numrow <- 100 ###Number of subjects/samples you want to generate
+numcol <- 5 ###Number of taxa
+ADControl <- matrix(nrow=numrow,ncol=numcol)
+ADControl <- data.frame(ADControl)
+colnames(ADControl) <- c("Firmicutes", "Actinobacteria", "Proteobacteria", "Bacteroidetes", "Others")
+size <- dim(ADControl)[1]
+for (i in 1:size){
+total <- 1
+###Generate number for Firmicutes
+ADControl$Firmicutes[i] <- rpearson(n=1, params=FirmADCparam)
+total <- total - ADControl$Firmicutes[i]
+###Generate number for Actinobacteria
+rActino <- rpearson(n=1, params=ActinoADCparam)
+ADControl$Actinobacteria[i] <- (total*rActino)
+total <- total - ADControl$Actinobacteria[i]
+###Generate number for Proteobacteria
+rProteo <- rpearson(n=1, params=ProteoADCparam)
+ADControl$Proteobacteria[i] <- (total*rProteo)
+total <- total - ADControl$Proteobacteria[i]
+###Generate number for Bacteridetes
+rBacter <- rpearson(n=1, params=BacterADCparam)
+ADControl$Bacteroidetes[i] <- (total*rBacter)
+###Remainder is placed in Others
+ADControl$Others[i] <- total - ADControl$Bacteroidetes[i]
+}
+View(ADControl)
+for (i in 1:size){
+total <- 1
+###Generate number for Firmicutes
+ADControl$Firmicutes[i] <- rpearson(n=1, params=FirmADCparam)
+total <- total - ADControl$Firmicutes[i]
+###Generate number for Actinobacteria
+rActino <- rpearson(n=1, params=ActinoADCparam)
+ADControl$Actinobacteria[i] <- (total*rActino)
+total <- total - ADControl$Actinobacteria[i]
+###Generate number for Proteobacteria
+rProteo <- rpearson(n=1, params=ProteoADCparam)
+ADControl$Proteobacteria[i] <- (total*rProteo)
+total <- total - ADControl$Proteobacteria[i]
+###Generate number for Bacteridetes
+rBacter <- rpearson(n=1, params=BacterADCparam)
+ADControl$Bacteroidetes[i] <- (total*rBacter)
+###Remainder is placed in Others
+ADControl$Others[i] <- total - ADControl$Bacteroidetes[i]
+}
+View(ADControl)
+17.22/(100-75.39)
+(17.22/(100-75.39))8100
+(17.22/(100-75.39))100
+(17.22/(100-75.39))*100
+read.table("UpperRmean.txt")
+read.table("UpperRmean.txt")
+a <- read.table("UpperRmean.txt")
+a <- data.matrix(a)
+View(a)
+matrix(dimnames=a)
+rownames(a)
+matrix(dimnames=rownames(a))
+b <- rownames(a)
+data.frame(b)
+data.matrix(rownames.force=b)
+matrix(dimnames=b)
+dim(a)
+dim(a)[1]
+dim(a)[2]
+matrix(nrow=rowsize,ncol=colsize)
+rowsize <- dim(a)[1]
+colsize <- dim(a)[2]
+matrix(nrow=rowsize,ncol=colsize)
+b <- rownames(a)
+b
+list(b)
+b <- list(rownames(a))
+matrix(dimnames=b)
+matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+%remainder <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+percentremainder <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+percentremainder$mean[1] <- 75.390
+premainder <- data.frame(percentremainder)
+premainder$mean[1] <- 75.390
+View(premainder)
+View(percentremainder)
+premainder <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+premainder <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+premainder <- data.frame(premainder)
+View(premainder)
+premainder <- data.frame(premainder,row.names=mean)
+premainder <- data.frame(premainder,row.names="mean")
+View(premainder)
+premainder <- data.frame(matrix(nrow=rowsize,ncol=colsize, dimnames=b))
+View(premainder)
+premainder <- data.frame(mean)
+mean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+premainder <- data.frame(mean)
+View(premainder)
+premainder$mean[1] <- 75.390
+View(premainder)
+View(a)
+premainder$mean[1] <- a$mean[1]
+a <- data.frame(a)
+premainder$mean[1] <- a$mean[1]
+View(premainder)
+mean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+premainder <- data.frame(mean)
+premainder$mean[1] <- a$mean[1]
+View(premainder)
+a <- read.table("UpperRmean.txt")
+a <- data.frame(a)
+b <- list(rownames(a))
+pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+pmean <- matrix(dimnames=b)
+rowsize <- dim(a)[1]
+colsize <- dim(a)[2]
+pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+premainder <- data.frame(mean)
+source('~/data sim/Get Parameters from mean etc.R')
+source('~/.active-rstudio-document')
+getBetaParams(75, 23)
+Planctomycetes <- c(0.001, 0.008)
+Chloroflexi <- c(0.001, 0.005)
+BRC1 <- c(0.000, 0.000)
+Prot1<- as.numeric(Proteobacteria)
+getBetaParams <- function(mean,sd) {
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)(m/(sd^2*n^2)-1)
+beta <- m * alpha
+params <- c(alpha, beta)
+return(params)
+}
+getBetaParams(mean = 75.39, sd = 23.81)
+source('~/.active-rstudio-document')
+getBetaParams <- function(u,s) {
+m <- (1-u)/u
+n <- 1 + m
+alpha <- (1/n)(m/(s^2*n^2)-1)
+beta <- m * alpha
+params <- c(alpha, beta)
+return(params)
+}
+getBetaParams(u = 75.39, s = 23.81)
+cv <- function(x) sd(x)/mean(x)
+cv(1:10)
+cv
+cv(1:2)
+cv(1)
+cv(1:1)
+cv(1:10)
+lapply(lst,cv)
+norm <- function(x) sqrt(x%*%x)
+norm(1:4)
+(function(x, y){ z <- x^2 + y^2; x+y+z })(0:7, 1)
+(function(x, y){ z <- x^2 + y^2;
+x+y+z })(0:7, 1)
+(function(x, y){ z <- x^2 + y^2
+x+y+z })(0:7, 1)
+(function(x, y){ z <- x^2 + y^2; x+y+z })(2, 1)
+a <- function(x, y){ z <- x^2 + y^2; x+y+z }
+a(2, 1)
+a(1, 1)
+getBetaParams <- function(mean, sd) {
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)(m/(sd^2*n^2)-1)
+beta <- m * alpha
+return(alpha, beta)
+}
+getBetaParams(mean = 75.39, sd = 23.81)
+getBetaParams(75.39, 23.81)
+getBetaParams <- function(mean, sd) {
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)(m/(sd^2*n^2)-1)
+beta <- m * alpha
+params <- c(alpha, beta)
+getBetaParams <- function(mean, sd) {
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)(m/(sd^2*n^2)-1)
+beta <- m * alpha
+}
+getBetaParams(75.39, 23.81)
+getBetaParams <- function(mean, sd) {
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)(m/(sd^2*n^2)-1)
+beta <- m * alpha
+alpha,beta
+alpha
+c(alpha, beta)
+a <- function(x,y){
+m <- (1-x)/x
+n <- 1 + m
+al <- (1/n)(m/(y**2 * n**2)-1)
+be <- m * al
+return(al,be)
+}
+a <- function(x,y){
+m <- (1-x)/x
+n <- 1 + m
+al <- (1/n)(m/(y**2 * n**2)-1)
+be <- m * al
+return(c(al,be))
+}
+a(75,23)
+x <- 75
+y <- 23
+a <- function(x,y){
+m <- (1-x)/x
+n <- 1 + m
+al <- (1/n)(m/(y**2 * n**2)-1)
+be <- m * al
+return(c(al,be))
+}
+x <- 75
+y <- 23
+fix(a)
+m <- (1-x)/x
+n <- 1 + m
+al <- (1/n)(m/(y**2 * n**2)-1)
+al <- (1/n)(m/(y^2 * n^2)-1)
+be <- m * al
+a <- read.table("UpperRmean.txt")
+a <- data.frame(a)
+a <- read.table("UpperRmean.txt")
+rowsize <- dim(a)[1]
+colsize <- dim(a)[2]
+b <- list(rownames(a))
+pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+premainder <- data.frame(mean)
+premainder <- data.frame(dimnames=b)
+View(premainder)
+premainder <- data.frame(row.names=pmean)
+premainder <- data.frame(pmean)
+View(premainder)
+pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+premainder <- data.frame(pmean)
+View(premainder)
+total <- 100
+premainder$mean[1] <- a$mean[1]
+View(premainder)
+pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+premainder <- data.frame(pmean)
+total <- 100
+a <- read.table("UpperRmean.txt")
+rowsize <- dim(a)[1]
+colsize <- dim(a)[2]
+b <- list(rownames(a))
+pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+premainder <- data.frame(pmean)
+View(premainder)
+premainder$Proteobacteria[1] <- a$Proteobacteria[1]
+View(premainder)
+premainder$Proteobacteria[1,] <- a$Proteobacteria[1,]
+View(premainder)
+premainder$Proteobacteria[1,1] <- a$Proteobacteria[1,1]
+View(premainder)
+View(a)
+View(a)
+edit(a)
+a$Proteobacteria[1]
+a$Proteobacteria[1,]
+premainder[1,1] <- a[1,1]
+View(premainder)
+a <- read.table("UpperRmean.txt")
+rowsize <- dim(a)[1]
+colsize <- dim(a)[2]
+b <- list(rownames(a))
+pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+premainder <- data.frame(pmean)
+total <- 100
+premainder[Proteobacteria,] <- a[Proteobacteria,]
+premainder["Proteobacteria",] <- a["Proteobacteria",]
+View(premainder)
+a <- read.table("UpperRmean.txt")
+rowsize <- dim(a)[1]
+colsize <- dim(a)[2]
+b <- colnames(a)
+pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+b <- list(colnames(a))
+pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+View(premainder)
+View(pmean)
+View(a)
+b <- list(rownames(a))
+pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
+View(pmean)
+b <- list(colnames(a))
+fix(b)
+dimnames(a)
+pmean <- matrix(dim)
+pmean <- matrix(dimnames=dims)
+dims <- dimnames(a)
+pmean <- matrix(dimnames=dims)
+pmean <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+View(pmean)
+View(a)
+premainder <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+premainder <- data.frame(pmean)
+premainder <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+premainder[1,1] <- a[1,1]
+View(premainder)
+a <- read.table("UpperRmean.txt")
+rowsize <- dim(a)[1]
+colsize <- dim(a)[2]
+dims <- dimnames(a)
+PRemainder <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+total <- 100
+PRemainder[1,1] <- a[1,1]
+total - PRemainder[1,1]
+PRemainder[1,1] <- a[1,1]/100
+total <- 100
+total - a[1,1]
+total <- total - a[1,1]
+k <- 1
+PRemainder[k,1] <- a[k,1]/100
+View(PRemainder)
+total <- total - a[k,1]
+k <- k + 1

@@ -77,7 +77,7 @@ BFNT <- pearsonFitML(as.numeric(PRFNT[4,]))
 
 ###ADFNT dataset
 colsize <- dim(PRFNT)[1]
-rowsize <- 10
+rowsize <- 100
 ADFNT <- matrix(nrow=rowsize, ncol=colsize)
 colnames(ADFNT) <- dimnames(PRFNT)[[1]]
 rownames(ADFNT) <- rownames(ADFNT, do.NULL= FALSE, prefix= "Sample")

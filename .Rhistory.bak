@@ -1,178 +1,453 @@
-library("PearsonDS")
 ADFlaresNT <- read.table("ADFlareNoTreatment.txt")
-###0-100 AD Flare No Treatment extracted individual taxa dataset
-FirmFNT1 <- as.numeric(ADFlaresNT[1,])*100
-ActinoFNT1 <- as.numeric(ADFlaresNT[2,])*100
-ProteoFNT1 <- as.numeric(ADFlaresNT[3,])*100
-BacterFNT1 <- as.numeric(ADFlaresNT[4,])*100
-###Fitting distribution 0-100
-FirmFNTparam <- pearsonFitML(FirmFNT1)
-ActinoFNTparam <-pearsonFitML(ActinoFNT1)
-ProteoFNTparam <- pearsonFitML(ProteoFNT1)
-BacterFNTparam <- pearsonFitML(BacterFNT1)
-###Fitted distribution dataset generation
-FirmicutesFNT <- rpearson(n=1000, params=FirmFNTparam)
-ActinobacteriaFNT <- rpearson(n=1000, params=ActinoFNTparam)
-ProteobacteriaFNT <- rpearson(n=1000, params=ProteoFNTparam)
-BacteroidetesFNT <- rpearson(n=1000, params=BacterFNTparam)
-numrow=1000
-numcol=5
-ADFlareNT <- matrix(nrow=numrow,ncol=numcol)
-ADFlareNT <- data.frame(ADFlareNT)
-colnames(ADFlareNT) <- c("Firmicutes", "Actinobacteria", "Proteobacteria", "Bacteroidetes", "Others")
-size <- dim(ADFlareNT)[1]
-for (i in 1:size){
-total <- 100
-###Generate number for Firmicute and place into table
-ADFlareNT$Firmicutes[i] <- rpearson(n=1, params=FirmFNTparam)
-total <- total - ADFlareNT$Firmicutes[i]
-###Generate number for Actinobacteria and place into table
-rActinoFNT <- rpearson(n=1, params=ActinoFNTparam)
-ADFlareNT$Actinobacteria[i] <- (total*rActinoFNT)/100
-total <- total - ADFlareNT$Actinobacteria[i]
-###Generate number for Proteobacteria and place into table
-rProteoFNT <- rpearson(n=1, params=ProteoFNTparam)
-ADFlareNT$Proteobacteria[i] <- (total*rProteoFNT)/100
-total <- total - ADFlareNT$Proteobacteria[i]
-###Generate number for Bacteroidetes and place into table
-rBacterFNT <- rpearson(n=1, params=BacterFNTparam)
-ADFlareNT$Bacteroidetes[i] <- (total*rBacterFNT)/100
-###Remainder is placed into Others
-ADFlareNT$Others[i] <- total - ADFlareNT$Bacteroidetes[i]
+b <- read.table("ADFNTdata.txt")
+rowsize <- dim(b)[1]
+colsize <- dim(b)[2]
+dims <- dimnames(b)
+PRFNT <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:colsize){
+total <- apply(X=b, MARGIN=2, sum)[i]
+PR[1,i] <- b[1,i]
+total <- total - b[1,i]
+for(k in 2:rowsize){
+PR[k,i] <- b[k,i]/total
+total <- total - b[k,i]
 }
-Barchart.data(ADFlareNT)
-View(ADFlareNT)
-###AD Flare No Treatment Loop
-library("PearsonDS")
-ADFlaresNT <- read.table("ADFlareNoTreatment.txt")
-###0-100 AD Flare No Treatment extracted individual taxa dataset
-FirmFNT1 <- as.numeric(ADFlaresNT[1,])*100
-ActinoFNT1 <- as.numeric(ADFlaresNT[2,])*100
-ProteoFNT1 <- as.numeric(ADFlaresNT[3,])*100
-BacterFNT1 <- as.numeric(ADFlaresNT[4,])*100
-###Fitting distribution 0-100
-FirmFNTparam <- pearsonFitML(FirmFNT1)
-ActinoFNTparam <-pearsonFitML(ActinoFNT1)
-ProteoFNTparam <- pearsonFitML(ProteoFNT1)
-BacterFNTparam <- pearsonFitML(BacterFNT1)
-###Fitted distribution dataset generation
-FirmicutesFNT <- rpearson(n=1000, params=FirmFNTparam)
-ActinobacteriaFNT <- rpearson(n=1000, params=ActinoFNTparam)
-ProteobacteriaFNT <- rpearson(n=1000, params=ProteoFNTparam)
-BacteroidetesFNT <- rpearson(n=1000, params=BacterFNTparam)
-numrow=100
-numcol=5
-ADFlareNT <- matrix(nrow=numrow,ncol=numcol)
-ADFlareNT <- data.frame(ADFlareNT)
-colnames(ADFlareNT) <- c("Firmicutes", "Actinobacteria", "Proteobacteria", "Bacteroidetes", "Others")
-size <- dim(ADFlareNT)[1]
-for (i in 1:size){
-total <- 100
-###Generate number for Firmicute and place into table
-ADFlareNT$Firmicutes[i] <- rpearson(n=1, params=FirmFNTparam)
-total <- total - ADFlareNT$Firmicutes[i]
-###Generate number for Actinobacteria and place into table
-rActinoFNT <- rpearson(n=1, params=ActinoFNTparam)
-ADFlareNT$Actinobacteria[i] <- (total*rActinoFNT)/100
-total <- total - ADFlareNT$Actinobacteria[i]
-###Generate number for Proteobacteria and place into table
-rProteoFNT <- rpearson(n=1, params=ProteoFNTparam)
-ADFlareNT$Proteobacteria[i] <- (total*rProteoFNT)/100
-total <- total - ADFlareNT$Proteobacteria[i]
-###Generate number for Bacteroidetes and place into table
-rBacterFNT <- rpearson(n=1, params=BacterFNTparam)
-ADFlareNT$Bacteroidetes[i] <- (total*rBacterFNT)/100
-###Remainder is placed into Others
-ADFlareNT$Others[i] <- total - ADFlareNT$Bacteroidetes[i]
 }
-Barchart.data(ADFlareNT)
-rpearsonI(10,.5,.5)
-rpearsonI(10,.5,.5, 1, 1)
-rpearsonI(10,.5,.5, 1, 0)
-rpearsonI(10,.5,.5, 0,1)
-rpearsonI(100,.5,.5, 0,1)
-mean(rpearsonI(100,.5,.5, 0,1))
-sd(rpearsonI(100,.5,.5, 0,1))
-.5/(.5+.5)
-(.25)/2
-sqrt(.125)
-rpearsonI(10, 6.9523,2.2695,0,1)
-library("PearsonDS")
-rpearsonI(10, 6.9523,2.2695,0,1)
-a <- rpearsonI(10, 6.9523,2.2695,0,1)
-a <- rpearsonI(100, 6.9523,2.2695,0,1)
-hist(a,100)
-a <- rpearsonI(1000, 6.9523,2.2695,0,1)
-hist(a,100)
-mean(a)
-sd(a)
-help(sd)
-a <- rpearsonI(1000, -.1664,-.0543,0,1)
-hist(a)
-hist(a,10)
-a <- rpearsonI(1000, 6.9523,2.2695,0,1)
-hist(a,10)
-mean(a)
-sd(a)
-a <- rpearsonI(1000, .395865,.1292245,0,1)
-mean(a)
-sd(a)
-hist(a,10)
-a <- rpearsonI(1000, .812235,.26514,0,1)
-hist(a,10)
-sd(a)
-mean(a)
-hist(a,100)
-a <- rpearsonI(1000, .395865,.1.50857,0,1)
-a <- rpearsonI(1000, .395865,1.50857,0,1)
-hist(a,100)
-mean(a)
-sd(a)
-a <- rpearsonI(1000, 1.71339,.559312,0,1)
-mean(a)
-sd(a)
-hist(a,100)
-a <- rpearsonI(1000, 0.288381,15.051,0,1)
-hist(a,100)
-sd(a)
-mean(a)
-a <- rpearsonI(1000, 0.149222,3.59069,0,1)
-mean(a)
-sd(a)
-a <- rpearsonI(1000, 0.149222,3.59069,0,1)
-hist(a,100)
-hilbert <- function(n) { i <- 1:n; 1 / outer(i - 1, i, "+") }
-fix(hilbert)
-h8 <- hilbert(8); h8
-sh8 <- solve(h8)
-round(sh8 %*% h8, 3)
-A <- hilbert(4)
-A[] <- as.complex(A)
-## might not be supported on all platforms
-try(solve(A))
-a <- rpearsonI(1000, 1.71339,.559312,0,1)
-hist(a,100)
-b <- rpearsonI(1000, .720741, 3.46475,0,1)
-hist(b,100)
-a <- rpearsonI(10, 1.71339,.559312,0,1)
-a <- rpearsonI(1000, 1.71339,.559312,0,1)
-hist(a,10)
-a <- rpearsonI(10, 1.71339,.559312,0,1)
-hist(a,10)
-a
-a <- rpearsonI(50, 1.71339,.559312,0,1)
-hist(a,10)
-a
-mean(a)
-sd(a)
-a <- rpearsonI(100, 1.71339,.559312,0,1)
-a <- rpearsonI(1000, 1.71339,.559312,0,1)
-mean(a)
-a <- rpearsonI(5, 1.71339,.559312,0,1)
-b <- rpearsonI(5, .720741, 3.46475,0,1)
-a
-b
-library("PearsonDS")
+View(PRFNT)
+b <- read.table("ADFNTdata.txt")
+rowsize <- dim(b)[1]
+colsize <- dim(b)[2]
+dims <- dimnames(b)
+PRFNT <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:colsize){
+total <- apply(X=b, MARGIN=2, sum)[i]
+PRFNT[1,i] <- b[1,i]
+total <- total - b[1,i]
+for(k in 2:rowsize){
+PRFNT[k,i] <- b[k,i]/total
+total <- total - b[k,i]
+}
+}
+View(PRFNT)
+colsize <- dim(PRFNT)[1]
+rowsize <- 10
+ADFNT <- matrix(nrow=rowsize, ncol=colsize)
+colnames(ADFNT) <- dimnames(PRFNT)[[1]]
+rownames(ADFNT) <- rownames(ADFNT, do.NULL= FALSE, prefix= "Sample")
+for (i in 1:rowsize){
+total <- 1
+ADFNT[i,1] <- rpearson(n=1, params=F)
+total <- total - ADFNT[i,1]
+R <- rpearson(n=1, params=A)
+ADFNT[i,2] <- total * R
+total <- total - ADFNT[i,2]
+R <- rpearson(n=1, params=P)
+ADFNT[i,3] <- total * R
+total <- total - ADFNT[i,3]
+R <- rpearson(n=1, params=B)
+ADFNT[i,4] <- total * R
+ADFNT[i,5] <- total - ADFNT[i,4]
+}
+View(ADFNT)
+apply(ADFNT,1,sum)
+apply(ADFNT,2,mean)
+View(ADControl)
+apply(ADControl,2,mean)
+apply(ADControl,1,mean)
+apply(ADControl,1,sum)
+###Params
+F <- pearsonFitML(as.numeric(PRFNT[1,]))
+A <- pearsonFitML(as.numeric(PRFNT[2,]))
+P <- pearsonFitML(as.numeric(PRFNT[3,]))
+B <- pearsonFitML(as.numeric(PRFNT[4,]))
+colsize <- dim(PRFNT)[1]
+rowsize <- 10
+ADFNT <- matrix(nrow=rowsize, ncol=colsize)
+colnames(ADFNT) <- dimnames(PRFNT)[[1]]
+rownames(ADFNT) <- rownames(ADFNT, do.NULL= FALSE, prefix= "Sample")
+for (i in 1:rowsize){
+total <- 1
+ADFNT[i,1] <- rpearson(n=1, params=F)
+total <- total - ADFNT[i,1]
+R <- rpearson(n=1, params=A)
+ADFNT[i,2] <- total * R
+total <- total - ADFNT[i,2]
+R <- rpearson(n=1, params=P)
+ADFNT[i,3] <- total * R
+total <- total - ADFNT[i,3]
+R <- rpearson(n=1, params=B)
+ADFNT[i,4] <- total * R
+ADFNT[i,5] <- total - ADFNT[i,4]
+}
+View(ADFNT)
+library(PearsonDS)
+library(HMP)
+set.seed(123)
+###AD Controls %remaining dataset
+###control <- read.table("ADcontrolsredist.txt")
+###AD Control creates the %remaining dataset
+b <- read.table("ADControlsData.txt")
+rowsize <- dim(b)[1]
+colsize <- dim(b)[2]
+dims <- dimnames(b)
+PR <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:colsize){
+total <- apply(X=b, MARGIN=2, sum)[i]
+PR[1,i] <- b[1,i]
+total <- total - b[1,i]
+for(k in 2:rowsize){
+PR[k,i] <- b[k,i]/total
+total <- total - b[k,i]
+}
+}
+###Params
+F <- pearsonFitML(as.numeric(PR[1,]))
+A <- pearsonFitML(as.numeric(PR[2,]))
+P <- pearsonFitML(as.numeric(PR[3,]))
+B <- pearsonFitML(as.numeric(PR[4,]))
+###AD Control dataset
+colsize <- dim(PR)[1]
+rowsize <- 10
+ADControl <- matrix(nrow=rowsize, ncol=colsize)
+colnames(ADControl) <- dimnames(PR)[[1]]
+rownames(ADControl) <- rownames(ADControl, do.NULL= FALSE, prefix= "Sample")
+for (i in 1:rowsize){
+total <- 1
+ADControl[i,1] <- rpearson(n=1, params=F)
+total <- total - ADControl[i,1]
+R <- rpearson(n=1, params=A)
+ADControl[i,2] <- total * R
+total <- total - ADControl[i,2]
+R <- rpearson(n=1, params=P)
+ADControl[i,3] <- total * R
+total <- total - ADControl[i,3]
+R <- rpearson(n=1, params=B)
+ADControl[i,4] <- total * R
+ADControl[i,5] <- total - ADControl[i,4]
+}
+###AD Flares with No Treatment %remaining dataset
+b <- read.table("ADFNTdata.txt")
+rowsize <- dim(b)[1]
+colsize <- dim(b)[2]
+dims <- dimnames(b)
+PRFNT <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:colsize){
+total <- apply(X=b, MARGIN=2, sum)[i]
+PRFNT[1,i] <- b[1,i]
+total <- total - b[1,i]
+for(k in 2:rowsize){
+PRFNT[k,i] <- b[k,i]/total
+total <- total - b[k,i]
+}
+}
+###Params
+FFNT <- pearsonFitML(as.numeric(PRFNT[1,]))
+AFNT <- pearsonFitML(as.numeric(PRFNT[2,]))
+PFNT <- pearsonFitML(as.numeric(PRFNT[3,]))
+BFNT <- pearsonFitML(as.numeric(PRFNT[4,]))
+###ADFNT dataset
+colsize <- dim(PRFNT)[1]
+rowsize <- 10
+ADFNT <- matrix(nrow=rowsize, ncol=colsize)
+colnames(ADFNT) <- dimnames(PRFNT)[[1]]
+rownames(ADFNT) <- rownames(ADFNT, do.NULL= FALSE, prefix= "Sample")
+for (i in 1:rowsize){
+total <- 1
+ADFNT[i,1] <- rpearson(n=1, params=FFNT)
+total <- total - ADFNT[i,1]
+R <- rpearson(n=1, params=AFNT)
+ADFNT[i,2] <- total * R
+total <- total - ADFNT[i,2]
+R <- rpearson(n=1, params=PFNT)
+ADFNT[i,3] <- total * R
+total <- total - ADFNT[i,3]
+R <- rpearson(n=1, params=BFNT)
+ADFNT[i,4] <- total * R
+ADFNT[i,5] <- total - ADFNT[i,4]
+}
+View(ADControl)
+View(ADFNT)
+apply(ADControl,1,mean)
+apply(ADControl,2,mean)
+apply(ADFNT,2,mean)
+R = 100
+alpha = numeric(R)
+for (i in 1:R) {
+group1 = rnorm(10, mean= 0.75, sd= 1.9)
+group2 = rnorm(10, mean= 2.33, sd= 1.9)
+alpha[i] = t.test(group1, group2)$p.value
+}
+mean(alpha<0.5)
+R = 100
+alpha = numeric(R)
+for (i in 1:R) {
+group1 = rnorm(10, mean= 0.75, sd= 1.9)
+group2 = rnorm(10, mean= 2.33, sd= 1.9)
+alpha[i] = t.test(group1, group2)$p.value
+}
+mean(alpha<0.5)
+data(sleep)
+str(sleep)
+attach(sleep)
+tapply(extra,group,mean)
+tapply(extra,group,sd)
+tapply(extra,group,length)
+t.test(extra~group)
+power.t.test(n=10, delta=(2.33-.75), sd=1.9, sig.level=0.05, type="two.sample", alternative="two.sided")
+detach(sleep)
+1.789010 + 2.002249
+(1.789010 + 2.002249).2
+(1.789010 + 2.002249)/2
+R = 100
+alpha = numeric(R)
+for (i in 1:R) {
+group1 = rnorm(10, mean= .75, sd= 1.9)
+group2 = rnorm(10, mean= 2.33, sd= 1.9)
+alpha[i] = t.test(group1,group2)$p.value
+}
+mean(alpha<0.5)
+attach(sleep)
+R = 100
+alpha = numeric(R)
+for (i in 1:R) {
+group1 = rnorm(10, mean= .75, sd= 1.9)
+group2 = rnorm(10, mean= 2.33, sd= 1.9)
+alpha[i] = t.test(group1,group2)$p.value
+}
+mean(alpha<0.5)
+R <- 100
+alpha <- numeric(R)
+for (i in 1:R) {
+group1 <- rnorm(10, mean= .75, sd= 1.9)
+group2 <- rnorm(10, mean= 2.33, sd= 1.9)
+alpha[i] <- t.test(group1,group2)$p.value
+}
+mean(alpha<0.5)
+R <- 999
+alpha <- numeric(R)
+for (i in 1:R) {
+group1 <- rnorm(10, mean= .75, sd= 1.9)
+group2 <- rnorm(10, mean= 2.33, sd= 1.9)
+alpha[i] <- t.test(group1,group2)$p.value
+}
+mean(alpha<0.5)
+R = 999
+alpha = numeric(R)
+for (i in 1:R) {
+group1 = rnorm(10, mean=.75, sd=1.9)
+group2 = rnorm(10, mean=2.33, sd=1.9)
+alpha[i] = t.test(group1,group2)$p.value
+}
+mean(alpha<.05)
+R = 999
+alpha = numeric(R)
+for (i in 1:R) {
+group1 = rnorm(10, mean=.75, sd=1.9)
+group2 = rnorm(10, mean=2.33, sd=1.9)
+alpha[i] = t.test(group1,group2)$p.value
+}
+mean(alpha<.05)
+R <- 999
+alpha <- numeric(R)
+for (i in 1:R) {
+group1 <- rnorm(10, mean= .75, sd= 1.9)
+group2 <- rnorm(10, mean= 2.33, sd= 1.9)
+alpha[i] <- t.test(group1,group2)$p.value
+}
+mean(alpha<0.05)
+detach(sleep)
+SD(ADcontrol)
+std(ADcontrol)
+sd(ADControl)
+ad(ADFNT)
+sd(ADFNT)
+mean(ADControl)
+mean(ADFNT)
+t.test(ADControl)
+t.test(ADControl~ADFNT)
+(0.1870859+0.3161735)/2
+power.t.test(n=10,delta=0,sd=0.2516297,sig.level=0.05,type="two.sample", alternative="two.sided")
+power.t.test(n=100,delta=0,sd=0.2516297,sig.level=0.05,type="two.sample", alternative="two.sided")
+ADcontrol
+ADControl
+mean(ADControl)
+hist(ADControl)
+hist(ADControl[1,])
+ADControl[1,]
+hist(ADControl[,1])
+mean(ADControl[,1])
+ADControl[,1]
+install.packages("compute.es")
+library("compute.es", lib.loc="C:/Users/Sylvia.Cheng/Documents/R/R-3.0.1/library")
+median(ADControl)
+median(ADFNT)
+mean(ADControl)
+mean(ADFNT)
+mean(ADControl[,1])
+mean(ADFNT[,1])
+sd(ADControl[,1])
+sd(ADFNT[,1])
+mes(m.1=0.4310957,m.2=0.7906224,sd.1=0.2220954,sd.2=0.1874553,n.1=10,n.2=10)
+group.data <- list(ADControl,ADFNT)
+Xmcupo.effectsize(group.data)
+data(saliva)
+data(throat)
+group.data <- list(saliva, throat)
+group.data
+group.AD <- list(ADControl,ADFNT)
+group.AD
+View(ADFNT)
+###ADFNT creates %remaining dataset
+b <- read.table("ADFNTdata.txt")
+rowsize <- dim(b)[1]
+colsize <- dim(b)[2]
+dims <- dimnames(b)
+PRFNT <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:colsize){
+total <- apply(X=b, MARGIN=2, sum)[i]
+PRFNT[1,i] <- b[1,i]
+total <- total - b[1,i]
+for(k in 2:rowsize){
+PRFNT[k,i] <- b[k,i]/total
+total <- total - b[k,i]
+}
+}
+Xmcupo.effectsize(group.data)
+Xmcupo.sevsample(group.data, 15)
+Xmcupo.sevsample(group.AD, 15)
+group.AD
+View(ADFlaresNT)
+b <- read.table("ADFNTdata.txt")
+rowsize <- dim(b)[1]
+colsize <- dim(b)[2]
+dims <- dimnames(b)
+PRFNT <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:colsize){
+total <- apply(X=b, MARGIN=2, sum)[i]
+PRFNT[1,i] <- b[1,i]
+total <- total - b[1,i]
+for(k in 2:rowsize){
+PRFNT[k,i] <- b[k,i]/total
+total <- total - b[k,i]
+}
+}
+View(ADFlaresNT)
+b <- read.table("ADFNTdata.txt")
+rowsize <- dim(b)[1]
+colsize <- dim(b)[2]
+dims <- dimnames(b)
+PRFNT <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:colsize){
+total <- apply(X=b, MARGIN=2, sum)[i]
+PRFNT[1,i] <- b[1,i]
+total <- total - b[1,i]
+for(k in 2:rowsize){
+PRFNT[k,i] <- b[k,i]/total
+total <- total - b[k,i]
+}
+}
+View(ADFlaresNT)
+b <- read.table("ADFNTdata.txt")
+View(ADFlaresNT)
+View(ADFlaresNT)
+total <- apply(X=b, MARGIN=2, sum)[4]
+fix(total)
+PRFNT[1,4] <- b[1,4]
+total <- total - b[1,4]
+PRFNT[k,4] <- b[k,4]/total
+total <- total - b[k,4]
+fix(total)
+View(ADFlaresNT)
+###Params
+FFNT <- pearsonFitML(as.numeric(PRFNT[1,]))
+AFNT <- pearsonFitML(as.numeric(PRFNT[2,]))
+PFNT <- pearsonFitML(as.numeric(PRFNT[3,]))
+BFNT <- pearsonFitML(as.numeric(PRFNT[4,]))
+###ADFNT dataset
+colsize <- dim(PRFNT)[1]
+rowsize <- 10
+ADFNT <- matrix(nrow=rowsize, ncol=colsize)
+colnames(ADFNT) <- dimnames(PRFNT)[[1]]
+rownames(ADFNT) <- rownames(ADFNT, do.NULL= FALSE, prefix= "Sample")
+for (i in 1:rowsize){
+total <- 1
+ADFNT[i,1] <- rpearson(n=1, params=FFNT)
+total <- total - ADFNT[i,1]
+R <- rpearson(n=1, params=AFNT)
+ADFNT[i,2] <- total * R
+total <- total - ADFNT[i,2]
+R <- rpearson(n=1, params=PFNT)
+ADFNT[i,3] <- total * R
+total <- total - ADFNT[i,3]
+R <- rpearson(n=1, params=BFNT)
+ADFNT[i,4] <- total * R
+ADFNT[i,5] <- total - ADFNT[i,4]
+}
+#####
+View(ADFNT)
+group.AD <- list(ADControl,ADFNT)
+Xmcupo.effectsize(group.AD)
+attach(ADControl)
+Con <- data.frame(ADControl)
+FNT <- data.frame(ADFNT)
+group.AD <- list(Con,FNT)
+Xmcupo.effectsize(group.AD)
+fit.ADControl <- DM.MoM(ADControl)
+effect <- MC.Xdc.statistics(group.nrs,MC,fit.ADControl$pi,,group.theta,"hnull",0.01)
+effect <- MC.Xdc.statistics(group.nrs,MC,fit.ADControl$pi,group.theta,"hnull",0.01)
+fit.ADControl <- DM.MoM(ADControl)
+fit.ADFNT <- DM.MoM(ADFNT)
+MC <- 1000
+nrs1 <- rep(12000, 10)
+nrs2 <- rep(12000, 10)
+group.nrs <- list(nrs1,nrs2)
+group.theta <- c(fit.ADControl$theta, fit.ADFNT$theta)
+effect <- MC.Xdc.statistics(group.nrs,MC,fit.ADControl$pi,,group.theta,"hnull",0.01)
+effect <- MC.Xdc.statistics(group.nrs,MC,fit.ADControl$pi,group.theta,"hnull",0.01)
+effect
+MC.Xdc.statistics(group.nrs,MC,fit.ADControl$pi,group.theta,"hnull",0.01)
+effect <- MC.Xmcupo.statistics(group.nrs,MC,fit.ADControl$pi,,group.theta,"hnull",0.01)
+effect <- MC.Xmcupo.statistics(group.nrs,MC,fit.ADControl$pi,group.theta,"hnull",0.01)
+MC.Xmcupo.statistics(Nrs=group.nrs,MC=MC,pi0=fit.ADControl$pi,group.theta=group.theta,type="hnull",siglev=0.01)
+data(saliva)
+### Change the number of display digits so our output looks better
+defaultd <- .Options$digits
+options(digits=5)
+calpha_check <- C.alpha.multinomial(saliva)
+calpha_check
+options(digits=defaultd) ### Set the number of digits back for the user
+ADControl1000 <- ADControl1000*1000
+ADControl1000 <- ADControl*1000
+View(ADControl1000)
+C.alpha.multinomial(ADControl1000)
+salvia
+saliva
+data(throat)
+data(tongue)
+data(tonsil)
+data(tonsils)
+fit.saliva <- DM.MoM(saliva)
+fit.throat <- DM.MoM(throat)
+fit.tonsils <- DM.MoM(tonsils)
+MC <- 1000
+Nrs1 <- rep(12000, 10)
+Nrs2 <- rep(12000, 19)
+Nrs3 <- rep(12000, 19)
+group.Nrs <- list(Nrs1, Nrs2, Nrs3)
+group.theta <- c(fit.throat$theta, fit.tonsils$theta)
+mc.xmcupo_check1 <- MC.Xmcupo.statistics(group.Nrs, MC, fit.saliva$pi, ,
+group.theta, "hnull", 0.01)
+mc.xmcupo_check1
+pi_2grp <- rbind(fit.throat$pi, fit.tonsils$pi)
+mc.xmcupo_check2 <- MC.Xmcupo.statistics(group.Nrs, MC, fit.saliva$pi,
+pi_2grp, group.theta, "ha", 0.01)
+mc.xmcupo_check2
+fit.ADControl <- DM.MoM(ADControl)
+fit.ADControl
+View(ADControl)
+ADcontrol <- data.frame(ADControl)
+fit.ADControl <- DM.MoM(ADcontrol)
+fit.ADControl
 ###AD Controls %remaining dataset
 control <- read.table("ADcontrolsredist.txt")
 ###0-1 AD Control extracted each individual taxa dataset (proportions)
@@ -195,7 +470,7 @@ numrow <- 100 ###Number of subjects/samples you want to generate
 numcol <- 5 ###Number of taxa
 ADControl <- matrix(nrow=numrow,ncol=numcol)
 ADControl <- data.frame(ADControl)
-colnames(ADControl) <- c("Firmicutes", "Actinobacteria", "Proteobacteria", "Bacteroidetes", "Others")
+colnames(ADControl) <- c("Firmicutes", "Actinobacteria", "Proteobacteria", "Bacteroidetes", "Others") ###Names of columns
 size <- dim(ADControl)[1]
 for (i in 1:size){
 total <- 1
@@ -216,7 +491,227 @@ ADControl$Bacteroidetes[i] <- (total*rBacter)
 ###Remainder is placed in Others
 ADControl$Others[i] <- total - ADControl$Bacteroidetes[i]
 }
+###AD Flares with No Treatment %remaining dataset
+ADFlaresNT <- read.table("ADFlareNoTreatment.txt")
+###0-1 AD Flare No Treatment extracted each individual taxa dataset
+FirmFNT <- as.numeric(ADFlaresNT[1,])
+ActinoFNT <- as.numeric(ADFlaresNT[2,])
+ProteoFNT <- as.numeric(ADFlaresNT[3,])
+BacterFNT <- as.numeric(ADFlaresNT[4,])
+###Distribution parameters 0-1 (proportions)
+FirmFNTparam <- pearsonFitML(FirmFNT)
+ActinoFNTparam <- pearsonFitML(ActinoFNT)
+ProteoFNTparam <- pearsonFitML(ProteoFNT)
+BacterFNTparam <- pearsonFitML(BacterFNT)
+###Generates AD Control dataset (proportions)###
+numrow <- 100 ###Number of subjects/samples you want to generate
+numcol <- 5 ###Number of taxa
+ADFNT <- matrix(nrow=numrow,ncol=numcol)
+ADFNT <- data.frame(ADFNT)
+colnames(ADFNT) <- c("Firmicutes", "Actinobacteria", "Proteobacteria", "Bacteroidetes", "Others") ###Names of columns
+size <- dim(ADFNT)[1]
+for (i in 1:size){
+total <- 1
+###Generate number for Firmicutes
+ADFNT$Firmicutes[i] <- rpearson(n=1, params=FirmFNTparam)
+total <- total - ADFNT$Firmicutes[i]
+###Generate number for Actinobacteria
+rActino <- rpearson(n=1, params=ActinoFNTparam)
+ADFNT$Actinobacteria[i] <- (total*rActino)
+total <- total - ADFNT$Actinobacteria[i]
+###Generate number for Proteobacteria
+rProteo <- rpearson(n=1, params=ProteoFNTparam)
+ADFNT$Proteobacteria[i] <- (total*rProteo)
+total <- total - ADFNT$Proteobacteria[i]
+###Generate number for Bacteridetes
+rBacter <- rpearson(n=1, params=BacterFNTparam)
+ADFNT$Bacteroidetes[i] <- (total*rBacter)
+###Remainder is placed in Others
+ADFNT$Others[i] <- total - ADFNT$Bacteroidetes[i]
+}
+View(ADFNT)
 View(ADControl)
+ADControl500 <- ADControl8500
+ADControl500 <- ADControl*500
+ADFNt500 <- ADFNT*500
+fit.ADControl500 <- DM.MoM(ADControl500)
+fit.ADFNT500 <- DM.MoM(ADFNT500)
+fit.ADFNT500 <- DM.MoM(ADFNt500)
+MC <- 1000
+Nrs1 <- rep(500,10)
+Nrs2 <- rep(500,10)
+group.Nrs <- list(Nrs1, Nrs2)
+TS <- MC.Xdc.statistics(group.NRS, MC, fit.ADControl500$gamma, 2, "hnull", .05)
+TS <- MC.Xdc.statistics(group.Nrs, MC, fit.ADControl500$gamma, 2, "hnull", .05)
+TS
+group.alpha <- rbind(fit.ADControl500$gamma, fit.ADFNT500$gamma)
+View(group.alpha)
+TS <- MC.Xdc.statistics(group.Nrs, MC, fit.ADFNT500$gamma, 2, "hnull", .05)
+TS
+P <- MC.Xdc.statistics(group.Nrs, MC, group.alpha, 2, "ha", .05)
+P
+Nrs1 <- rep(500,5)
+Nrs2 <- rep(500,5)
+group.Nrs <- list(Nrs1, Nrs2)
+P <- MC.Xdc.statistics(group.Nrs, MC, group.alpha, 2, "ha", .05)
+P
+Nrs2 <- rep(500,20)
+Nrs1 <- rep(500,20)
+group.Nrs <- list(Nrs1, Nrs2)
+P <- MC.Xdc.statistics(group.Nrs, MC, group.alpha, 2, "ha", .05)
+P
+source('~/.active-rstudio-document')
+ADControl500 <- ADControl*500
+ADFNT500 <- ADFNT*500
+fit.ADControl500 <- DM.MoM(ADControl500)
+fit.ADFNT500 <- DM.MoM(ADFNT500)
+MC <- 1000
+Nrs1 <- rep(500,1)
+Nrs2 <- rep(500,1)
+group.Nrs <- list(Nrs1, Nrs2)
+group.alphap <- rbind(fit.ADControl500$gamma, fit.ADFNT500$gamma)
+P <- MC.Xdc.statistics(group.Nrs, MC, group.alphap, 2, "ha", 0.05, "mom")
+View(group.alphap)
+P <- MC.Xdc.statistics(group.Nrs, MC, group.alphap, 2, "ha", 0.05)
+Nrs1 <- rep(500,5)
+Nrs2 <- rep(500,5)
+group.Nrs <- list(Nrs1, Nrs2)
+P <- MC.Xdc.statistics(group.Nrs, MC, group.alphap, 2, "ha", 0.05)
+P
+Nrs1 <- rep(500,10)
+Nrs2 <- rep(500,10)
+group.Nrs <- list(Nrs1, Nrs2)
+group.alphap <- rbind(fit.ADControl500$gamma, fit.ADFNT500$gamma)
+P <- MC.Xdc.statistics(group.Nrs, MC, group.alphap, 2, "ha", 0.05)
+P
+set.seed(123)
+control <- read.table("ADcontrolsredist.txt")
+###0-1 AD Control extracted each individual taxa dataset (proportions)
+Firm <- as.numeric(control[1,])
+Actino <- as.numeric(control[2,])
+Proteo <- as.numeric(control[3,])
+Bacter <- as.numeric(control[4,])
+<<<<<<< HEAD
+###Fitting distribution 0-1
+unlist(pearsonFitML(Firm))
+unlist(pearsonFitML(Actino))
+unlist(pearsonFitML(Proteo))
+unlist(pearsonFitML(Bacter))
+###fitted distribution taxa generation 0-1
+Firmicutes <- rpearsonI(n=1000, a=0.9977008, b=2.1005555, location=0.1063188, scale=0.9611892)
+Actinobacteria<- rpearsonI(n=1000, a=0.99874103, b=2.47718315, location=0.09764036, scale=1.03623409)
+Proteobacteria <- rpearsonI(n=1000, a=1.3711653, b=1.4778528, location=0.4542903, scale=0.4134097)
+Bacteroidetes <- rpearsonI(n=1000, a=2.2113205, b=0.6628346, location=-0.2730789, scale=1.2522455)
+###Histograms of generated taxa 0-1
+hist(Firmicutes,100)
+hist(Actinobacteria,100)
+hist(Proteobacteria,100)
+hist(Bacteroidetes, 100)
+###0-100 AD Control extracted individual taxa dataset
+Firm1 <- as.numeric(control[1,])*100
+Actino1 <- as.numeric(control[2,])*100
+Proteo1 <- as.numeric(control[3,])*100
+Bacter1 <- as.numeric(control[4,])*100
+###Fitting distribution 0-100
+unlist(pearsonFitML(Firm1))
+unlist(pearsonFitML(Actino1))
+unlist(pearsonFitML(Proteo1))
+unlist(pearsonFitML(Bacter1))
+###fitted distribution taxa generation 0-100
+Firmicutes1 <- rpearsonI(n=1000, a=0.9970149, b=2.0062602, location=10.6318818, scale=89.3067879)
+hist(Firmicutes1, 100)
+hist(Actinobacteria1, 100)
+Firmicutes1 <- rpearsonI(n=1000, a=0.9970149, b=2.0062602, location=10.6318818, scale=89.3067879)
+Actinobacteria1 <- rpearsonII(n=1000, a=0.840323, location=9.764036, scale=81.726210)
+Proteobacteria1 <- rpearsonI(n=1000, a=1.371166,  b=1.477854, location=45.429029, scale=41.340968)
+Bacteroidetes1 <- rpearsonI(n=1000, a=2.2098166, b=0.6798847, location=-12.4973479, scale=110.4140148)
+###Histograms 0-100
+hist(Firmicutes1, 100)
+hist(Actinobacteria1, 100)
+hist(Proteobacteria1, 100)
+hist(Bacteroidetes1, 100)
+unlist(pearsonFitML(Actino))
+unlist(pearsonFitML(Actino1))
+pearsonsMSC
+pearsonMSC(Actino)
+pearsonMSC(Actino1)
+a <- rpearsonI(1000 ,0.9542805,  2.3447883,  9.7640358, 98.5426251)
+hist(a)
+hist(a, bins=100)
+hist(a, 100)
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+Prot1
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+mean <- 75
+sd <- 23
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)(m/(sd^2*n^2)-1)
+alpha <- 1
+beta <- m * alpha
+params <- c(alpha, beta)
+return(params)
+alpha <- function(n, m, sd){(1/n)(m/(sd^2*n^2)-1)}
+getalpha <- function(n, m, sd){(1/n)(m/(sd^2*n^2)-1)}
+alpha <- getalpha(n, m, sd)
+source('~/.active-rstudio-document')
+norm(2:10)
+(function(x, y){ z <- x^2 + y^2; x+y+z })(0:7, 1)
+source('~/.active-rstudio-document')
+getBetaParams(mean, sd)
+sd^2
+m
+n
+1/n
+sd^2*n^2
+m/sd^2*n^2
+m/sd^2*n^2-1
+source('~/.active-rstudio-document')
+getBetaParams(mean, sd)
+getBetaParams2 <- function(mean, sd) {
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)*(m/(sd^2*n^2)-1)
+beta <- m * alpha
+params <- c(alpha, beta)
+return(params)
+}
+getBetaParams2(75, 23)
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+y
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+y
+source('~/.active-rstudio-document')
+y
+=======
+###Distribution parameters 0-1 (proportions)
+FirmADCparam <- pearsonFitML(Firm)
+ActinoADCparam <- pearsonFitML(Actino)
+ProteoADCparam <- pearsonFitML(Proteo)
+BacterADCparam <- pearsonFitML(Bacter)
+###Generates AD Control dataset (proportions)###
+numrow <- 10 ###Number of subjects/samples you want to generate
+numcol <- 5 ###Number of taxa
+ADControl <- matrix(nrow=numrow,ncol=numcol)
+ADControl <- data.frame(ADControl)
+colnames(ADControl) <- c("Firmicutes", "Actinobacteria", "Proteobacteria", "Bacteroidetes", "Others") ###Names of columns
+size <- dim(ADControl)[1]
 for (i in 1:size){
 total <- 1
 ###Generate number for Firmicutes
@@ -236,277 +731,129 @@ ADControl$Bacteroidetes[i] <- (total*rBacter)
 ###Remainder is placed in Others
 ADControl$Others[i] <- total - ADControl$Bacteroidetes[i]
 }
-View(ADControl)
-17.22/(100-75.39)
-(17.22/(100-75.39))8100
-(17.22/(100-75.39))100
-(17.22/(100-75.39))*100
-read.table("UpperRmean.txt")
-read.table("UpperRmean.txt")
-a <- read.table("UpperRmean.txt")
-a <- data.matrix(a)
-View(a)
-matrix(dimnames=a)
-rownames(a)
-matrix(dimnames=rownames(a))
-b <- rownames(a)
-data.frame(b)
-data.matrix(rownames.force=b)
-matrix(dimnames=b)
-dim(a)
-dim(a)[1]
-dim(a)[2]
-matrix(nrow=rowsize,ncol=colsize)
-rowsize <- dim(a)[1]
-colsize <- dim(a)[2]
-matrix(nrow=rowsize,ncol=colsize)
-b <- rownames(a)
-b
-list(b)
-b <- list(rownames(a))
-matrix(dimnames=b)
-matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-%remainder <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-percentremainder <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-percentremainder$mean[1] <- 75.390
-premainder <- data.frame(percentremainder)
-premainder$mean[1] <- 75.390
-View(premainder)
-View(percentremainder)
-premainder <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-premainder <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-premainder <- data.frame(premainder)
-View(premainder)
-premainder <- data.frame(premainder,row.names=mean)
-premainder <- data.frame(premainder,row.names="mean")
-View(premainder)
-premainder <- data.frame(matrix(nrow=rowsize,ncol=colsize, dimnames=b))
-View(premainder)
-premainder <- data.frame(mean)
-mean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-premainder <- data.frame(mean)
-View(premainder)
-premainder$mean[1] <- 75.390
-View(premainder)
-View(a)
-premainder$mean[1] <- a$mean[1]
-a <- data.frame(a)
-premainder$mean[1] <- a$mean[1]
-View(premainder)
-mean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-premainder <- data.frame(mean)
-premainder$mean[1] <- a$mean[1]
-View(premainder)
-a <- read.table("UpperRmean.txt")
-a <- data.frame(a)
-b <- list(rownames(a))
-pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-pmean <- matrix(dimnames=b)
-rowsize <- dim(a)[1]
-colsize <- dim(a)[2]
-pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-premainder <- data.frame(mean)
-source('~/data sim/Get Parameters from mean etc.R')
-source('~/.active-rstudio-document')
-getBetaParams(75, 23)
-Planctomycetes <- c(0.001, 0.008)
-Chloroflexi <- c(0.001, 0.005)
-BRC1 <- c(0.000, 0.000)
-Prot1<- as.numeric(Proteobacteria)
-getBetaParams <- function(mean,sd) {
-m <- (1-mean)/mean
-n <- 1 + m
-alpha <- (1/n)(m/(sd^2*n^2)-1)
-beta <- m * alpha
-params <- c(alpha, beta)
-return(params)
+###AD Flares with No Treatment %remaining dataset
+ADFlaresNT <- read.table("ADFlareNoTreatment.txt")
+###0-1 AD Flare No Treatment extracted each individual taxa dataset
+FirmFNT <- as.numeric(ADFlaresNT[1,])
+ActinoFNT <- as.numeric(ADFlaresNT[2,])
+ProteoFNT <- as.numeric(ADFlaresNT[3,])
+BacterFNT <- as.numeric(ADFlaresNT[4,])
+###Distribution parameters 0-1 (proportions)
+FirmFNTparam <- pearsonFitML(FirmFNT)
+ActinoFNTparam <- pearsonFitML(ActinoFNT)
+ProteoFNTparam <- pearsonFitML(ProteoFNT)
+BacterFNTparam <- pearsonFitML(BacterFNT)
+###Generates AD Control dataset (proportions)###
+numrow <- 10 ###Number of subjects/samples you want to generate
+numcol <- 5 ###Number of taxa
+ADFNT <- matrix(nrow=numrow,ncol=numcol)
+ADFNT <- data.frame(ADFNT)
+colnames(ADFNT) <- c("Firmicutes", "Actinobacteria", "Proteobacteria", "Bacteroidetes", "Others") ###Names of columns
+size <- dim(ADFNT)[1]
+for (i in 1:size){
+total <- 1
+###Generate number for Firmicutes
+ADFNT$Firmicutes[i] <- rpearson(n=1, params=FirmFNTparam)
+total <- total - ADFNT$Firmicutes[i]
+###Generate number for Actinobacteria
+rActino <- rpearson(n=1, params=ActinoFNTparam)
+ADFNT$Actinobacteria[i] <- (total*rActino)
+total <- total - ADFNT$Actinobacteria[i]
+###Generate number for Proteobacteria
+rProteo <- rpearson(n=1, params=ProteoFNTparam)
+ADFNT$Proteobacteria[i] <- (total*rProteo)
+total <- total - ADFNT$Proteobacteria[i]
+###Generate number for Bacteridetes
+rBacter <- rpearson(n=1, params=BacterFNTparam)
+ADFNT$Bacteroidetes[i] <- (total*rBacter)
+###Remainder is placed in Others
+ADFNT$Others[i] <- total - ADFNT$Bacteroidetes[i]
 }
-getBetaParams(mean = 75.39, sd = 23.81)
-source('~/.active-rstudio-document')
-getBetaParams <- function(u,s) {
-m <- (1-u)/u
-n <- 1 + m
-alpha <- (1/n)(m/(s^2*n^2)-1)
-beta <- m * alpha
-params <- c(alpha, beta)
-return(params)
+ADControl500 <- ADControl*500
+ADFNT500 <- ADFNT*500
+View(ADControl500)
+View(ADFNT500)
+fit.ADControl500 <- DM.MoM(ADControl500)
+fit.ADFNT500 <- DM.MoM(ADFNT500)
+MC <- 1000
+Nrs1 <- rep(500,10)
+Nrs2 <- rep(500,10)
+group.Nrs <- list(Nrs1, Nrs2)
+group.alphap <- rbind(fit.ADControl500$gamma, fit.ADFNT500$gamma)
+P <- MC.Xdc.statistics(group.Nrs, MC, group.alphap, 2, "ha", 0.05)
+P
+Nrs1 <- rep(500,2)
+Nrs2 <- rep(500,2)
+group.Nrs <- list(Nrs1, Nrs2)
+P <- MC.Xdc.statistics(group.Nrs, MC, group.alphap, 2, "ha", 0.05)
+P
+Nrs1 <- rep(500,1)
+Nrs2 <- rep(500,1)
+group.Nrs <- list(Nrs1, Nrs2)
+P <- MC.Xdc.statistics(group.Nrs, MC, group.alphap, 2, "ha", 0.05)
+Nrs1 <- rep(500,3)
+Nrs2 <- rep(500,3)
+group.Nrs <- list(Nrs1, Nrs2)
+P <- MC.Xdc.statistics(group.Nrs, MC, group.alphap, 2, "ha", 0.05)
+P
+Nrs1 <- rep(500,5)
+Nrs2 <- rep(500,5)
+group.Nrs <- list(Nrs1, Nrs2)
+P <- MC.Xdc.statistics(group.Nrs, MC, group.alphap, 2, "ha", 0.05)
+P
+P <- MC.Xmc.statistics(group.Nrs, MC, fit.ADControl$pi, group.pi, group.theta, "ha")
+group.pi <- rbind(fit.ADControl500$pi, fit.ADFNT500$pi)
+group.theta <- c(0.01, 0.05)
+P <- MC.Xmc.statistics(group.Nrs, MC, fit.ADControl$pi, group.pi, group.theta, "ha")
+P <- MC.Xmc.statistics(group.Nrs, MC, fit.ADControl500$pi, group.pi, group.theta, "ha")
+P
+P <- MC.Xmc.statistics(group.Nrs, MC, fit.ADFNT500$pi, group.pi, group.theta, "ha")
+P
+group.theta <- c(fit.ADControl500$theta, fit.ADFNT500$theta)
+P <- MC.Xmc.statistics(group.Nrs, MC, fit.ADFNT500$pi, group.pi, group.theta, "ha")
+P
+P <- MC.Xmc.statistics(group.Nrs, MC, fit.ADControl$pi, group.pi, group.theta, "ha")
+P <- MC.Xmc.statistics(group.Nrs, MC, fit.ADControl500$pi, group.pi, group.theta, "ha")
+P
+MC.Xdc.statistics
+install.packages("phylosim")
+data(sleep)
+sleep
+str(sleep)
+attach(sleep)
+tapply(extra, group, mean)
+tapply(extra, group, sd)
+tapply(extra, group, length)
+t.test(extra~group)
+power.t.test(n=10, delta=(2.33-.75), sd=1.9, sig.level=.05,type="two.sample", alternative="two.sided")
+R = 999
+> alpha = numeric(R)
+> for (i in 1:R) {
++ group1 = rnorm(10, mean=.75, sd=1.9)
++ group2 = rnorm(10, mean=2.33, sd=1.9)
++ alpha[i] = t.test(group1,group2)$p.value
++ }
+R = 999
+> alpha <- numeric(R)
+> for (i in 1:R) {
++ group1 <- rnorm(10, mean=.75, sd=1.9)
++ group2 <- rnorm(10, mean=2.33, sd=1.9)
++ alpha[i] <- t.test(group1,group2)$p.value
++ }
+R = 999
+> alpha <- numeric(R)
+> for (i in 1:R) {
+group1 <- rnorm(10, mean=.75, sd=1.9)
+group2 <- rnorm(10, mean=2.33, sd=1.9)
+alpha[i] <- t.test(group1,group2)$p.value
 }
-getBetaParams(u = 75.39, s = 23.81)
-cv <- function(x) sd(x)/mean(x)
-cv(1:10)
-cv
-cv(1:2)
-cv(1)
-cv(1:1)
-cv(1:10)
-lapply(lst,cv)
-norm <- function(x) sqrt(x%*%x)
-norm(1:4)
-(function(x, y){ z <- x^2 + y^2; x+y+z })(0:7, 1)
-(function(x, y){ z <- x^2 + y^2;
-x+y+z })(0:7, 1)
-(function(x, y){ z <- x^2 + y^2
-x+y+z })(0:7, 1)
-(function(x, y){ z <- x^2 + y^2; x+y+z })(2, 1)
-a <- function(x, y){ z <- x^2 + y^2; x+y+z }
-a(2, 1)
-a(1, 1)
-getBetaParams <- function(mean, sd) {
-m <- (1-mean)/mean
-n <- 1 + m
-alpha <- (1/n)(m/(sd^2*n^2)-1)
-beta <- m * alpha
-return(alpha, beta)
+R <-999
+alpha <- numeric(R)
+for (i in 1:R) {
+group1 <- rnorm(10, mean=.75, sd=1.9)
+group2 <- rnorm(10, mean=2.33, sd=1.9)
+alpha[i] <- t.test(group1,group2)$p.value
 }
-getBetaParams(mean = 75.39, sd = 23.81)
-getBetaParams(75.39, 23.81)
-getBetaParams <- function(mean, sd) {
-m <- (1-mean)/mean
-n <- 1 + m
-alpha <- (1/n)(m/(sd^2*n^2)-1)
-beta <- m * alpha
-params <- c(alpha, beta)
-getBetaParams <- function(mean, sd) {
-m <- (1-mean)/mean
-n <- 1 + m
-alpha <- (1/n)(m/(sd^2*n^2)-1)
-beta <- m * alpha
-}
-getBetaParams(75.39, 23.81)
-getBetaParams <- function(mean, sd) {
-m <- (1-mean)/mean
-n <- 1 + m
-alpha <- (1/n)(m/(sd^2*n^2)-1)
-beta <- m * alpha
-alpha,beta
-alpha
-c(alpha, beta)
-a <- function(x,y){
-m <- (1-x)/x
-n <- 1 + m
-al <- (1/n)(m/(y**2 * n**2)-1)
-be <- m * al
-return(al,be)
-}
-a <- function(x,y){
-m <- (1-x)/x
-n <- 1 + m
-al <- (1/n)(m/(y**2 * n**2)-1)
-be <- m * al
-return(c(al,be))
-}
-a(75,23)
-x <- 75
-y <- 23
-a <- function(x,y){
-m <- (1-x)/x
-n <- 1 + m
-al <- (1/n)(m/(y**2 * n**2)-1)
-be <- m * al
-return(c(al,be))
-}
-x <- 75
-y <- 23
-fix(a)
-m <- (1-x)/x
-n <- 1 + m
-al <- (1/n)(m/(y**2 * n**2)-1)
-al <- (1/n)(m/(y^2 * n^2)-1)
-be <- m * al
-a <- read.table("UpperRmean.txt")
-a <- data.frame(a)
-a <- read.table("UpperRmean.txt")
-rowsize <- dim(a)[1]
-colsize <- dim(a)[2]
-b <- list(rownames(a))
-pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-premainder <- data.frame(mean)
-premainder <- data.frame(dimnames=b)
-View(premainder)
-premainder <- data.frame(row.names=pmean)
-premainder <- data.frame(pmean)
-View(premainder)
-pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-premainder <- data.frame(pmean)
-View(premainder)
-total <- 100
-premainder$mean[1] <- a$mean[1]
-View(premainder)
-pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-premainder <- data.frame(pmean)
-total <- 100
-a <- read.table("UpperRmean.txt")
-rowsize <- dim(a)[1]
-colsize <- dim(a)[2]
-b <- list(rownames(a))
-pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-premainder <- data.frame(pmean)
-View(premainder)
-premainder$Proteobacteria[1] <- a$Proteobacteria[1]
-View(premainder)
-premainder$Proteobacteria[1,] <- a$Proteobacteria[1,]
-View(premainder)
-premainder$Proteobacteria[1,1] <- a$Proteobacteria[1,1]
-View(premainder)
-View(a)
-View(a)
-edit(a)
-a$Proteobacteria[1]
-a$Proteobacteria[1,]
-premainder[1,1] <- a[1,1]
-View(premainder)
-a <- read.table("UpperRmean.txt")
-rowsize <- dim(a)[1]
-colsize <- dim(a)[2]
-b <- list(rownames(a))
-pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-premainder <- data.frame(pmean)
-total <- 100
-premainder[Proteobacteria,] <- a[Proteobacteria,]
-premainder["Proteobacteria",] <- a["Proteobacteria",]
-View(premainder)
-a <- read.table("UpperRmean.txt")
-rowsize <- dim(a)[1]
-colsize <- dim(a)[2]
-b <- colnames(a)
-pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-b <- list(colnames(a))
-pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-View(premainder)
-View(pmean)
-View(a)
-b <- list(rownames(a))
-pmean <- matrix(nrow=rowsize,ncol=colsize, dimnames=b)
-View(pmean)
-b <- list(colnames(a))
-fix(b)
-dimnames(a)
-pmean <- matrix(dim)
-pmean <- matrix(dimnames=dims)
-dims <- dimnames(a)
-pmean <- matrix(dimnames=dims)
-pmean <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
-View(pmean)
-View(a)
-premainder <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
-premainder <- data.frame(pmean)
-premainder <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
-premainder[1,1] <- a[1,1]
-View(premainder)
-a <- read.table("UpperRmean.txt")
-rowsize <- dim(a)[1]
-colsize <- dim(a)[2]
-dims <- dimnames(a)
-PRemainder <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
-total <- 100
-PRemainder[1,1] <- a[1,1]
-total - PRemainder[1,1]
-PRemainder[1,1] <- a[1,1]/100
-total <- 100
-total - a[1,1]
-total <- total - a[1,1]
-k <- 1
-PRemainder[k,1] <- a[k,1]/100
-View(PRemainder)
-total <- total - a[k,1]
-k <- k + 1
+mean(alpha<.05)
+detach(sleep)
+>>>>>>> cb5619b9707198db63f802169d71f357f8537e0f

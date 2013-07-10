@@ -1,23 +1,36 @@
 ###Fall/Winter
 a <- read.table("UpperRmean.txt")
+c <- read.table("ADControlP.txt")
+###Function need to fix
 
-rowsize <- dim(a)[1]
-colsize <- dim(a)[2]
-dims <- dimnames(a)
-
-PRemainder <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
-
-
+Premainder <- function(x) {
+  rowsize <- dim(x)[1]
+  colsize <- dim(x)[2]
+  dims <- dimnames(x)
+  y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+  for(i in 1:rowsize){
+    total <- apply(X=x,MARGIN=1,sum)[i]
+    y[i,1] <- x[i,1]/100
+    total <- total - x[i,1]
+    for(k in 2:colsize){
+      y[1,k] <- x[1,k]/ total
+      total <- total - x[1,k]
+    }
+  } 
+  return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+  
+rowsize <- dim(c)[1]
+colsize <- dim(c)[2]
+dims <- dimnames(c)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
 for(i in 1:rowsize){
-  total <- apply(X=a,MARGIN=1,sum)
-  PRemainder[i,1] <- a[i,1]/100
-  total <- total - a[i,1]
+  total <- apply(X=c,MARGIN=1,sum)[2]
+  y[2,1] <- c[2,1]/100
+  total <- total - c[2,1]
   for(k in 2:colsize){
-    PRemainder[1,k] <- a[1,k]/ total
-    total <- total - a[1,k]
-  }
-} 
-
+    y[1,2] <- c[1,2]/ total
+    total <- total - c[1,2]
 
 ##Mean = alpha/alpha+beta
 ##Variance = alpha*beta/(alpha+beta)^2 * (alpha + beta + 1)

@@ -1,7 +1,11 @@
 ###Fall/Winter
-a <- read.table("UpperRmean.txt")
+a <- read.table("UpperRFall.txt")
 c <- read.table("ADControlP.txt")
-###Function need to fix
+
+
+###Function for calculating percent remainder
+###Format for original data: 
+###Rows: Samples/Subjects, Columns: Taxa
 
 Premainder <- function(x) {
   rowsize <- dim(x)[1]
@@ -13,30 +17,39 @@ Premainder <- function(x) {
     y[i,1] <- x[i,1]/100
     total <- total - x[i,1]
     for(k in 2:colsize){
-      y[1,k] <- x[1,k]/ total
-      total <- total - x[1,k]
+      y[i,k] <- x[i,k]/ total
+      total <- total - x[i,k]
     }
   } 
   return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
 }
-  
-rowsize <- dim(c)[1]
-colsize <- dim(c)[2]
-dims <- dimnames(c)
-y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
-for(i in 1:rowsize){
-  total <- apply(X=c,MARGIN=1,sum)[2]
-  y[2,1] <- c[2,1]/100
-  total <- total - c[2,1]
-  for(k in 2:colsize){
-    y[1,2] <- c[1,2]/ total
-    total <- total - c[1,2]
+
 
 ##Mean = alpha/alpha+beta
 ##Variance = alpha*beta/(alpha+beta)^2 * (alpha + beta + 1)
 ##SD^2 = alpha*beta/(alpha+beta)^2 * (alpha + beta + 1)
 ## a= alpha b=beta
 ##using WolframAlpha to fine alpha and beta
+
+getBetaParams <- function(mean, sd) {
+  m <- (1-mean)/mean
+  n <- 1 + m
+  alpha <- (1/n)*(m/(sd^2*n^2)-1)
+  beta <- m * alpha
+  params <- c(a=alpha, b=beta)
+  return(params)
+}
+
+getBeta <- function()
+
+getBetaRand <- function(mean, sd) {
+  m <- (1-mean)/mean
+  n <- 1 + m
+  alpha <- (1/n)*(m/(sd^2*n^2)-1)
+  beta <- m * alpha
+  betadist <- rpearsonI(n=1,a=alpha,b=beta,location=0,scale=1)
+  return(betadist)
+}
 
 Proteobacteria <- rpearsonI(n=1000, a=1.7133906, b=0.5593122, location=0, scale=1)
 Firmicutes <- rpearsonI(n=1000, a=4.651839, b=2.005531, location=0, scale=1)

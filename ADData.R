@@ -4,7 +4,7 @@ library(HMP)
 set.seed(123)
 
 ###AD Control creates the %remaining dataset
-b <- read.table("ADControlsData.txt")
+b <- read.table("ADControldata.csv")
 
 rowsize <- dim(b)[1]
 colsize <- dim(b)[2]

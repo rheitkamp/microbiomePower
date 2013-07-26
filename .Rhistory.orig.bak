@@ -1,0 +1,1684 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+UpperRepSpring[i,11] <- total*r
+###Chloroflexi
+r <- rpearsonI(n=1, a=5e+07, b=5e+07, location=0, scale=1)
+UpperRepSpring[i,12] <- total*r
+###BRC1
+UpperRepSpring[i,13] <- total - UpperRepSpring[i,12]
+}
+View(PRemainder)
+View(UpperRepSpring)
+barchart(x=UpperRepSpring,horizontal=FALSE, col=rainbow(13))
+library(HMP)
+barchart(x=UpperRepSpring,horizontal=FALSE, col=rainbow(13))
+apply(UpperRepSpring, 1, mean)
+apply(UpperRepSpring, 2, mean)
+apply(UpperRepSpring, 2, mean)*100
+getBetaParams(.5113..2377)
+getBetaParams(.5113,.2377)
+getBetaParams(.2476,.2522)
+getBetaParams(.1931,.1662)
+getBetaParams(.03677,.0591)
+getBetaParams(.0098,.0662)
+getBetaParams(.0009,.0013)
+getBetaParams(.00046,.00054)
+getBetaParams(.00023,.00151)
+getBetaParams(.00008,.00014)
+getBetaParams(.00001,.00005)
+getBetaParams(.00002,.00013)
+getBetaParams(.00001,.00005)
+getBetaParams(.00001,.00009)
+Proteobacteria <- rpearsonI(n=1000, a=1.749882, b=1.672536, location=0, scale=1)
+hist(Proteobacteria)
+Firmicutes <- rpearsonI(n=1000, a=0.4776035, b=1.4513283, location=0, scale=1)
+hist(Firmicutes)
+Bacteroidetes <- rpearsonI(n=1000, a=0.8961366, b=3.7446536, location=0, scale=1)
+hist(Bacteroidetes)
+Actinobacteria <- rpearsonI(n=1000, a=0.336087, b=8.804163, location=0, scale=1)
+hist(Actinobacteria)
+Fusobacteria <- rpearsonI(n=1000, a=0.01189997, b=1.20238249, location=0, scale=1)
+hist(Fusobacteria)
+Cyanobacteria <- rpearsonI(n=1000, a=0.4779586, b=530.5871302, location=0, scale=1)
+hist(Cyanobacteria)
+OD1 <- rpearsonI(n=1000, a=0.7248578, b=1575.0529200, location=0, scale=1)
+hist(OD1)
+TM7 <- rpearsonI(n=1000, a=0.0229654, b=99.8266026, location=0, scale=1)
+hist(TM7)
+DT <- rpearsonI(n=1000, a=0.3264245, b=4079.9796980, location=0, scale=1)
+hist(DT)
+Nitrospira <- rpearsonI(n=1000, a=3.99896e-02, b=3.99892e+0, location=0, scale=1)
+hist(Nitrospira)
+Planctomycetes <- rpearsonI(n=1000, a=2.364817e-02, b=1.182385e+03, location=0, scale=1)
+hist(Planctomycetes)
+Chloroflexi <- rpearsonI(n=1000, a=3.99896e-02, b=3.99892e+03, location=0, scale=1)
+hist(Chloroflexi)
+BRC1 <- rpearsonI(n=1000, a=1.233556e-02, b=1.233543e+03)
+numrow <- 50
+numcol <- dim(PRemainder)[2]
+data <- matrix(nrow=numrow, ncol=numcol)
+colnames(data) <- dimnames(PRemainder)[[2]]
+rownames(data) <- rownames(data, do.NULL= FALSE, prefix= "Sample")
+size <- dim(data)[1]
+for (i in 1:size){
+total <- 1
+###BRC1
+data[i,13] <- 0
+total <- total - data[i,13]
+###Chloroflexi
+data[i,12] <- rpearsonI(n=1, a=3.99896e-02, b=3.99892e+03, location=0, scale=1)
+total <- total - data[i,12]
+###Planctomycetes
+data[i,11] <- rpearsonI(n=1, a=1.561484e-02, b=1.561469e+03, location=0, scale=1)
+total <- total - data[i,11]
+###Nitrospira
+data[i,10] <- rpearsonI(n=1, a=0.1735524, b=3470.8750587, location=0, scale=1)
+total <- total - data[i,10]
+###Deinococcus-Thermus
+data[i,9] <- rpearsonI(n=1, a=0.2498125, b=1665.1668542, location=0, scale=1)
+total <- total - data[i,9]
+###TM7
+data[i,8] <- rpearsonI(n=1, a=0.02130855, b=47.33101610, location=0, scale=1)
+total <- total - data[i,8]
+###OD1
+data[i,7] <- rpearsonI(n=1, a=0.605873, b=903.682256, location=0, scale=1)
+total <- total - data[i,7]
+###Cyanobacteria
+data[i,6] <- rpearsonI(n=1, a=0.3728329, b=137.7134274, location=0, scale=1)
+total <- total - data[i,6]
+###Fusobacteria
+data[i,5] <- rpearsonI(n=1, a=0.02791087, b=1.56699613, location=0, scale=1)
+total <- total - data[i, 5]
+###Bacteroidetes
+data[i,3] <- rpearsonI(n=1, a=0.1034732, b=2.9488343, location=0, scale=1)
+total <- total - data[i,3]
+###Actinobacteria
+data[i,4] <- rpearsonI(n=1, a=0.2883812, b=15.0510462, location=0, scale=1)
+total <- total - data[i,4]
+###Firmicutes
+data[i,2] <- rpearsonI(n=1, a=0.7207408, b=3.4647458, location=0, scale=1)
+total <- total - data[i,2]
+###Proteobacteria
+data[i,1] <- total
+=======
+>>>>>>> 7f595ebefcc24a64e859085feeb83d119244b11c
+colsize <- dim(x)[2]
+dims <- dimnames(x)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+<<<<<<< HEAD
+=======
+>>>>>>> 018459b0d559556cdfcaed75762a21b741bea85c
+>>>>>>> 7f595ebefcc24a64e859085feeb83d119244b11c
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+Premainder(a, y)
+View(y)
+PR <- Premainder(a,y)
+View(PR)
+Premainder <- function(x) {
+rowsize <- dim(x)[1]
+colsize <- dim(x)[2]
+dims <- dimnames(x)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+PR <- Premainder(a)
+View(PR)
+PR1 <- Premainder(a)
+View(PR1)
+Premainder <- function(x) {
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+PR2 <- Premainder(a)
+View(PR2)
+Premainder <- function(x) {
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+PR2 <- Premainder(a)
+Premainder <- function(x) {
+rowsize <- dim(a)[1]
+colsize <- dim(a)[2]
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+<<<<<<< HEAD
+PR2 <- Premainder(a)
+=======
+<<<<<<< HEAD
+install.packages("HMP")
+data(saliva)
+library("HMP")
+data(saliva)
+saliva
+barchart(saliva)
+Barchart.saliva
+Barchart.data
+Barchart.data(saliva)
+fit.saliva <- DM.MoM(saliva)
+fit.saliva
+fit.saliva$pi
+library("PearsonDS", lib.loc="C:/Users/rae.heitkamp/Documents/R/R-3.0.1/library")
+fit.saliva <- pearsonsFitML(saliva)
+fit.saliva <- pearsonFitML(saliva)
+saliva
+saliva$Taxa 16
+saliva$"Taxa 16"
+saliva["Taxa 16"]
+saliva[1,]
+saliva[,1]
+taxon1 <- saliva[,1]
+taxon1
+distTaxon1<-pearsonFitML(taxon1)
+distTaxon1
+distTaxon1$type
+rpearsonI(1000, distTaxon1)
+rpearsonI(1000, params = distTaxon1)
+rpearson(1000,distTaxon1)
+help(DM.MoM)
+data(saliva)
+dm.mom_check <- DM.MoM(saliva)
+dm.mom_check
+data(saliva)
+data(throat)
+data(tonsils)
+### Get a list of dirichlet-multinomial parameters for the data
+fit.saliva <- DM.MoM(saliva)
+fit.throat <- DM.MoM(throat)
+fit.tonsils <- DM.MoM(tonsils)
+### Set up the number of Monte-Carlo experiments
+### We set MC=1 due to CRAN restrictions, Please set MC to be at least 1,000
+MC <- 1
+MC <- 1000
+### Generate a random vector of number of reads per sample
+Nrs1 <- rep(12000, 9)
+Nrs2 <- rep(12000, 11)
+Nrs3 <- rep(12000, 12)
+group.Nrs <- list(Nrs1, Nrs2, Nrs3)
+### Computing size of the test statistics (Type I error)
+mc.xdc_check1 <- MC.Xdc.statistics(group.Nrs, MC, fit.saliva$gamma, 3, "hnull", .05, "mom")
+mc.xdc_check1
+### Computing Power of the test statistics (1 - Type II error)
+group.alphap <- rbind(fit.saliva$gamma, fit.throat$gamma, fit.tonsils$gamma)
+mc.xdc_check2 <- MC.Xdc.statistics(group.Nrs, MC, group.alphap, 3, "ha", 0.05, "mom")
+mc.xdc_check2
+mc.xdc_check2
+help(rbind)
+library("HMP", lib.loc="C:/Users/rae.heitkamp/Documents/R/R-3.0.1/library")
+data(saliva)
+View(saliva)
+View(saliva)
+View(HMP)
+HMP
+Barchart.data
+C.alpha.multinomial
+C.alpha.multinomial(data)
+C.alpha.multinomial(saliva)
+data <- data(0)
+T.statistics
+library("HMP", lib.loc="C:/Users/rae.heitkamp/Documents/R/R-3.0.1/library")
+calpha_check <- C.alpha.multinomial(saliva)
+calpha_check
+dirmult(saliva)
+fit.saliva <- dirmult(saliva)
+fit.saliva
+dirmult_data <- Dirichlet.multinomial(fit.saliva)
+Nrs <- rep(15000, 20)
+dirmult_data <- Dirichlet.multinomial(Nrs, fit.saliva$gamma)
+dirmult_data
+saliva
+data(saliva)
+View(saliva)
+View(saliva)
+setwd("E:/Development/R projects/microbiomePower")
+as.matrix(ADcontrols.txt)
+as.matrix("ADcontrols.txt")
+data <- t("ADcontrols.txt")
+data
+data
+data <- read.table("ADcontrols.txt")
+data
+data
+data <- as.matrix(data)
+data
+data.matrix(data)
+data1 <- data.matrix(data)
+ls
+data
+C.alpha.multinomial(data)
+salia
+saliva
+data
+AD <- data
+AD
+AD*10000
+C.alph.multinomial(AD)
+C.alpha.multinomial(AD)
+data2 <- data.frame("ADFlareNoTreatment.txt")
+data2
+data2 <- read.table("ADFlareNoTreatment.txt")
+data2 <- data.matrix(data2)
+data2
+data2 <- -data2
+data2
+data2 <- -data2
+data2 <- t(data2)
+data2
+AD
+Nrs <- rep(10000, 20)
+fit.AD <- dirmult(AD)
+ls
+data2 <- read.table("ADFlareNoTreatment.txt")
+data2
+data2 <- data.matrix(data2)
+data2
+flare <- data2
+flare
+flare = flare*500
+flare
+calpha_check <- C.alpha.multinomial(flare)
+calpha_check
+data
+AD
+AD <- data*500
+Ad
+AD
+calpha_check2 <- C.alpha.multinomial(AD)
+calpha_check2
+calpha_check2 <- C.alpha.multinomial(data)
+calpha_check2
+flare
+AD
+Nrs <- rep(500, 20)
+fit.flare <- dirmult(flare)
+dirmult_data <- Dirichlet.multinomial(Nrs, fit.saliva$gamma)
+dirmult_data
+dirmult_data <- Dirichlet.multinomial(Nrs, fit.flare$gamma)
+dirmult_data
+Nrs <- rep(50000, 20)
+dirmult_data <- Dirichlet.multinomial(Nrs, fit.flare$gamma)
+dirmult_data
+data(saliva)
+View(saliva)
+View(saliva)
+dirmult_data <- Dirichlet.multinomial(Nrs, fit.saliva$gamma)
+dirmult_data
+simSaliva <- dirmult_data
+Barchart.data(simSaliva)
+dirmult_data <- Dirichlet.multinomial(Nrs, fit.flare$gamma)
+simFlare <- dirmult_data
+Barchart.data(simFlare)
+Nrs <- rep(50000, 100\)
+Nrs <- rep(50000, 100)
+dirmult_data <- Dirichlet.multinomial(Nrs, fit.flare$gamma)
+simFlare <- dirmult_data
+Barchart.data(simFlare)
+dirmult
+fit.control <- DM.MoM(AD)
+fit.flare <- DM.MoM(flare)
+MC <- 1000
+Nrs1 <- rep(12000, 9)
+Nrs <- rep(12000, 9)
+Nrs2 <- rep(12000, 9)
+Nrs3 <- rep(12000, 12\)
+Nrs3 <- rep(12000, 12)
+Nrs2 <- rep(12000, 11)
+group.Nrs <- list(Nrs1, Nrs2, Nrs3)
+mc.xdc_check1 <- MC.Xdc.statistics(group.Nrs, MC, fit.control$gamma, 2, "hnull", 0.05, "mom" )
+mc.xdc_check1 <- MC.Xdc.statistics(group.Nrs, MC, fit.flare$gamma, 2, "ha", 0.05, "mom" )
+mc.xdc_check1 <- MC.Xdc.statistics(group.Nrs, MC, fit.flare$gamma, 2, "ha", 0.05, "mom")
+mc.xdc_check1
+group.alphap <- rbind(fit.control$gamma, fit.flare$gamma)
+group.alphap <- rbind(fit.control$gamma, fit.flare$gamma)
+mc.xdc_check2 <- MC.Xdc.statistics(group.Nrs, MC, group.alphap, 2, "ha", 0.05, "mom")
+mc.xdc_check2
+group.Nrs <- list(Nrs1, Nrs2)
+group.alphap <- rbind(fit.control$gamma, fit.flare$gamma)
+mc.xdc_check1 <- MC.Xdc.statistics(group.Nrs, MC, fit.control$gamma, 2, "hnull", 0.05, "mom" )
+group.alphap <- rbind(fit.control$gamma, fit.flare$gamma)
+mc.xdc_check2 <- MC.Xdc.statistics(group.Nrs, MC, group.alphap, 2, "ha", 0.05, "mom")
+mc.xdc_check2
+read.table("ADcontrolReads")
+read.table("ADcontrolReads.txt")
+=======
+total <- total - UpperRepSpring[i,9]
+###Nitrospira
+r <- rpearsonI(n=1, a=12800000, b=51199999, location=0, scale=1)
+UpperRepSpring[i,10] <- total*r
+total <- total - UpperRepSpring[i,10]
+###Planctomycetes
+r <- rpearsonI(n=1, a=7396449, b=7396449, location=0, scale=1)
+UpperRepSpring[i,11] <- total*r
+###Chloroflexi
+r <- rpearsonI(n=1, a=5e+07, b=5e+07, location=0, scale=1)
+UpperRepSpring[i,12] <- total*r
+###BRC1
+UpperRepSpring[1,13] <- total - UpperRepSpring[i,12]
+}
+View(UpperRepSpring)
+###Loop
+numrow <- 50
+numcol <- dim(PRemainder)[2]
+UpperRepSpringSpring <- matrix(nrow=numrow,ncol=numcol)
+colnames(UpperRepSpringSpring) <- dimnames(PRemainder)[[2]]
+rownames(UpperRepSpringSpring) <- rownames(UpperRepSpringSpring, do.NULL= FALSE, prefix= "Sample")
+size <- dim(UpperRepSpring)[1]
+for (i in 1:size){
+total <- 1
+###Proteobacteria
+UpperRepSpring[i,1] <- rpearsonI(n=1, a=1.749882, b=1.672536, location=0, scale=1)
+total <- total - UpperRepSpring[i,1]
+###Firmicutes
+r <- rpearsonI(n=1, a=1.483752, b=1.446118, location=0, scale=1)
+UpperRepSpring[i,2] <- total*r
+total <- total - UpperRepSpring[i,2]
+###Bacteroidetes
+r <- rpearsonI(n=1, a=3.831617, b=0.956813, location=0, scale=1)
+UpperRepSpring[i,3] <- total*r
+total <- total - UpperRepSpring[i,3]
+###Actinobacteria
+r <- rpearsonI(n=1, a=38.86014, b=12.19806, location=0, scale=1)
+UpperRepSpring[i,4] <- total*r
+total <- total - UpperRepSpring[i,4]
+###Fusobacteria
+r <- rpearsonI(n=1, a=23.80443, b=4.17792, location=0, scale=1)
+UpperRepSpring[i,5] <- total*r
+total <- total - UpperRepSpring[i,5]
+###Cyanobacteria
+r <- rpearsonI(n=1, a=77236.73, b=70371.24, location=0, scale=1)
+UpperRepSpring[i,6] <- total*r
+total <- total - UpperRepSpring[i,6]
+###OD1
+r <- rpearsonI(n=1, a=473792.9, b=370794.5, location=0, scale=1)
+UpperRepSpring[i,7] <- total*r
+total <- total - UpperRepSpring[i,7]
+###TM7
+r <- rpearsonI(n=1, a=64644.76, b=36538.34, location=0, scale=1)
+UpperRepSpring[i,8] <- total*r
+total <- total - UpperRepSpring[i,8]
+###Deinococcus-Thermus
+r <- DT <- rpearsonI(n=1, a=7431283, b=4644552, location=0, scale=1)
+UpperRepSpring[i,9] <- total*r
+total <- total - UpperRepSpring[i,9]
+###Nitrospira
+r <- rpearsonI(n=1, a=12800000, b=51199999, location=0, scale=1)
+UpperRepSpring[i,10] <- total*r
+total <- total - UpperRepSpring[i,10]
+###Planctomycetes
+r <- rpearsonI(n=1, a=7396449, b=7396449, location=0, scale=1)
+UpperRepSpring[i,11] <- total*r
+###Chloroflexi
+r <- rpearsonI(n=1, a=5e+07, b=5e+07, location=0, scale=1)
+UpperRepSpring[i,12] <- total*r
+###BRC1
+UpperRepSpring[i,13] <- total - UpperRepSpring[i,12]
+}
+View(PRemainder)
+View(UpperRepSpring)
+barchart(x=UpperRepSpring,horizontal=FALSE, col=rainbow(13))
+library(HMP)
+barchart(x=UpperRepSpring,horizontal=FALSE, col=rainbow(13))
+apply(UpperRepSpring, 1, mean)
+apply(UpperRepSpring, 2, mean)
+apply(UpperRepSpring, 2, mean)*100
+getBetaParams(.5113..2377)
+getBetaParams(.5113,.2377)
+getBetaParams(.2476,.2522)
+getBetaParams(.1931,.1662)
+getBetaParams(.03677,.0591)
+getBetaParams(.0098,.0662)
+getBetaParams(.0009,.0013)
+getBetaParams(.00046,.00054)
+getBetaParams(.00023,.00151)
+getBetaParams(.00008,.00014)
+getBetaParams(.00001,.00005)
+getBetaParams(.00002,.00013)
+getBetaParams(.00001,.00005)
+getBetaParams(.00001,.00009)
+Proteobacteria <- rpearsonI(n=1000, a=1.749882, b=1.672536, location=0, scale=1)
+hist(Proteobacteria)
+Firmicutes <- rpearsonI(n=1000, a=0.4776035, b=1.4513283, location=0, scale=1)
+hist(Firmicutes)
+Bacteroidetes <- rpearsonI(n=1000, a=0.8961366, b=3.7446536, location=0, scale=1)
+hist(Bacteroidetes)
+Actinobacteria <- rpearsonI(n=1000, a=0.336087, b=8.804163, location=0, scale=1)
+hist(Actinobacteria)
+Fusobacteria <- rpearsonI(n=1000, a=0.01189997, b=1.20238249, location=0, scale=1)
+hist(Fusobacteria)
+Cyanobacteria <- rpearsonI(n=1000, a=0.4779586, b=530.5871302, location=0, scale=1)
+hist(Cyanobacteria)
+OD1 <- rpearsonI(n=1000, a=0.7248578, b=1575.0529200, location=0, scale=1)
+hist(OD1)
+TM7 <- rpearsonI(n=1000, a=0.0229654, b=99.8266026, location=0, scale=1)
+hist(TM7)
+DT <- rpearsonI(n=1000, a=0.3264245, b=4079.9796980, location=0, scale=1)
+hist(DT)
+Nitrospira <- rpearsonI(n=1000, a=3.99896e-02, b=3.99892e+0, location=0, scale=1)
+hist(Nitrospira)
+Planctomycetes <- rpearsonI(n=1000, a=2.364817e-02, b=1.182385e+03, location=0, scale=1)
+hist(Planctomycetes)
+Chloroflexi <- rpearsonI(n=1000, a=3.99896e-02, b=3.99892e+03, location=0, scale=1)
+hist(Chloroflexi)
+BRC1 <- rpearsonI(n=1000, a=1.233556e-02, b=1.233543e+03)
+numrow <- 50
+numcol <- dim(PRemainder)[2]
+data <- matrix(nrow=numrow, ncol=numcol)
+colnames(data) <- dimnames(PRemainder)[[2]]
+rownames(data) <- rownames(data, do.NULL= FALSE, prefix= "Sample")
+size <- dim(data)[1]
+for (i in 1:size){
+total <- 1
+###BRC1
+data[i,13] <- 0
+total <- total - data[i,13]
+###Chloroflexi
+data[i,12] <- rpearsonI(n=1, a=3.99896e-02, b=3.99892e+03, location=0, scale=1)
+total <- total - data[i,12]
+###Planctomycetes
+data[i,11] <- rpearsonI(n=1, a=1.561484e-02, b=1.561469e+03, location=0, scale=1)
+total <- total - data[i,11]
+###Nitrospira
+data[i,10] <- rpearsonI(n=1, a=0.1735524, b=3470.8750587, location=0, scale=1)
+total <- total - data[i,10]
+###Deinococcus-Thermus
+data[i,9] <- rpearsonI(n=1, a=0.2498125, b=1665.1668542, location=0, scale=1)
+total <- total - data[i,9]
+###TM7
+data[i,8] <- rpearsonI(n=1, a=0.02130855, b=47.33101610, location=0, scale=1)
+total <- total - data[i,8]
+###OD1
+data[i,7] <- rpearsonI(n=1, a=0.605873, b=903.682256, location=0, scale=1)
+total <- total - data[i,7]
+###Cyanobacteria
+data[i,6] <- rpearsonI(n=1, a=0.3728329, b=137.7134274, location=0, scale=1)
+total <- total - data[i,6]
+###Fusobacteria
+data[i,5] <- rpearsonI(n=1, a=0.02791087, b=1.56699613, location=0, scale=1)
+total <- total - data[i, 5]
+###Bacteroidetes
+data[i,3] <- rpearsonI(n=1, a=0.1034732, b=2.9488343, location=0, scale=1)
+total <- total - data[i,3]
+###Actinobacteria
+data[i,4] <- rpearsonI(n=1, a=0.2883812, b=15.0510462, location=0, scale=1)
+total <- total - data[i,4]
+###Firmicutes
+data[i,2] <- rpearsonI(n=1, a=0.7207408, b=3.4647458, location=0, scale=1)
+total <- total - data[i,2]
+###Proteobacteria
+data[i,1] <- total
+}
+View(data)
+View(data)
+View(data)
+numrow <- 50
+numcol <- dim(PRemainder)[2]
+data <- matrix(nrow=numrow, ncol=numcol)
+colnames(data) <- dimnames(PRemainder)[[2]]
+rownames(data) <- rownames(data, do.NULL= FALSE, prefix= "Sample")
+size <- dim(data)[1]
+for (i in 1:size){
+total <- 1
+###BRC1
+data[i,13] <- rpearsonI(n=1, a=1.233556e-02, b=1.233543e+03)
+total <- total - data[i,13]
+###Chloroflexi
+data[i,12] <- rpearsonI(n=1, a=3.99896e-02, b=3.99892e+03, location=0, scale=1)
+total <- total - data[i,12]
+###Planctomycetes
+data[i,11] <- rpearsonI(n=1, a=2.364817e-02, b=1.182385e+03, location=0, scale=1)
+total <- total - data[i,11]
+###Nitrospira
+data[i,10] <- rpearsonI(n=1, a=3.99896e-02, b=3.99892e+0, location=0, scale=1)
+total <- total - data[i,10]
+###Deinococcus-Thermus
+data[i,9] <- rpearsonI(n=1, a=0.3264245, b=4079.9796980, location=0, scale=1)
+total <- total - data[i,9]
+###TM7
+data[i,8] <- rpearsonI(n=1, a=0.0229654, b=99.8266026, location=0, scale=1)
+total <- total - data[i,8]
+###OD1
+data[i,7] <- rpearsonI(n=1, a=0.7248578, b=1575.0529200, location=0, scale=1)
+total <- total - data[i,7]
+###Cyanobacteria
+data[i,6] <- rpearsonI(n=1, a=0.4779586, b=530.5871302, location=0, scale=1)
+total <- total - data[i,6]
+###Fusobacteria
+data[i,5] <- rpearsonI(n=1, a=0.01189997, b=1.20238249, location=0, scale=1)
+total <- total - data[i, 5]
+###Actinobacteria
+data[i,4] <- rpearsonI(n=1, a=a=0.336087, b=8.804163, location=0, scale=1)
+total <- total - data[i,4]
+###Bacteroidetes
+data[i,3] <- rpearsonI(n=1, a=0.8961366, b=3.7446536, location=0, scale=1)
+total <- total - data[i,3]
+###Firmicutes
+data[i,2] <- rpearsonI(n=1, a=0.4776035, b=1.4513283, location=0, scale=1)
+total <- total - data[i,2]
+###Proteobacteria
+data[i,1] <- total
+}
+numrow <- 50
+numcol <- dim(PRemainder)[2]
+data <- matrix(nrow=numrow, ncol=numcol)
+colnames(data) <- dimnames(PRemainder)[[2]]
+rownames(data) <- rownames(data, do.NULL= FALSE, prefix= "Sample")
+size <- dim(data)[1]
+for (i in 1:size){
+total <- 1
+###BRC1
+data[i,13] <- rpearsonI(n=1, a=1.233556e-02, b=1.233543e+03)
+total <- total - data[i,13]
+###Chloroflexi
+data[i,12] <- rpearsonI(n=1, a=3.99896e-02, b=3.99892e+03, location=0, scale=1)
+total <- total - data[i,12]
+###Planctomycetes
+data[i,11] <- rpearsonI(n=1, a=2.364817e-02, b=1.182385e+03, location=0, scale=1)
+total <- total - data[i,11]
+###Nitrospira
+data[i,10] <- rpearsonI(n=1, a=3.99896e-02, b=3.99892e+0, location=0, scale=1)
+total <- total - data[i,10]
+###Deinococcus-Thermus
+data[i,9] <- rpearsonI(n=1, a=0.3264245, b=4079.9796980, location=0, scale=1)
+total <- total - data[i,9]
+###TM7
+data[i,8] <- rpearsonI(n=1, a=0.0229654, b=99.8266026, location=0, scale=1)
+total <- total - data[i,8]
+###OD1
+data[i,7] <- rpearsonI(n=1, a=0.7248578, b=1575.0529200, location=0, scale=1)
+total <- total - data[i,7]
+###Cyanobacteria
+data[i,6] <- rpearsonI(n=1, a=0.4779586, b=530.5871302, location=0, scale=1)
+total <- total - data[i,6]
+###Fusobacteria
+data[i,5] <- rpearsonI(n=1, a=0.01189997, b=1.20238249, location=0, scale=1)
+total <- total - data[i, 5]
+###Actinobacteria
+data[i,4] <- rpearsonI(n=1, a=0.336087, b=8.804163, location=0, scale=1)
+total <- total - data[i,4]
+###Bacteroidetes
+data[i,3] <- rpearsonI(n=1, a=0.8961366, b=3.7446536, location=0, scale=1)
+total <- total - data[i,3]
+###Firmicutes
+data[i,2] <- rpearsonI(n=1, a=0.4776035, b=1.4513283, location=0, scale=1)
+total <- total - data[i,2]
+###Proteobacteria
+data[i,1] <- total
+}
+numrow <- 50
+numcol <- dim(PRemainder)[2]
+data <- matrix(nrow=numrow, ncol=numcol)
+colnames(data) <- dimnames(PRemainder)[[2]]
+rownames(data) <- rownames(data, do.NULL= FALSE, prefix= "Sample")
+size <- dim(data)[1]
+for (i in 1:size){
+total <- 1
+###BRC1
+data[i,13] <- rpearsonI(n=1, a=1.233556e-02, b=1.233543e+03, location=0, scale=1)
+total <- total - data[i,13]
+###Chloroflexi
+data[i,12] <- rpearsonI(n=1, a=3.99896e-02, b=3.99892e+03, location=0, scale=1)
+total <- total - data[i,12]
+###Planctomycetes
+data[i,11] <- rpearsonI(n=1, a=2.364817e-02, b=1.182385e+03, location=0, scale=1)
+total <- total - data[i,11]
+###Nitrospira
+data[i,10] <- rpearsonI(n=1, a=3.99896e-02, b=3.99892e+0, location=0, scale=1)
+total <- total - data[i,10]
+###Deinococcus-Thermus
+data[i,9] <- rpearsonI(n=1, a=0.3264245, b=4079.9796980, location=0, scale=1)
+total <- total - data[i,9]
+###TM7
+data[i,8] <- rpearsonI(n=1, a=0.0229654, b=99.8266026, location=0, scale=1)
+total <- total - data[i,8]
+###OD1
+data[i,7] <- rpearsonI(n=1, a=0.7248578, b=1575.0529200, location=0, scale=1)
+total <- total - data[i,7]
+###Cyanobacteria
+data[i,6] <- rpearsonI(n=1, a=0.4779586, b=530.5871302, location=0, scale=1)
+total <- total - data[i,6]
+###Fusobacteria
+data[i,5] <- rpearsonI(n=1, a=0.01189997, b=1.20238249, location=0, scale=1)
+total <- total - data[i, 5]
+###Actinobacteria
+data[i,4] <- rpearsonI(n=1, a=0.336087, b=8.804163, location=0, scale=1)
+total <- total - data[i,4]
+###Bacteroidetes
+data[i,3] <- rpearsonI(n=1, a=0.8961366, b=3.7446536, location=0, scale=1)
+total <- total - data[i,3]
+###Firmicutes
+data[i,2] <- rpearsonI(n=1, a=0.4776035, b=1.4513283, location=0, scale=1)
+total <- total - data[i,2]
+###Proteobacteria
+data[i,1] <- total
+}
+View(data)
+numrow <- 50
+numcol <- dim(PRemainder)[2]
+data <- matrix(nrow=numrow, ncol=numcol)
+colnames(data) <- dimnames(PRemainder)[[2]]
+rownames(data) <- rownames(data, do.NULL= FALSE, prefix= "Sample")
+size <- dim(data)[1]
+for (i in 1:size){
+total <- 1
+###BRC1
+data[i,13] <- rpearsonI(n=1, a=1.233556e-02, b=1.233543e+03, location=0, scale=1)
+total <- total - data[i,13]
+###Chloroflexi
+data[i,12] <- rpearsonI(n=1, a=3.99896e-02, b=3.99892e+03, location=0, scale=1)
+total <- total - data[i,12]
+###Planctomycetes
+data[i,11] <- rpearsonI(n=1, a=2.364817e-02, b=1.182385e+03, location=0, scale=1)
+total <- total - data[i,11]
+###Nitrospira
+data[i,10] <- rpearsonI(n=1, a=3.99896e-02, b=3.99892e+0, location=0, scale=1)
+total <- total - data[i,10]
+###Deinococcus-Thermus
+data[i,9] <- rpearsonI(n=1, a=0.3264245, b=4079.9796980, location=0, scale=1)
+total <- total - data[i,9]
+###TM7
+data[i,8] <- rpearsonI(n=1, a=0.0229654, b=99.8266026, location=0, scale=1)
+total <- total - data[i,8]
+###OD1
+data[i,7] <- rpearsonI(n=1, a=0.7248578, b=1575.0529200, location=0, scale=1)
+total <- total - data[i,7]
+###Cyanobacteria
+data[i,6] <- rpearsonI(n=1, a=0.4779586, b=530.5871302, location=0, scale=1)
+total <- total - data[i,6]
+###Fusobacteria
+data[i,5] <- rpearsonI(n=1, a=0.01189997, b=1.20238249, location=0, scale=1)
+total <- total - data[i, 5]
+###Actinobacteria
+data[i,4] <- rpearsonI(n=1, a=0.336087, b=8.804163, location=0, scale=1)
+total <- total - data[i,4]
+###Bacteroidetes
+data[i,3] <- rpearsonI(n=1, a=0.8961366, b=3.7446536, location=0, scale=1)
+total <- total - data[i,3]
+###Firmicutes
+data[i,2] <- rpearsonI(n=1, a=0.4776035, b=1.4513283, location=0, scale=1)
+total <- total - data[i,2]
+###Proteobacteria
+data[i,1] <- total
+}
+View(PRemainder)
+View(data)
+numrow <- 50
+numcol <- dim(PRemainder)[2]
+data <- matrix(nrow=numrow, ncol=numcol)
+colnames(data) <- dimnames(PRemainder)[[2]]
+rownames(data) <- rownames(data, do.NULL= FALSE, prefix= "Sample")
+size <- dim(data)[1]
+for (i in 1:size){
+total <- 1
+###BRC1
+data[i,13] <- rpearsonI(n=1, a=1.233556e-02, b=1.233543e+03, location=0, scale=1)
+total <- total - data[i,13]
+###Chloroflexi
+data[i,12] <- rpearsonI(n=1, a=3.99896e-02, b=3.99892e+03, location=0, scale=1)
+total <- total - data[i,12]
+###Planctomycetes
+data[i,11] <- rpearsonI(n=1, a=2.364817e-02, b=1.182385e+03, location=0, scale=1)
+total <- total - data[i,11]
+###Nitrospira
+data[i,10] <- rpearsonI(n=1, a=3.99896e-02, b=3.99892e+0, location=0, scale=1)
+total <- total - data[i,10]
+###Deinococcus-Thermus
+data[i,9] <- rpearsonI(n=1, a=0.3264245, b=4079.9796980, location=0, scale=1)
+total <- total - data[i,9]
+###TM7
+data[i,8] <- rpearsonI(n=1, a=0.0229654, b=99.8266026, location=0, scale=1)
+total <- total - data[i,8]
+###OD1
+data[i,7] <- rpearsonI(n=1, a=0.7248578, b=1575.0529200, location=0, scale=1)
+total <- total - data[i,7]
+###Cyanobacteria
+data[i,6] <- rpearsonI(n=1, a=0.4779586, b=530.5871302, location=0, scale=1)
+total <- total - data[i,6]
+###Fusobacteria
+data[i,5] <- rpearsonI(n=1, a=0.01189997, b=1.20238249, location=0, scale=1)
+total <- total - data[i,5]
+###Actinobacteria
+data[i,4] <- rpearsonI(n=1, a=0.336087, b=8.804163, location=0, scale=1)
+total <- total - data[i,4]
+###Bacteroidetes
+data[i,3] <- rpearsonI(n=1, a=0.8961366, b=3.7446536, location=0, scale=1)
+total <- total - data[i,3]
+###Firmicutes
+data[i,2] <- rpearsonI(n=1, a=0.4776035, b=1.4513283, location=0, scale=1)
+total <- total - data[i,2]
+###Proteobacteria
+data[i,1] <- total
+}
+View(data)
+>>>>>>> eb584bcbb9b3fdc2e2cdb97d2e690ba493c18d89
+a <- read.table("UpperRmean.txt")
+PR2 <- Premainder(a)
+Premainder <- function(x) {
+rowsize <- dim(a)[1]
+colsize <- dim(a)[2]
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+PR2 <- Premainder(a)
+Premainder <- function(x) {
+rowsize <- dim(a)[1]
+colsize <- dim(a)[2]
+dims <- dimnames(a)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+PR2 <- Premainder(a)
+View(PR2)
+b <- read.table("ADControlsData.txt")
+View(b)
+View(a)
+View(PR2)
+fix(Premainder)
+Premainder(a)
+Fall <- Premainder(a)
+View(Fall)
+View(b)
+c <- read.tabke("ADControlsData.txt")
+c <- read.table("ADControlsData.txt")
+AD <- Premainder(c)
+Premainder <- function(x) {
+rowsize <- dim(x)[1]
+colsize <- dim(x)[2]
+dims <- dimnames(x)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+<<<<<<< HEAD
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+AD <- Premainder(c)
+write.table(x=b,file="ADControldata.csv")
+View(c)
+View(a)
+Premainder <- function(x) {
+rowsize <- dim(x)[1]
+colsize <- dim(x)[2]
+dims <- dimnames(x)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)[i]
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+=======
+View(data)
+a <- read.table("UpperRmean.txt")
+PR2 <- Premainder(a)
+Premainder <- function(x) {
+rowsize <- dim(a)[1]
+colsize <- dim(a)[2]
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+PR2 <- Premainder(a)
+Premainder <- function(x) {
+rowsize <- dim(a)[1]
+colsize <- dim(a)[2]
+dims <- dimnames(a)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+PR2 <- Premainder(a)
+View(PR2)
+b <- read.table("ADControlsData.txt")
+View(b)
+View(a)
+View(PR2)
+fix(Premainder)
+Premainder(a)
+Fall <- Premainder(a)
+View(Fall)
+View(b)
+c <- read.tabke("ADControlsData.txt")
+c <- read.table("ADControlsData.txt")
+AD <- Premainder(c)
+Premainder <- function(x) {
+rowsize <- dim(x)[1]
+colsize <- dim(x)[2]
+dims <- dimnames(x)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+AD <- Premainder(c)
+write.table(x=b,file="ADControldata.csv")
+View(c)
+View(a)
+Premainder <- function(x) {
+rowsize <- dim(x)[1]
+colsize <- dim(x)[2]
+dims <- dimnames(x)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)[i]
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+<<<<<<< HEAD
+PRemainder[1,k] <- a[1,k]/ total
+total <- total - a[1,k]
+}
+}
+View(PRemainder)
+write.table(x=PRemainder, file="PRemainderFall.csv",sep=",")
+getBetaParams(0.7539,0.2381)
+getBetaParams(0.698750203, 0.1658)
+getBetaParams(0.456627155, 0.0899)
+getBetaParams(0.466038671, 0.0336)
+getBetaParams(0.812441968, 0.018)
+getBetaParams(0.668316832, 0.0044)
+getBetaParams(0.5, 0.00086)
+getBetaParams(0.671641791, 0.00305)
+getBetaParams(0.681818182, 0.0003)
+getBetaParams(0.714285714, 0.00012)
+getBetaParams(0.5, 0.00008)
+getBetaParams(0.5, 0.00008)
+###Loop
+numrow <- 50
+numcol <- dim(PRemainder)[2]
+UpperRep <- matrix(nrow=numrow,ncol=numcol)
+colnames(UpperRep) <- dimnames(PRemainder)[[2]]
+rownames(UpperRep) <- rownames(UpperRep, do.NULL= FALSE, prefix= "Sample")
+size <- dim(UpperRep)[1]
+for (i in 1:size){
+total <- 1
+###Proteobacteria
+UpperRep[i,1] <- rpearsonI(n=1, a=1.7133906, b=0.5593122, location=0, scale=1)
+total <- total - UpperRep[i,1]
+###Firmicutes
+r <- rpearsonI(n=1, a=4.651839, b=2.005531, location=0, scale=1)
+UpperRep[i,2] <- total*r
+total <- total - UpperRep[i,2]
+###Bacteroidetes
+r <- rpearsonI(n=1, a=13.56189, b=16.13825, location=0, scale=1)
+UpperRep[i,3] <- total*r
+total <- total - UpperRep[i,3]
+###Actinobacteria
+r <- rpearsonI(n=1, a=102.2587, b=117.1624, location=0, scale=1)
+UpperRep[i,4] <- total*r
+total <- total - UpperRep[i,4]
+###Fusobacteria
+r <- rpearsonI(n=1, a=381.28608,  b=88.02261, location=0, scale=1)
+UpperRep[i,5] <- total*r
+total <- total - UpperRep[i,5]
+###Cyanobacteria
+r <- rpearsonI(n=1, a=7651.471, b=3797.397, location=0, scale=1)
+UpperRep[i,6] <- total*r
+total <- total - UpperRep[i,6]
+###OD1
+r <- rpearsonI(n=1, a=169009.8, b=169009.8, location=0, scale=1)
+UpperRep[i,7] <- total*r
+total <- total - UpperRep[i,7]
+###TM7
+r <- rpearsonI(n=1, a=15922.282, b=7784.227, location=0, scale=1)
+UpperRep[i,8] <- total*r
+total <- total - UpperRep[i,8]
+###Deinococcus-Thermus
+r <- rpearsonI(n=1, a=1643500.4, b=766966.9, location=0, scale=1)
+UpperRep[i,9] <- total*r
+total <- total - UpperRep[i,9]
+###Nitrospira
+r <- rpearsonI(n=1, a=10123096, b=4049238, location=0, scale=1)
+UpperRep[i,10] <- total*r
+total <- total - UpperRep[i,10]
+###Planctomycetes
+r <- rpearsonI(n=1, a=19531249, b=19531249, location=0, scale=1)
+UpperRep[i,11] <- total*r
+###Chloroflexi
+UpperRep[i,12] <- total - UpperRep[i,11]
+###BRC1
+UpperRep[1:numrow,13] <- 0
+}
+View(UpperRep)
+barchart(x=UpperRep,horizontal=FALSE, col=rainbow(13))
+apply(UpperRep,2,mean)
+apply(UpperRep,2,mean)*100
+View(UpperRep)
+apply(UppeRep,2,mean)*100
+apply(UpperRep,2,mean)*100
+apply(UpperRep,2,mean)*1000.
+View(UpperRep)
+apply(UpperRep*100,2,mean)*1000.
+apply(UpperRep*100,2,mean)
+colMeans(UpperRep)
+colMeans(UpperRep)*100
+colMeans(UpperRep)*100
+colMeans(UpperRep[1])*100
+colMeans(UpperRep[1:13])*100
+colMeans(UpperRep[1:50,])*100
+colMeans(UpperRep[,1:50])*100
+colMeans(UpperRep[1,1:50])*100
+colMeans(UpperRep[1:50,1])*100
+library(HMP)
+#Pilot Data
+install.packages("HMP")
+library("HMP", lib.loc="/Library/Frameworks/R.framework/Versions/2.15/Resources/library")
+library(HMP)
+#Pilot Data
+#********************************************
+#Loading data
+data(throat)
+data(tonsils)
+View(throat)
+View(throat)
+View(tonsils)
+View(tonsils)
+Gp1=throat
+Gp2=tonsils
+#Preprocessing 1:removing taxa that are zeroes in both groups
+#If the data loaded consists of columns given by taxa units and rows subjects (usually called species data),
+#then the following preprocessing should be done. Note that you are using the data of the package (ranked data),
+#then there is not need to do the following.
+comb=rbind(Gp1,Gp2)
+View(comb)
+View(comb)
+=======
+>>>>>>> 7f595ebefcc24a64e859085feeb83d119244b11c
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+AD <- Premainder(c)
+View(AD)
+c <- read.table("ADControlP.txt")
+View(c)
+AD <- Premainder(c)
+View(AD)
+Premainder <- function(x) {
+rowsize <- dim(x)[1]
+colsize <- dim(x)[2]
+dims <- dimnames(x)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+AD <- Premainder(c)
+apply(X=c,MARGIN=1,sum)[1]
+apply(X=c,MARGIN=1,sum)[2]
+rowsize <- dim(x)[1]
+rowsize <- dim(c)[1]
+colsize <- dim(c)[2]
+dims <- dimnames(c)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+y[1,1] <- c[1,1]/100
+View(y)
+total <- apply(X=c,MARGIN=1,sum)[1]
+total <- total - c[1,1]
+fix(total)
+fix(total)
+y[1,2] <- c[1,2]/ total
+View(y)
+total <- total - c[1,2]
+total <- apply(X=c,MARGIN=1,sum)[2]
+y[2,1] <- c[2,1]/100
+total <- total - c[2,1]
+View(y)
+Premainder <- function(x) {
+rowsize <- dim(x)[1]
+colsize <- dim(x)[2]
+dims <- dimnames(x)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)[i]
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+Premainder <- function(x) {
+rowsize <- dim(x)[1]
+colsize <- dim(x)[2]
+dims <- dimnames(x)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)[i]
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+}
+return(y)
+}
+Premainder(c)
+Premainder(a)
+colsize <- dim(c)[2]
+library(HMP)
+data(throat)
+data(tonsils)
+Gp1=throat
+Gp2=tonsils
+comb=rbind(Gp1,Gp2)
+View(comb)
+index=which(colSums(comb)==0)
+fix(index)
+fix(index)
+colSums(comb)
+colSums(comb)==0
+which(colSums(comb)==0)
+length(index)>0
+Gp1=Gp1[,-index]
+Gp1=throat
+Gp1[,-index]
+Gp2[,-index]
+Gp2
+-index
+Gp1=throat
+Gp2=tonsils
+comb=rbind(Gp1,Gp2)
+<<<<<<< HEAD
+=======
+>>>>>>> 018459b0d559556cdfcaed75762a21b741bea85c
+>>>>>>> 7f595ebefcc24a64e859085feeb83d119244b11c
+index=which(colSums(comb)==0)
+if(length(index)>0){
+Gp1=Gp1[,-index]
+Gp2=Gp2[,-index]
+}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+#Computing and visualizing taxa frequency means for each group
+View(Gp1)
+View(Gp1)
+View(Gp2)
+View(Gp2)
+View(throat)
+View(throat)
+mygroup <- list(Gp1,Gp2)
+names(mygroup)<-c('throat','tonsils')
+Sites.pi.MoM=do.call(rbind,lapply(mygroup,function(x) DM.MoM(x)$pi))
+Sites.pi.MoM=Sites.pi.MoM[,order(abs(Sites.pi.MoM[1,]-Sites.pi.MoM[2,]),decreasing=T)]
+#Ploting taxa frequency means
+View(Sites.pi.MoM)
+View(Sites.pi.MoM)
+matplot(t(Sites.pi.MoM),type='o',pch=19,axes="FALSE", ann="FALSE",col=c('blue','red'),ylim=c(-0.25,0.6))
+y=colnames(Sites.pi.MoM)
+nc=dim((Sites.pi.MoM))[2]
+=======
+>>>>>>> 7f595ebefcc24a64e859085feeb83d119244b11c
+list(Gp1,Gp2)
+mygroup <- list(Gp1,Gp2)
+names(mygroup)<-c('throat','tonsils')
+fix(mygroup)
+mygroup
+Sites.pi.MoM=do.call(rbind,lapply(mygroup,function(x) DM.MoM(x)$pi))
+View(Sites.pi.MoM)
+Sites.pi.MoM=Sites.pi.MoM[,order(abs(Sites.pi.MoM[1,]-Sites.pi.MoM[2,]),decreasing=T)]
+Sites.pi.MoM=do.call(rbind,lapply(mygroup,function(x) DM.MoM(x)$pi))
+Sites.pi.MoM
+Sites.pi.MoM=Sites.pi.MoM[,order(abs(Sites.pi.MoM[1,]-Sites.pi.MoM[2,]),decreasing=T)]
+Sites.pi.MoM
+matplot(t(Sites.pi.MoM),type='o',pch=19,axes="FALSE", ann="FALSE",col=c('blue','red'),ylim=c(-0.25,0.6))
+y=colnames(Sites.pi.MoM)
+colnames(Sites.pi.MoM)
+nc=dim((Sites.pi.MoM))[2]
+dim((Sites.pi.MoM))[2]
+<<<<<<< HEAD
+=======
+>>>>>>> 018459b0d559556cdfcaed75762a21b741bea85c
+>>>>>>> 7f595ebefcc24a64e859085feeb83d119244b11c
+axis(1,at=1:nc, lab=F, hadj=3,pos=-0.009)
+text(1:nc,-0.02, srt=90,adj=1,labels=y,xpd=T, cex=1)
+axis(2, las=1, at=seq(0,0.6,0.05))
+legend("topright",legend=c(rownames(Sites.pi.MoM)), cex=0.8, col=c('blue','red'), bty="n",pch=19)
+text(-1.5,0.01,srt=90,adj=-1,labels='Taxa Abundance',xpd=T, cex=1)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+#text(21,-0.01,srt=0,adj=0,labels='Taxa Abundance',cex=1)
+#Selecting taxa with weigthed average across groups above 1%
+fit1=DM.MoM(Gp1)
+fit2=DM.MoM(Gp2)
+fix(fit1)
+fit1$reads=apply(Gp1,1,sum)
+fit2$reads=apply(Gp2,1,sum)
+pio=pioest(fit1,fit2)
+taxaselection=which(pio>0.01)
+Gp1sel=cbind(Gp1[,taxaselection],rowSums(Gp1[,-taxaselection]))
+Gp2sel=cbind(Gp2[,taxaselection],rowSums(Gp2[,-taxaselection]))
+nc=dim(Gp1sel)[2]
+fix(fit1)
+print fit1
+print(fit1)
+=======
+>>>>>>> 7f595ebefcc24a64e859085feeb83d119244b11c
+DM.MoM(Gp1)
+DM.MoM(Gp2)
+fit1=DM.MoM(Gp1)
+fit2=DM.MoM(Gp2)
+apply(Gp1,1,sum)
+fit1$reads=apply(Gp1,1,sum)
+fit2$reads=apply(Gp2,1,sum)
+pioest(fit1,fit2)
+fit2$reads=apply(Gp2,1,sum)
+fit2=DM.MoM(Gp2)
+pioest(fit1,fit2)
+pio=pioest(fit1,fit2)
+fit1=DM.MoM(Gp1)
+fit2=DM.MoM(Gp2)
+fit1$reads=apply(Gp1,1,sum)
+fit2$reads=apply(Gp2,1,sum)
+pio=pioest(fit1,fit2)
+group.fit <- list(fit1,fit2)
+pio=pioest(group.fit)
+pioest(fit1)
+group.data <- list(saliva,throat)
+pioest(group.data)
+Premainder <- function(x) {
+rowsize <- dim(x)[1]
+colsize <- dim(x)[2]
+dims <- dimnames(x)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)[i]
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+}
+repeat
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+c <- read.table("ADControlP.txt")
+rowsize <- dim(c)[1]
+colsize <- dim(c)[2]
+dims <- dimnames(c)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=c,MARGIN=1,sum)[i]
+y[i,1] <- c[i,1]/100
+total <- total - c[i,1]
+for(k in 2:colsize){
+y[1,k] <- c[1,k]/total
+total <- total - c[1,k]
+}
+}
+View(y)
+b <- read.table("ADControldata.csv")
+rowsize <- dim(b)[1]
+colsize <- dim(b)[2]
+dims <- dimnames(b)
+PR <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:colsize){
+total <- apply(X=b, MARGIN=2, sum)[i]
+PR[1,i] <- b[1,i]
+total <- total - b[1,i]
+for(k in 2:rowsize){
+PR[k,i] <- b[k,i]/total
+total <- total - b[k,i]
+}
+}
+View(b)
+dim(c)[2]
+View(y)
+View(b)
+Premainder <- function(x) {
+rowsize <- dim(x)[1]
+colsize <- dim(x)[2]
+dims <- dimnames(x)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)[i]
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[1,k] <- x[1,k]/ total
+total <- total - x[1,k]
+<<<<<<< HEAD
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+a <- read.table("UpperRmean.txt")
+a <- read.table("UpperRFall.txt")
+Premainder(a)
+ADPreaminder <- function(b){
+rowsize <- dim(b)[1]
+colsize <- dim(b)[2]
+dims <- dimnames(b)
+PR <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:colsize){
+total <- apply(X=b, MARGIN=2, sum)[i]
+PR[1,i] <- b[1,i]
+total <- total - b[1,i]
+for(k in 2:rowsize){
+PR[k,i] <- b[k,i]/total
+total <- total - b[k,i]
+}
+}
+}
+=======
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+a <- read.table("UpperRmean.txt")
+a <- read.table("UpperRFall.txt")
+Premainder(a)
+ADPreaminder <- function(b){
+rowsize <- dim(b)[1]
+colsize <- dim(b)[2]
+dims <- dimnames(b)
+PR <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:colsize){
+total <- apply(X=b, MARGIN=2, sum)[i]
+PR[1,i] <- b[1,i]
+total <- total - b[1,i]
+for(k in 2:rowsize){
+PR[k,i] <- b[k,i]/total
+total <- total - b[k,i]
+}
+}
+}
+>>>>>>> 7f595ebefcc24a64e859085feeb83d119244b11c
+ADPreaminder(b)
+ADPreaminder <- function(b){
+rowsize <- dim(b)[1]
+colsize <- dim(b)[2]
+dims <- dimnames(b)
+PR <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:colsize){
+total <- apply(X=b, MARGIN=2, sum)[i]
+PR[1,i] <- b[1,i]
+total <- total - b[1,i]
+for(k in 2:rowsize){
+PR[k,i] <- b[k,i]/total
+total <- total - b[k,i]
+}
+}
+return(matrix(PR))
+<<<<<<< HEAD
+}
+ADPreaminder(b)
+rowsize <- dim(c)[1]
+colsize <- dim(c)[2]
+dims <- dimnames(c)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=c,MARGIN=1,sum)[i]
+y[i,1] <- c[i,1]/100
+total <- total - c[i,1]
+for(k in 2:colsize){
+y[i,k] <- c[i,k]/total
+total <- total - c[i,k]
+}
+}
+View(y)
+View(b)
+groupfit <- list(fit1$reads, fit2$reads)
+pio <- pioest(groupfit)
+fix(groupfit)
+Premainder(a)
+Premainder(c)
+Premainder <- function(x) {
+rowsize <- dim(x)[1]
+colsize <- dim(x)[2]
+dims <- dimnames(x)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)[i]
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[i,k] <- x[i,k]/ total
+total <- total - x[i,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+Premainder(c)
+getBetaParams <- function(mean, sd) {
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)*(m/(sd^2*n^2)-1)
+beta <- m * alpha
+params <- c(alpha, beta)
+return(a,b)
+}
+getBetaParams(25,5)
+=======
+}
+ADPreaminder(b)
+rowsize <- dim(c)[1]
+colsize <- dim(c)[2]
+dims <- dimnames(c)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=c,MARGIN=1,sum)[i]
+y[i,1] <- c[i,1]/100
+total <- total - c[i,1]
+for(k in 2:colsize){
+y[i,k] <- c[i,k]/total
+total <- total - c[i,k]
+}
+}
+View(y)
+View(b)
+groupfit <- list(fit1$reads, fit2$reads)
+pio <- pioest(groupfit)
+fix(groupfit)
+Premainder(a)
+Premainder(c)
+Premainder <- function(x) {
+rowsize <- dim(x)[1]
+colsize <- dim(x)[2]
+dims <- dimnames(x)
+y <- matrix(nrow=rowsize, ncol=colsize, dimnames=dims)
+for(i in 1:rowsize){
+total <- apply(X=x,MARGIN=1,sum)[i]
+y[i,1] <- x[i,1]/100
+total <- total - x[i,1]
+for(k in 2:colsize){
+y[i,k] <- x[i,k]/ total
+total <- total - x[i,k]
+}
+}
+return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=dims))
+}
+Premainder(c)
+getBetaParams <- function(mean, sd) {
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)*(m/(sd^2*n^2)-1)
+beta <- m * alpha
+params <- c(alpha, beta)
+return(a,b)
+}
+getBetaParams(25,5)
+getBetaParams(.25,.5)
+getBetaParams <- function(mean, sd) {
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)*(m/(sd^2*n^2)-1)
+beta <- m * alpha
+params <- c(alpha, beta)
+return(alpha,beta)
+}
+>>>>>>> 7f595ebefcc24a64e859085feeb83d119244b11c
+getBetaParams(.25,.5)
+getBetaParams <- function(mean, sd) {
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)*(m/(sd^2*n^2)-1)
+beta <- m * alpha
+params <- c(alpha, beta)
+<<<<<<< HEAD
+return(alpha,beta)
+}
+getBetaParams(.25,.5)
+=======
+return(params)
+}
+>>>>>>> 7f595ebefcc24a64e859085feeb83d119244b11c
+getBetaParams <- function(mean, sd) {
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)*(m/(sd^2*n^2)-1)
+beta <- m * alpha
+params <- c(a=alpha, b=beta)
+return(params)
+}
+<<<<<<< HEAD
+getBetaParams <- function(mean, sd) {
+=======
+getBetaParams(.25,.5)
+getBetaParams(.75,.23)
+Proto <- getBetaParams(.75,.23)
+library(PearsonDS)
+getBetaDist <- function(mean, sd) {
+>>>>>>> 7f595ebefcc24a64e859085feeb83d119244b11c
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)*(m/(sd^2*n^2)-1)
+beta <- m * alpha
+<<<<<<< HEAD
+params <- c(a=alpha, b=beta)
+return(params)
+}
+getBetaParams(.25,.5)
+getBetaParams(.75,.23)
+Proto <- getBetaParams(.75,.23)
+library(PearsonDS)
+getBetaDist <- function(mean, sd) {
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)*(m/(sd^2*n^2)-1)
+beta <- m * alpha
+betadist <- rpearsonI(n=1,a=alpha,b=beta,location=0,scale=1)
+return(betadist)
+}
+=======
+betadist <- rpearsonI(n=1,a=alpha,b=beta,location=0,scale=1)
+return(betadist)
+}
+>>>>>>> 7f595ebefcc24a64e859085feeb83d119244b11c
+getBetaDist(.75,.23)
+getBetaRand <- function(mean, sd) {
+m <- (1-mean)/mean
+n <- 1 + m
+alpha <- (1/n)*(m/(sd^2*n^2)-1)
+beta <- m * alpha
+betadist <- rpearsonI(n=1,a=alpha,b=beta,location=0,scale=1)
+return(betadist)
+}
+getBetaRand(.75,.23)
+getBetaRand(.75,.23)
+getBetaRand(.75,.23)
+getBetaRand(.75,.23)
+getBetaRand(.75,.23)
+<<<<<<< HEAD
+=======
+PRemainder[1,k] <- a[1,k]/ total
+total <- total - a[1,k]
+}
+}
+View(PRemainder)
+write.table(x=PRemainder, file="PRemainderFall.csv",sep=",")
+getBetaParams(0.7539,0.2381)
+getBetaParams(0.698750203, 0.1658)
+getBetaParams(0.456627155, 0.0899)
+getBetaParams(0.466038671, 0.0336)
+getBetaParams(0.812441968, 0.018)
+getBetaParams(0.668316832, 0.0044)
+getBetaParams(0.5, 0.00086)
+getBetaParams(0.671641791, 0.00305)
+getBetaParams(0.681818182, 0.0003)
+getBetaParams(0.714285714, 0.00012)
+getBetaParams(0.5, 0.00008)
+getBetaParams(0.5, 0.00008)
+###Loop
+numrow <- 50
+numcol <- dim(PRemainder)[2]
+UpperRep <- matrix(nrow=numrow,ncol=numcol)
+colnames(UpperRep) <- dimnames(PRemainder)[[2]]
+rownames(UpperRep) <- rownames(UpperRep, do.NULL= FALSE, prefix= "Sample")
+size <- dim(UpperRep)[1]
+for (i in 1:size){
+total <- 1
+###Proteobacteria
+UpperRep[i,1] <- rpearsonI(n=1, a=1.7133906, b=0.5593122, location=0, scale=1)
+total <- total - UpperRep[i,1]
+###Firmicutes
+r <- rpearsonI(n=1, a=4.651839, b=2.005531, location=0, scale=1)
+UpperRep[i,2] <- total*r
+total <- total - UpperRep[i,2]
+###Bacteroidetes
+r <- rpearsonI(n=1, a=13.56189, b=16.13825, location=0, scale=1)
+UpperRep[i,3] <- total*r
+total <- total - UpperRep[i,3]
+###Actinobacteria
+r <- rpearsonI(n=1, a=102.2587, b=117.1624, location=0, scale=1)
+UpperRep[i,4] <- total*r
+total <- total - UpperRep[i,4]
+###Fusobacteria
+r <- rpearsonI(n=1, a=381.28608,  b=88.02261, location=0, scale=1)
+UpperRep[i,5] <- total*r
+total <- total - UpperRep[i,5]
+###Cyanobacteria
+r <- rpearsonI(n=1, a=7651.471, b=3797.397, location=0, scale=1)
+UpperRep[i,6] <- total*r
+total <- total - UpperRep[i,6]
+###OD1
+r <- rpearsonI(n=1, a=169009.8, b=169009.8, location=0, scale=1)
+UpperRep[i,7] <- total*r
+total <- total - UpperRep[i,7]
+###TM7
+r <- rpearsonI(n=1, a=15922.282, b=7784.227, location=0, scale=1)
+UpperRep[i,8] <- total*r
+total <- total - UpperRep[i,8]
+###Deinococcus-Thermus
+r <- rpearsonI(n=1, a=1643500.4, b=766966.9, location=0, scale=1)
+UpperRep[i,9] <- total*r
+total <- total - UpperRep[i,9]
+###Nitrospira
+r <- rpearsonI(n=1, a=10123096, b=4049238, location=0, scale=1)
+UpperRep[i,10] <- total*r
+total <- total - UpperRep[i,10]
+###Planctomycetes
+r <- rpearsonI(n=1, a=19531249, b=19531249, location=0, scale=1)
+UpperRep[i,11] <- total*r
+###Chloroflexi
+UpperRep[i,12] <- total - UpperRep[i,11]
+###BRC1
+UpperRep[1:numrow,13] <- 0
+}
+View(UpperRep)
+barchart(x=UpperRep,horizontal=FALSE, col=rainbow(13))
+apply(UpperRep,2,mean)
+apply(UpperRep,2,mean)*100
+View(UpperRep)
+apply(UppeRep,2,mean)*100
+apply(UpperRep,2,mean)*100
+apply(UpperRep,2,mean)*1000.
+View(UpperRep)
+apply(UpperRep*100,2,mean)*1000.
+apply(UpperRep*100,2,mean)
+colMeans(UpperRep)
+colMeans(UpperRep)*100
+colMeans(UpperRep)*100
+colMeans(UpperRep[1])*100
+colMeans(UpperRep[1:13])*100
+colMeans(UpperRep[1:50,])*100
+colMeans(UpperRep[,1:50])*100
+colMeans(UpperRep[1,1:50])*100
+colMeans(UpperRep[1:50,1])*100
+>>>>>>> 0a48a1e6fd5848bf8f12874b775f6c21d3cfb3a5
+>>>>>>> eb584bcbb9b3fdc2e2cdb97d2e690ba493c18d89
+=======
+>>>>>>> 018459b0d559556cdfcaed75762a21b741bea85c
+>>>>>>> 7f595ebefcc24a64e859085feeb83d119244b11c

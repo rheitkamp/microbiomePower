@@ -29,15 +29,6 @@ Gp2=Gp2[,-index]
 mygroup <- list(Gp1,Gp2)
 names(mygroup)<-c('control','flares')
 
-#
-#
-#
-#start here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#
-#
-#
-
-
 Sites.pi.MoM=do.call(rbind,lapply(mygroup,function(x) DM.MoM(x)$pi))
 Sites.pi.MoM=Sites.pi.MoM[,order(abs(Sites.pi.MoM[1,]-Sites.pi.MoM[2,]),decreasing=T)]
 
@@ -71,11 +62,13 @@ pio <- pioest(group.data)
 
 #pio=pioest(fit1,fit2)
 taxaselection=which(pio>0.01)
-Gp1sel=cbind(Gp1[,taxaselection],rowSums(Gp1[,-taxaselection]))
-Gp2sel=cbind(Gp2[,taxaselection],rowSums(Gp2[,-taxaselection]))
+##Gp1sel=cbind(Gp1[,taxaselection],rowSums(Gp1[,-taxaselection]))
+##Gp2sel=cbind(Gp2[,taxaselection],rowSums(Gp2[,-taxaselection]))
+Gp1sel=Gp1 ##there are no taxa pooled
+Gp2sel=Gp2 ##there are no taxa pooled
 nc=dim(Gp1sel)[2]
-colnames(Gp1sel)[nc]<-'Pooled taxa'
-colnames(Gp2sel)[nc]<-'Pooled taxa'
+##colnames(Gp1sel)[nc]<-'Pooled taxa'
+##colnames(Gp2sel)[nc]<-'Pooled taxa'
 
 #Hypothesis testing;
 
@@ -94,12 +87,12 @@ fit2$reads=colSums(Gp2sel)
 Sites.pi.MoMsel=rbind(fit1$pi,fit2$pi)
 Sites.pi.MoMsel=Sites.pi.MoMsel[,order(abs(Sites.pi.MoMsel[1,]-Sites.pi.MoMsel[2,]),decreasing=T)]
 rownames(Sites.pi.MoMsel)<-rownames(Sites.pi.MoM)
-matplot(t(Sites.pi.MoMsel),type='o',pch=19,axes="FALSE", ann="FALSE",col=c('blue','red'),ylim=c(-0.25,0.6))
+matplot(t(Sites.pi.MoMsel),type='o',pch=19,axes="FALSE", ann="FALSE",col=c('blue','red'),ylim=c(-0.25,1))
 y=colnames(Sites.pi.MoMsel)
 nc=dim((Sites.pi.MoMsel))[2]
 axis(1,at=1:nc, lab=F, hadj=3,pos=-0.009)
 text(1:nc,-0.02, srt=90,adj=1,labels=y,xpd=T, cex=1)
-axis(2, las=1, at=seq(0,0.6,0.05))
+axis(2, las=1, at=seq(0,1,0.1))
 legend("topright",legend=c(rownames(Sites.pi.MoMsel)), cex=0.8, col=c('blue','red'), bty="n",pch=19)
 text(-1.5,0.01,srt=90,adj=-1,labels='Taxa Abundance',xpd=T, cex=1)
 #text(21,-0.01,srt=0,adj=0,labels='Taxa Abundance',cex=1)
@@ -114,6 +107,16 @@ pi_2gr=rbind(fit1$pi, fit2$pi)
 group.theta=c(fit1$theta,fit2$theta)
 
 MC=10000 #number of Monte Carlo experiments
+
+
+#
+#
+#
+#start here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#
+#
+#
+
 
 #Defining range of subjects and sample size 
 subjects=c(5,10,20,25) #number of subjects per group

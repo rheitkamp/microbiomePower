@@ -30,7 +30,7 @@ B <- pearsonFitML(as.numeric(PR[4,]))
 
 ###AD Control dataset
 colsize <- dim(PR)[1]
-rowsize <- 10
+rowsize <- 20
 ADControl <- matrix(nrow=rowsize, ncol=colsize)
 colnames(ADControl) <- dimnames(PR)[[1]]
 rownames(ADControl) <- rownames(ADControl, do.NULL= FALSE, prefix= "Sample")
@@ -77,7 +77,7 @@ BFNT <- pearsonFitML(as.numeric(PRFNT[4,]))
 
 ###ADFNT dataset
 colsize <- dim(PRFNT)[1]
-rowsize <- 100
+rowsize <- 20
 ADFNT <- matrix(nrow=rowsize, ncol=colsize)
 colnames(ADFNT) <- dimnames(PRFNT)[[1]]
 rownames(ADFNT) <- rownames(ADFNT, do.NULL= FALSE, prefix= "Sample")

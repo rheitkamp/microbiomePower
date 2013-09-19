@@ -151,8 +151,7 @@ MC=10000 #number of Monte Carlo experiments
 ptm <- proc.time()
 
 #Defining range of subjects and sample size 
-subjects=c(5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,
-           160,165,170,175) #number of subjects per group
+subjects=c(205,210,215,220,225) #number of subjects per group
 nreads=c(11000) #same number of reads per subject (see package to define different number of reads)    
 subject.reads = expand.grid(subj=subjects, reads=nreads) 
 range=subject.reads
@@ -164,7 +163,7 @@ power.sample.size.table
 
 proc.time() - ptm
 
-write.table(x=power.sample.size.table,file="UpperRepFallvsS1_1P5_175by5s.csv", sep=",")
+write.table(x=power.sample.size.table,file="UpperRepFallvsS1_1P205_225by5s.csv", sep=",")
 
 #######
 ##S2### <---
@@ -271,8 +270,7 @@ MC=10000 #number of Monte Carlo experiments
 ptm <- proc.time()
 
 #Defining range of subjects and sample size 
-subjects=c(5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,
-           160,165,170,175) #number of subjects per group
+subjects=c(205,210,215,220,225) #number of subjects per group
 nreads=c(11000) #same number of reads per subject (see package to define different number of reads)    
 subject.reads = expand.grid(subj=subjects, reads=nreads) 
 range=subject.reads
@@ -284,7 +282,7 @@ power.sample.size.table
 
 proc.time() - ptm
 
-write.table(x=power.sample.size.table,file="UpperRepFallvsS2_1P5_175by5s.csv", sep=",")
+write.table(x=power.sample.size.table,file="UpperRepFallvsS2_1P205_225by5s.csv", sep=",")
 
 ######
 ##S3##
@@ -527,7 +525,7 @@ power.sample.size.table
 
 proc.time() - ptm
 
-write.table(x=power.sample.size.table,file="UpperRepFallvsS4_1P105_175by5s.csv", sep=",")
+write.table(x=power.sample.size.table,file="UpperRepFallvsS4_1P5_175by5s.csv", sep=",")
 
 ######
 ##S5##
@@ -648,7 +646,7 @@ power.sample.size.table
 
 proc.time() - ptm
 
-write.table(x=power.sample.size.table,file="UpperRepFallvsS5_1P105_175by5s.csv", sep=",")
+write.table(x=power.sample.size.table,file="UpperRepFallvsS5_1P1_175by5s.csv", sep=",")
 
 ################################################################################
 ##############################Siglev=0.05#Pooled#Taxa###########################
@@ -760,8 +758,7 @@ MC=10000 #number of Monte Carlo experiments
 ptm <- proc.time()
 
 #Defining range of subjects and sample size 
-subjects=c(5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,
-           160,165,170,175) #number of subjects per group
+subjects=c(176,177,178,179) #number of subjects per group
 nreads=c(11000) #same number of reads per subject (see package to define different number of reads)    
 subject.reads = expand.grid(subj=subjects, reads=nreads) 
 range=subject.reads
@@ -773,7 +770,7 @@ power.sample.size.table
 
 proc.time() - ptm
 
-write.table(x=power.sample.size.table,file="UpperRepFallvsS1_5P5_175by5s.csv", sep=",")
+write.table(x=power.sample.size.table,file="UpperRepFallvsS1_5P176_179.csv", sep=",")
 
 #######
 ##S2### 
@@ -880,8 +877,7 @@ MC=10000 #number of Monte Carlo experiments
 ptm <- proc.time()
 
 #Defining range of subjects and sample size 
-subjects=c(5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,
-           160,165,170,175) #number of subjects per group
+subjects=c(176,177,178,179) #number of subjects per group
 nreads=c(11000) #same number of reads per subject (see package to define different number of reads)    
 subject.reads = expand.grid(subj=subjects, reads=nreads) 
 range=subject.reads
@@ -893,7 +889,7 @@ power.sample.size.table
 
 proc.time() - ptm
 
-write.table(x=power.sample.size.table,file="UpperRepFallvsS2_5P5_175by5s.csv", sep=",")
+write.table(x=power.sample.size.table,file="UpperRepFallvsS2_5P180_200by5s.csv", sep=",")
 
 ######
 ##S3##

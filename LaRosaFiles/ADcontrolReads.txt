@@ -1,4 +1,4 @@
-	SUM_Firmicutes	SUM_Actinobacteria	SUM_Proteobacteria	Bacteroidetes	Other
+	Firmicutes	Actinobacteria	Proteobacteria	Bacteroidetes	Other
 HC01_1	180	44	179	91	7
 HC01_2	336	86	41	27	10
 HC01_3	138	90	125	123	23

@@ -1,0 +1,2 @@
+	Proteobacteria	Firmicutes	Bacteroidetes	Actinobacteria	Fusobacteria	Cyanobacteria	OD1	TM7	Deinococcus-Thermus	Nitrospira	Planctomycetes	Chloroflexi	BRC1
+SD	23.77	25.22	16.62	5.91	6.62	0.13	0.054	0.151	0.014	0.005	0.013	0.005	0.009

@@ -14,8 +14,66 @@ colSums(FlareNT)
 colSums(FlareT)
 colSums(PostFlare)
 
-sd(Control[1,])
+######
+(a <- matrix(Control[1,], dimnames=list(colnames(Control[1,]), rownames(Control[1,]))))
+(b <- matrix(Control[2,], dimnames=list(colnames(Control[2,]), rownames(Control[2,]))))
+(c <- matrix(Control[3,], dimnames=list(colnames(Control[3,]), rownames(Control[3,]))))
+(d <- matrix(Control[4,], dimnames=list(colnames(Control[4,]), rownames(Control[4,]))))
+(e <- matrix(Control[5,], dimnames=list(colnames(Control[5,]), rownames(Control[5,]))))
 
+(control <- cbind(a,b,c,d,e))
+mode(control) <- "numeric"
+
+(a <- matrix(Baseline[1,], dimnames=list(colnames(Baseline[1,]), rownames(Baseline[1,]))))
+(b <- matrix(Baseline[2,], dimnames=list(colnames(Baseline[2,]), rownames(Baseline[2,]))))
+(c <- matrix(Baseline[3,], dimnames=list(colnames(Baseline[3,]), rownames(Baseline[3,]))))
+(d <- matrix(Baseline[4,], dimnames=list(colnames(Baseline[4,]), rownames(Baseline[4,]))))
+(e <- matrix(Baseline[5,], dimnames=list(colnames(Baseline[5,]), rownames(Baseline[5,]))))
+
+(baseline <- cbind(a,b,c,d,e))
+mode(baseline) <- "numeric"
+
+(a <- matrix(FlareNT[1,], dimnames=list(colnames(FlareNT[1,]), rownames(FlareNT[1,]))))
+(b <- matrix(FlareNT[2,], dimnames=list(colnames(FlareNT[2,]), rownames(FlareNT[2,]))))
+(c <- matrix(FlareNT[3,], dimnames=list(colnames(FlareNT[3,]), rownames(FlareNT[3,]))))
+(d <- matrix(FlareNT[4,], dimnames=list(colnames(FlareNT[4,]), rownames(FlareNT[4,]))))
+(e <- matrix(FlareNT[5,], dimnames=list(colnames(FlareNT[5,]), rownames(FlareNT[5,]))))
+
+(flarent <- cbind(a,b,c,d,e))
+mode(flarent) <- "numeric"
+
+(a <- matrix(FlareT[1,], dimnames=list(colnames(FlareT[1,]), rownames(FlareT[1,]))))
+(b <- matrix(FlareT[2,], dimnames=list(colnames(FlareT[2,]), rownames(FlareT[2,]))))
+(c <- matrix(FlareT[3,], dimnames=list(colnames(FlareT[3,]), rownames(FlareT[3,]))))
+(d <- matrix(FlareT[4,], dimnames=list(colnames(FlareT[4,]), rownames(FlareT[4,]))))
+(e <- matrix(FlareT[5,], dimnames=list(colnames(FlareT[5,]), rownames(FlareT[5,]))))
+
+(flaret <- cbind(a,b,c,d,e))
+mode(flaret) <- "numeric"
+
+(a <- matrix(PostFlare[1,], dimnames=list(colnames(PostFlare[1,]), rownames(PostFlare[1,]))))
+(b <- matrix(PostFlare[2,], dimnames=list(colnames(PostFlare[2,]), rownames(PostFlare[2,]))))
+(c <- matrix(PostFlare[3,], dimnames=list(colnames(PostFlare[3,]), rownames(PostFlare[3,]))))
+(d <- matrix(PostFlare[4,], dimnames=list(colnames(PostFlare[4,]), rownames(PostFlare[4,]))))
+(e <- matrix(PostFlare[5,], dimnames=list(colnames(PostFlare[5,]), rownames(PostFlare[5,]))))
+
+(postflare <- cbind(a,b,c,d,e))
+mode(postflare) <- "numeric"
+
+#######
+(controlmean <- colMeans(control))
+(baselinemean <- colMeans(baseline))
+(flarentmean <- colMeans(flarent))
+(flaretmean <- colMeans(flaret))
+(postflaremean <- colMeans(postflare))
+
+(controlSD <- apply(control,2,sd))
+(baselineSD <- apply(baseline,2,sd))
+(flarentSD <- apply(flarent,2,sd))
+(flaretSD <- apply(flaret,2,sd))
+(postflareSD <- apply(postflare,2,sd))
+
+#######
 (ControlSD <- matrix(apply(Control,1,sd),dimnames=list(rownames(Control), "SD")))
 (BaselineSD <- matrix(apply(Baseline,1,sd), dimnames=list(rownames(Baseline), "SD")))
 (FlareNTSD <- matrix(apply(FlareNT,1,sd), dimnames=list(rownames(FlareNT), "SD")))
@@ -23,21 +81,33 @@ sd(Control[1,])
 (PostFlareSD <- matrix(apply(PostFlare,1,sd), dimnames=list(rownames(PostFlare), "SD")))
 
 (ControlMean <- matrix(rowMeans(Control), nrow=1, ncol=5, dimnames=list("Mean", rownames(Control))))
-
 (BaselineMean <- matrix(rowMeans(Baseline), nrow=1, ncol=5, dimnames=list("Mean", rownames(Baseline))))
-
 (FlareNTMean <- matrix(rowMeans(FlareNT), nrow=1, ncol=5, dimnames=list("Mean", rownames(FlareNT))))
-
 (FlareTMean <- matrix(rowMeans(FlareT), nrow=1, ncol=5, dimname=list("Mean", rownames(FlareT))))
-
 (PostFlareMean <- matrix(rowMeans(PostFlare), nrow=1, ncol=5, dimnames=list("Mean", rownames(PostFlare))))
 
-###instead of making it come out of 100 make it come out of the sum total of all taxa 
+#######
 Premainder <- function(x) {
   rowsize <- dim(x)[1]
   colsize <- dim(x)[2]
   dims <- dimnames(x)[[2]]
-  y <- matrix(nrow=rowsize, ncol=colsize, dimnames=list(NULL,dims))
+  y <- matrix(nrow=rowsize, ncol=colsize)
+  for(i in 1:rowsize){
+    total <- apply(X=x,MARGIN=1,sum)[i]
+    y[i,1] <- x[i,1]/100
+    total <- total - x[i,1]
+    for(k in 2:colsize){
+      y[i,k] <- x[i,k]/ total
+      total <- total - x[i,k]
+    }
+  } 
+  return(matrix(y,nrow=colsize, ncol=rowsize, dimnames=list(dims, "Mean")))
+}
+######
+Premainder <- function(x) {
+  rowsize <- dim(x)[1]
+  colsize <- dim(x)[2]
+  y <- matrix(nrow=rowsize, ncol=colsize, dimnames=list(rownames(x),colnames(x)))
   for(i in 1:rowsize){
     total <- apply(X=x,MARGIN=1,sum)[i]
     y[i,1] <- x[i,1]/100
@@ -50,6 +120,30 @@ Premainder <- function(x) {
   return(y)
 }
 
+########
+(pcontrol <- Premainder(control*100))
+(pbaseline <- Premainder(baseline*100))
+(pflarent <- Premainder(flarent*100))
+(pflaret <- Premainder(flaret*100))
+(ppostflare <- Premainder(postflare*100))
+
+(pcontrolmean <- colMeans(pcontrol))
+(pbaselinemean <- colMeans(pbaseline))
+(pflarentmean <- colMeans(pflarent))
+(pflaretmean <- colMeans(pflaret))
+(ppostflaremean <- colMeans(ppostflare))
+
+rbind(pcontrolmean, pbaselinemean, pflarentmean, pflaretmean, ppostflaremean)
+
+(pcontrolSD <- apply(pcontrol,2,sd))
+(pbaselineSD <- apply(pbaseline,2,sd))
+(pflarentSD <- apply(flarent,2,sd))
+(pflaretSD <- apply(flaret,2,sd))
+(ppostflareSD <- apply(ppostflare,2,sd))
+
+rbind(pcontrolSD, pbaselineSD, pflarentSD, pflaretSD, ppostflareSD)
+
+########
 (ControlMP <- Premainder(ControlMean*100))
 (BaselineMP <- Premainder(BaselineMean*100))
 (FlareNTMP <- Premainder(FlareNTMean*100))
@@ -62,6 +156,7 @@ Premainder <- function(x) {
 (FlareTMSD <- cbind(FlareTMP, FlareTSD))
 (PostFlareMSD <- cbind(PostFlareMP, PostFlareSD))
 
+#######
 getBetaParams <- function(mean, sd) {
   m <- (1-mean)/mean
   n <- 1 + m
@@ -71,6 +166,7 @@ getBetaParams <- function(mean, sd) {
   return(params)
 }
 
+########
 CparFirm <- getBetaParams(ControlMSD[1,1], ControlMSD[1,2])
 CparActino <- getBetaParams(ControlMSD[2,1], ControlMSD[2,2])
 CparProteo <- getBetaParams(ControlMSD[3,1], ControlMSD[3,2])

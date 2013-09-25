@@ -52,6 +52,7 @@ Premainder <- function(x) {
   } 
   return(matrix(y,nrow=colsize, ncol=rowsize, dimnames=list(dims, "Mean")))
 }
+
 ########
 #run Premainter on percentages in proportions-of-total matrices
 ########
@@ -86,77 +87,65 @@ getBetaParams <- function(mean, sd) {
 ########
 #calculate the beta parameters for each dataset for each taxon
 #######
+collectParameters <- function(datamatrix) {
+  taxa <- rownames(datamatrix)
+  parameterNames <- list("type","a","b","location","scale")
+  BetaParameters <- matrix(data = NA, nrow = length(taxa), ncol = length(parameterNames), dimnames=list(taxa, parameterNames))
+  
+  for (i in 1:nrow(BetaParameters)) {
+    parameters <- getBetaParams(datamatrix[i,1],datamatrix[i,2]);
+    BetaParameters[i,] <- c(parameters$type, parameters$a, parameters$b, parameters$location, parameters$scale)
+  }
+  
+  return(BetaParameters)
+}
 
-CparFirm <- getBetaParams(ControlMSD[1,1], ControlMSD[1,2])
-CparActino <- getBetaParams(ControlMSD[2,1], ControlMSD[2,2])
-CparProteo <- getBetaParams(ControlMSD[3,1], ControlMSD[3,2])
-CparBact <- getBetaParams(ControlMSD[4,1], ControlMSD[4,2])
-
-BparFirm <- getBetaParams(BaselineMSD[1,1], BaselineMSD[1,2])
-BparActino <- getBetaParams(BaselineMSD[2,1], BaselineMSD[2,2])
-BparProteo <- getBetaParams(BaselineMSD[3,1], BaselineMSD[3,2])
-BparBact <- getBetaParams(BaselineMSD[4,1], BaselineMSD[4,2])
-
-FNTparFirm <- getBetaParams(FlareNTMSD[1,1], FlareNTMSD[1,2]) 
-FNTparActino <- getBetaParams(FlareNTMSD[2,1], FlareNTMSD[2,2])
-FNTparProteo <- getBetaParams(FlareNTMSD[3,1], FlareNTMSD[3,2])
-FNTparBact <- getBetaParams(FlareNTMSD[4,1], FlareNTMSD[4,2])
-
-FTparFirm <- getBetaParams(FlareTMSD[1,1], FlareTMSD[1,2])
-FTparActino <- getBetaParams(FlareTMSD[2,1], FlareTMSD[2,2])
-FTparProteo <- getBetaParams(FlareTMSD[3,1], FlareTMSD[3,2])
-FTparBact <- getBetaParams(FlareTMSD[4,1], FlareTMSD[4,2])
-
-PFparFirm <- getBetaParams(PostFlareMSD[1,1], PostFlareMSD[1,2])
-PFparActino <- getBetaParams(PostFlareMSD[2,1], PostFlareMSD[2,2])
-PFparProteo <- getBetaParams(PostFlareMSD[3,1], PostFlareMSD[3,2])
-PFparBact <- getBetaParams(PostFlareMSD[4,1], PostFlareMSD[4,2])
-
-###Control###
-numrow <- 25 #select number of subjects for rows
-numcol <- dim(ControlMSD)[1] #number of taxa for columns 
-Cdata <- matrix(nrow=numrow,ncol=numcol)
-colnames(Cdata) <- dimnames(ControlMSD)[[1]] #list taxa names in columns
-rownames(Cdata) <- rownames(Cdata, do.NULL= FALSE, prefix= "Sample") #call rows samples
+controlPar <- collectParameters(ControlMSD)
+baselinePar <- collectParameters(BaselineMSD)
+flareNTPar <- collectParameters(FlareNTMSD)
+flareTPar <- collectParameters(FlareTMSD)
+postFlarePar <- collectParameters(PostFlareMSD)
 
 ###############
 #calculate percent-remainder data for each sample
 ###############
-
-size <- dim(Cdata)[1] #number of samples
-
-for (i in 1:size){ #for-loop to find percent-remainder for each taxon
-  total <- 1
-  ###Firmicutes
-  Cdata[i,1] <- rpearson(n=1, params=CparFirm) #simulate a number from the control params for this taxon
-  total <- total - Cdata[i,1]
+spaceFill <- function (dataMatrix, distParameters, subjects){
+  subjects <- subjects #number of subjects for rows
+  taxa <- dim(dataMatrix)[1] #number of taxa for columns 
   
-  ###Actinobacteria
-  r <- rpearson(n=1, params=CparActino) #simulate a number from the control params and 
-  Cdata[i,2] <- total*r #multiply by the remaining percentage space
-  total <- total - Cdata[i,2]
-
-  ###Proteobacteria
-  r <- rpearson(n=1, params=CparProteo)
-  Cdata[i,3] <- total*r
-  total <- total - Cdata[i,3]
+  Cdata <- matrix(nrow=subjects,ncol=taxa)
+  taxaNames <- dimnames(dataMatrix)[[1]]
+  colnames(Cdata) <- taxaNames #list taxa names in columns
+  rownames(Cdata) <- rownames(Cdata, do.NULL= FALSE, prefix= "Sample") #call rows samples
   
-  ###Bacteriodetes
-  r <- rpearson(n=1, params=CparBact)
-  Cdata[i,4] <- total*r
-  total <- total - Cdata[i,4]
-  
-  ###Other
-  Cdata[i,5] <- total
-
+  for (i in 1:subjects){
+    total <- 1
+    for (j in 1:(taxa-1)){
+      r <- rpearson(n=1, params=distParameters[j,]);
+      Cdata[i,j] <- total * r
+      total <- total - Cdata[i,j];
+    }
+    Cdata[i,taxa] <- total;
+  }
+  return(Cdata)
 }
+
+Cdata <- spaceFill(ControlMSD,controlPar,4)
+Bdata <- spaceFill(BaselineMSD, baselinePar,6)
+Fdata <- spaceFill(FlareNTMSD,flareNTPar,10)
+Tdata <- spaceFill(FlareTMSD,flareTPar,2)
+Pdata <- spaceFill(PostFlareMSD,postFlarePar,15)
 
 ######
 #display data as a barchart
 ######
 
 Barchart.data(Cdata, title="ADControl")
-barchart(x=Cdata,horizontal=FALSE, col=rainbow(5),xlab=NULL)
+Barchart.data(Bdata, title="ADBaseline")
+Barchart.data(Fdata, title="ADFlare")
+Barchart.data(Tdata, title="ADTreatment")
+Barchart.data(Pdata, title="ADPost")
+#barchart(x=Cdata,horizontal=FALSE, col=rainbow(5),xlab=NULL)
 
 ####
 #get standard deviation of simulated samples

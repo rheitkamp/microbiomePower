@@ -14,65 +14,6 @@ colSums(FlareNT)
 colSums(FlareT)
 colSums(PostFlare)
 
-######
-(a <- matrix(Control[1,], dimnames=list(colnames(Control[1,]), rownames(Control[1,]))))
-(b <- matrix(Control[2,], dimnames=list(colnames(Control[2,]), rownames(Control[2,]))))
-(c <- matrix(Control[3,], dimnames=list(colnames(Control[3,]), rownames(Control[3,]))))
-(d <- matrix(Control[4,], dimnames=list(colnames(Control[4,]), rownames(Control[4,]))))
-(e <- matrix(Control[5,], dimnames=list(colnames(Control[5,]), rownames(Control[5,]))))
-
-(control <- cbind(a,b,c,d,e))
-mode(control) <- "numeric"
-
-(a <- matrix(Baseline[1,], dimnames=list(colnames(Baseline[1,]), rownames(Baseline[1,]))))
-(b <- matrix(Baseline[2,], dimnames=list(colnames(Baseline[2,]), rownames(Baseline[2,]))))
-(c <- matrix(Baseline[3,], dimnames=list(colnames(Baseline[3,]), rownames(Baseline[3,]))))
-(d <- matrix(Baseline[4,], dimnames=list(colnames(Baseline[4,]), rownames(Baseline[4,]))))
-(e <- matrix(Baseline[5,], dimnames=list(colnames(Baseline[5,]), rownames(Baseline[5,]))))
-
-(baseline <- cbind(a,b,c,d,e))
-mode(baseline) <- "numeric"
-
-(a <- matrix(FlareNT[1,], dimnames=list(colnames(FlareNT[1,]), rownames(FlareNT[1,]))))
-(b <- matrix(FlareNT[2,], dimnames=list(colnames(FlareNT[2,]), rownames(FlareNT[2,]))))
-(c <- matrix(FlareNT[3,], dimnames=list(colnames(FlareNT[3,]), rownames(FlareNT[3,]))))
-(d <- matrix(FlareNT[4,], dimnames=list(colnames(FlareNT[4,]), rownames(FlareNT[4,]))))
-(e <- matrix(FlareNT[5,], dimnames=list(colnames(FlareNT[5,]), rownames(FlareNT[5,]))))
-
-(flarent <- cbind(a,b,c,d,e))
-mode(flarent) <- "numeric"
-
-(a <- matrix(FlareT[1,], dimnames=list(colnames(FlareT[1,]), rownames(FlareT[1,]))))
-(b <- matrix(FlareT[2,], dimnames=list(colnames(FlareT[2,]), rownames(FlareT[2,]))))
-(c <- matrix(FlareT[3,], dimnames=list(colnames(FlareT[3,]), rownames(FlareT[3,]))))
-(d <- matrix(FlareT[4,], dimnames=list(colnames(FlareT[4,]), rownames(FlareT[4,]))))
-(e <- matrix(FlareT[5,], dimnames=list(colnames(FlareT[5,]), rownames(FlareT[5,]))))
-
-(flaret <- cbind(a,b,c,d,e))
-mode(flaret) <- "numeric"
-
-(a <- matrix(PostFlare[1,], dimnames=list(colnames(PostFlare[1,]), rownames(PostFlare[1,]))))
-(b <- matrix(PostFlare[2,], dimnames=list(colnames(PostFlare[2,]), rownames(PostFlare[2,]))))
-(c <- matrix(PostFlare[3,], dimnames=list(colnames(PostFlare[3,]), rownames(PostFlare[3,]))))
-(d <- matrix(PostFlare[4,], dimnames=list(colnames(PostFlare[4,]), rownames(PostFlare[4,]))))
-(e <- matrix(PostFlare[5,], dimnames=list(colnames(PostFlare[5,]), rownames(PostFlare[5,]))))
-
-(postflare <- cbind(a,b,c,d,e))
-mode(postflare) <- "numeric"
-
-#######
-(controlmean <- colMeans(control))
-(baselinemean <- colMeans(baseline))
-(flarentmean <- colMeans(flarent))
-(flaretmean <- colMeans(flaret))
-(postflaremean <- colMeans(postflare))
-
-(controlSD <- apply(control,2,sd))
-(baselineSD <- apply(baseline,2,sd))
-(flarentSD <- apply(flarent,2,sd))
-(flaretSD <- apply(flaret,2,sd))
-(postflareSD <- apply(postflare,2,sd))
-
 #######
 (ControlSD <- matrix(apply(Control,1,sd),dimnames=list(rownames(Control), "SD")))
 (BaselineSD <- matrix(apply(Baseline,1,sd), dimnames=list(rownames(Baseline), "SD")))
@@ -121,27 +62,6 @@ Premainder <- function(x) {
 }
 
 ########
-(pcontrol <- Premainder(control*100))
-(pbaseline <- Premainder(baseline*100))
-(pflarent <- Premainder(flarent*100))
-(pflaret <- Premainder(flaret*100))
-(ppostflare <- Premainder(postflare*100))
-
-(pcontrolmean <- colMeans(pcontrol))
-(pbaselinemean <- colMeans(pbaseline))
-(pflarentmean <- colMeans(pflarent))
-(pflaretmean <- colMeans(pflaret))
-(ppostflaremean <- colMeans(ppostflare))
-
-rbind(pcontrolmean, pbaselinemean, pflarentmean, pflaretmean, ppostflaremean)
-
-(pcontrolSD <- apply(pcontrol,2,sd))
-(pbaselineSD <- apply(pbaseline,2,sd))
-(pflarentSD <- apply(flarent,2,sd))
-(pflaretSD <- apply(flaret,2,sd))
-(ppostflareSD <- apply(ppostflare,2,sd))
-
-rbind(pcontrolSD, pbaselineSD, pflarentSD, pflaretSD, ppostflareSD)
 
 ########
 (ControlMP <- Premainder(ControlMean*100))
@@ -196,7 +116,7 @@ PFparBact <- getBetaParams(PostFlareMSD[4,1], PostFlareMSD[4,2])
 numrow <- 25
 numcol <- dim(ControlMSD)[1]
 Cdata <- matrix(nrow=numrow,ncol=numcol)
-colnames(Cdata) <- dimnames(ControlMSD)[[1]]
+gcolnames(Cdata) <- dimnames(ControlMSD)[[1]]
 rownames(Cdata) <- rownames(Cdata, do.NULL= FALSE, prefix= "Sample")
 
 
@@ -227,7 +147,8 @@ for (i in 1:size){
   Cdata[i,5] <- total
 
 }
-
+Barchart.data(Cdata, title="ADControl")
+barchart(x=Cdata,horizontal=FALSE, col=rainbow(5),xlab=NULL)
 apply(Cdata,2,sd)
 apply(Control,1,sd)
 
@@ -310,7 +231,7 @@ for (i in 1:size){
   FNTdata[i,5] <- total
   
 }
-
+Barchart.data(FNTdata, title="ADFlareNT")
 apply(FNTdata,2,sd)
 apply(FlareNT,1,sd)
 

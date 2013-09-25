@@ -73,6 +73,14 @@ mode(postflare) <- "numeric"
 (flaretSD <- apply(flaret,2,sd))
 (postflareSD <- apply(postflare,2,sd))
 
+(ccmsd <- rbind(controlmean, controlSD))
+(cbmsd <- rbind(baselinemean, baselineSD))
+(cfntmsd <- rbind(flarentmean, flarentSD))
+(cftmsd <- rbind(flaretmean, flarentSD))
+(cpfmsd <- rbind(postflaremean, postflareSD))
+
+write.table(cpfmsd, "dataholding.csv", sep=",")
+
 ######
 #(controlmean <- matrix(colMeans(control), dimnames=list(colnames(control), "Mean")))
 #(baselinemean <- matrix(colMeans(baseline), dimnames=list(colnames(baseline), "Mean")))
@@ -111,17 +119,17 @@ Premainder <- function(x) { ###data is formated in percentages
 (ppostflare <- Premainder(postflare*100))
 
 #####
-pcontrolmean <- colMeans(pcontrol)
-pbaselinemean <- colMeans(pbaseline)
-pflarentmean <- colMeans(pflarent)
-pflaretmean <- colMeans(pflaret)
-ppostflare <- colMeans(ppostflare)
+(pcontrolmean <- colMeans(pcontrol))
+(pbaselinemean <- colMeans(pbaseline))
+(pflarentmean <- colMeans(pflarent))
+(pflaretmean <- colMeans(pflaret))
+(ppostflaremean <- colMeans(ppostflare))
 
-pcontrolSD <- apply(pcontrol,2,sd)
-pbaselineSD <- apply(pbaseline,2,sd)
-pflarentSD <- apply(pflarent,2,sd)
-pflaretSD <- apply(pflaret,2,sd)
-ppostflare <- apply(ppostflare,2,sd)
+(pcontrolSD <- apply(pcontrol,2,sd))
+(pbaselineSD <- apply(pbaseline,2,sd))
+(flarentSD <- apply(pflarent,2,sd))
+(flaretSD <- apply(pflaret,2,sd))
+(ppostflareSD <- apply(ppostflare,2,sd))
 
 #####
 (pcontrolmean <- matrix(colMeans(pcontrol), dimnames=list(colnames(pcontrol), "Mean")))
@@ -132,12 +140,12 @@ ppostflare <- apply(ppostflare,2,sd)
 
 (pcontrolSD <- matrix(apply(pcontrol,2,sd), dimnames=list(colnames(pcontrol), "SD")))
 (pbaselineSD <- matrix(apply(pbaseline,2,sd), dimnames=list(colnames(pbaseline), "SD")))
-(pflarentSD <- matrix(apply(flarent,2,sd), dimnames=list(colnames(pflarent), "SD")))
-(pflaretSD <- matrix(apply(flaret,2,sd), dimnames=list(colnames(pflaret), "SD")))
+(pflarentSD <- matrix(apply(pflarent,2,sd), dimnames=list(colnames(pflarent), "SD")))
+(pflaretSD <- matrix(apply(pflaret,2,sd), dimnames=list(colnames(pflaret), "SD")))
 (ppostflareSD <- matrix(apply(ppostflare,2,sd), dimnames=list(colnames(ppostflare), "SD")))
 
 ######Before changing the matrix to a 5x1
-(controlmsd <- rbind(controlmean, pcontrolmean, controlSD, pcontrolSD))
+controlmsd <- rbind(controlmean, pcontrolmean, controlSD, pcontrolSD))
 (baselinemsd <- rbind(baselinemean, pbaselinemean, baselineSD, pbaselineSD))
 (flarentmsd <- rbind(flarentmean, pflarentmean, flarentSD, pflarentSD))
 (flaretmsd <- rbind(flaretmean, pflaretmean, flaretSD, pflaretSD))
@@ -227,7 +235,188 @@ for (i in 1:size){
 }
 
 pcdata
-colMeans(pcdata)
-apply(pcdata,2,sd)
+(sdatamean <- colMeans(pcdata))
+(sdatasd <- apply(pcdata,2,sd))
 controlmean
 controlSD
+
+(cpcmsd <- rbind(sdatamean,sdatasd))
+write.table(cpcmsd, "dataholding.csv", sep=",")
+write.table(pcdata, "pcdata19.csv", sep=",")
+
+#######pbaseline
+numrow <- 25
+numcol <- dim(pbaselinemsd)[1]
+pbdata <- matrix(nrow=numrow,ncol=numcol)
+colnames(pbdata) <- dimnames(pbaselinemsd)[[1]]
+rownames(pbdata) <- rownames(pbdata, do.NULL= FALSE, prefix= "Sample")
+
+
+size <- dim(pbdata)[1]
+
+for (i in 1:size){
+  total <- 1
+  ###Firmicutes
+  pbdata[i,1] <- rpearson(n=1, params=pbparfirm)
+  total <- total - pbdata[i,1]
+  
+  ###Actinobacteria
+  r <- rpearson(n=1, params=pbparactino)
+  pbdata[i,2] <- total*r
+  total <- total - pbdata[i,2]
+  
+  ###Proteobacteria
+  r <- rpearson(n=1, params=pbparproteo)
+  pbdata[i,3] <- total*r
+  total <- total - pbdata[i,3]
+  
+  ###Bacteriodetes
+  r <- rpearson(n=1, params=pbparbact)
+  pbdata[i,4] <- total*r
+  total <- total - pbdata[i,4]
+  
+  ###Other
+  pbdata[i,5] <- total
+  
+}
+
+pbdata
+(sdatamean <- colMeans(pbdata))
+(sdatasd <- apply(pbdata,2,sd))
+baselinemean
+baselineSD
+
+(cpcmsd <- rbind(sdatamean,sdatasd))
+write.table(cpcmsd, "dataholding.csv", sep=",")
+write.table(pcdata, "pbdata10.csv", sep=",")
+
+########pflarent
+numrow <- 25
+numcol <- dim(pflarentmsd)[1]
+pfntdata <- matrix(nrow=numrow,ncol=numcol)
+colnames(pfntdata) <- dimnames(pflarentmsd)[[1]]
+rownames(pfntdata) <- rownames(pfntdata, do.NULL= FALSE, prefix= "Sample")
+
+
+size <- dim(pfntdata)[1]
+
+for (i in 1:size){
+  total <- 1
+  ###Firmicutes
+  pfntdata[i,1] <- rpearson(n=1, params=pfntparfirm)
+  total <- total - pfntdata[i,1]
+  
+  ###Actinobacteria
+  r <- rpearson(n=1, params=pfntparactino)
+  pfntdata[i,2] <- total*r
+  total <- total - pfntdata[i,2]
+  
+  ###Proteobacteria
+  r <- rpearson(n=1, params=pfntparproteo)
+  pfntdata[i,3] <- total*r
+  total <- total - pfntdata[i,3]
+  
+  ###Bacteriodetes
+  r <- rpearson(n=1, params=pfntparbact)
+  pfntdata[i,4] <- total*r
+  total <- total - pfntdata[i,4]
+  
+  ###Other
+  pfntdata[i,5] <- total
+  
+}
+
+pfntdata
+(sdatamean <- colMeans(pfntdata))
+(sdatasd <- apply(pfntdata,2,sd))
+flarentmean
+flarentSD
+
+(cpcmsd <- rbind(sdatamean,sdatasd))
+write.table(cpcmsd, "dataholding.csv", sep=",")
+write.table(pcdata, "pfntdata10.csv", sep=",")
+
+
+#####pflaret
+numrow <- 25
+numcol <- dim(pbaselinemsd)[1]
+pftdata <- matrix(nrow=numrow,ncol=numcol)
+colnames(pftdata) <- dimnames(pflaretmsd)[[1]]
+rownames(pftdata) <- rownames(pftdata, do.NULL= FALSE, prefix= "Sample")
+
+
+size <- dim(pftdata)[1]
+
+for (i in 1:size){
+  total <- 1
+  ###Firmicutes
+  pftdata[i,1] <- rpearson(n=1, params=pftparfirm)
+  total <- total - pftdata[i,1]
+  
+  ###Actinobacteria
+  r <- rpearson(n=1, params=pftparactino)
+  pftdata[i,2] <- total*r
+  total <- total - pftdata[i,2]
+  
+  ###Proteobacteria
+  r <- rpearson(n=1, params=pftparproteo)
+  pftdata[i,3] <- total*r
+  total <- total - pftdata[i,3]
+  
+  ###Bacteriodetes
+  r <- rpearson(n=1, params=pftparbact)
+  pftdata[i,4] <- total*r
+  total <- total - pftdata[i,4]
+  
+  ###Other
+  pftdata[i,5] <- total
+  
+}
+
+pftdata
+colMeans(pftdata)
+apply(pftdata,2,sd)
+flaretmean
+flaretSD
+
+#####ppostflare
+numrow <- 25
+numcol <- dim(ppostflaremsd)[1]
+ppfdata <- matrix(nrow=numrow,ncol=numcol)
+colnames(ppfdata) <- dimnames(ppostflaremsd)[[1]]
+rownames(ppfdata) <- rownames(ppfdata, do.NULL= FALSE, prefix= "Sample")
+
+
+size <- dim(ppfdata)[1]
+
+for (i in 1:size){
+  total <- 1
+  ###Firmicutes
+  ppfdata[i,1] <- rpearson(n=1, params=ppfparfirm)
+  total <- total - ppfdata[i,1]
+  
+  ###Actinobacteria
+  r <- rpearson(n=1, params=ppfparactino)
+  ppfdata[i,2] <- total*r
+  total <- total - ppfdata[i,2]
+  
+  ###Proteobacteria
+  r <- rpearson(n=1, params=ppfparproteo)
+  ppfdata[i,3] <- total*r
+  total <- total - ppfdata[i,3]
+  
+  ###Bacteriodetes
+  r <- rpearson(n=1, params=ppfparbact)
+  ppfdata[i,4] <- total*r
+  total <- total - ppfdata[i,4]
+  
+  ###Other
+  ppfdata[i,5] <- total
+  
+}
+
+ppfdata
+colMeans(ppfdata)
+apply(ppfdata,2,sd)
+postflaremean
+postflareSD

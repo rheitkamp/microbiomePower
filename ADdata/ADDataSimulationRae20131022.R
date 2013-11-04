@@ -90,7 +90,7 @@ simulateBrokenStick <- function(inputFilename,outputLabel,numberSubjects=25) {
   (rawStdDiv <- matrix(apply(rawData,1,sd),dimnames=list(rownames(rawData), "SD"))) 
   
   #get arithmetic mean of each taxon in the dataset
-  (rawMean <- matrix(rowMeans(rawData), nrow=1, ncol=5, dimnames=list("Mean", rownames(rawData))))
+  (rawMean <- matrix(rowMeans(rawData), nrow=1, ncol=dim(rawData)[1], dimnames=list("Mean", rownames(rawData))))
 
   (meanPercentRemainder <- Premainder(rawMean*100)) #get percent remainder for mean proportions of taxa
   
@@ -114,8 +114,58 @@ simulateBrokenStick <- function(inputFilename,outputLabel,numberSubjects=25) {
   return(brokenStickSim)
 }
 
-simulateBrokenStick("ADControls.txt","Controls", 5000)
-simulateBrokenStick("ADBaseline.txt","ADBaseline", 300)
-simulateBrokenStick("ADFlareNT.txt","ADFlare", 300)
-simulateBrokenStick("ADFlareT.txt","ADTreatment", 300)
-simulateBrokenStick("ADPostFlare.txt","ADPost")
+#simulateBrokenStick("ADControls.txt","Controls", 5000)
+#simulateBrokenStick("ADBaseline.txt","ADBaseline", 300)
+#simulateBrokenStick("ADFlareNT.txt","ADFlare", 300)
+#simulateBrokenStick("ADFlareT.txt","ADTreatment", 300)
+#simulateBrokenStick("ADPostFlare.txt","ADPost")
+
+
+######GET VALIDATION DATASETS#############
+validationdatasets <- function(simdata, numberSimulations, publishNumbersubjects, numReads){ #7.Number of datasets to create/number of times to repeat
+  
+  BSData <- simdata #1.Simulate 10,000 samples
+  
+  listdataset <- replicate(n=length(numberSimulations), expr=list()) #2.Creates a place to store everything 
+  for(k in 1:numberSimulations){
+    publishNumbersubjects <- 22
+    col <- dim(BSData)[2]
+    table <- matrix(nrow=publishNumbersubjects,ncol=col)
+    colnames(table) <- dimnames(BSData)[[2]]
+    rownames(table) <- rownames(table, do.NULL= FALSE, prefix= "Sample")
+    pick <- sample(x=1:dim(BSData)[1],size=publishNumbersubjects) #3.Pick n sets of samples  
+    for(i in 1:publishNumbersubjects){ #4.Put together as one dataset  
+      table[i,] <- round(BSData[pick[i],]*numReads)
+    }
+    listdataset[[k]] <- table #Save the pi stat with dataset
+  }
+  return(listdataset)
+}
+
+
+#######VARIANCE CHECK, ONE SIM DATASET VS. PUBLISH DATASET AT A TIME#######
+variancecheck <- function(inputFilename, datalist, numReads){
+  R <- length(datalist)
+  pvalues <- numeric(R)
+  pubdata <- round(t(read.table(inputFilename))*numReads)
+  for(i in 1:R){
+    listdata <- list(datalist[[i]],pubdata)
+    check <- Xoc.sevsample(listdata)
+    pvalues[i] <- check$'p value' 
+  }
+  return(pvalues)
+}
+
+#######MEAN CHECK, ONE SIM DATASET VS. PUBLISH DATASET AT A TIME#######
+meancheck <- function(inputFilename, datalist, numReads){
+  R <- length(datalist)
+  pvalues <- numeric(R)
+  pubdata <- round(t(read.table(inputFilename))*numReads)
+  for(i in 1:R){
+    fit.simdata <- dirmult(datalist[[i]])
+    check <- Xsc.onesample(pubdata,fit.simdata$pi)
+    pvalues[i] <- check$'p value' 
+  }
+  return(pvalues)
+}
+

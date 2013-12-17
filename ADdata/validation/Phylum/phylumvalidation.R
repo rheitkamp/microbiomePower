@@ -106,52 +106,52 @@ meancheck <- function(inputFilename, datalist, numReads){
 
 
 meancheckcontrol <- meancheck("ADControls.txt", vcontrol, 3000)
-mean(meancheckcontrol < 0.05)
+mean(meancheckcontrol > 0.05)
 write.table(meancheckcontrol, "meancheckcontrolpvalues1000.txt")
 
 meancheckbaseline <- meancheck("ADBaseline.txt", vbaseline, 3000)
-mean(meancheckbaseline < 0.05)
+mean(meancheckbaseline > 0.05)
 write.table(meancheckbaseline, "meancheckbaselinepvalues1000.txt")
 
 meancheckflarent <- meancheck("ADFlareNT.txt", vflarent, 3000)
-mean(meancheckflarent < 0.05)
+mean(meancheckflarent > 0.05)
 write.table(meancheckflarent, "meancheckflarentpvalues1000.txt")
 
 meancheckflaret <- meancheck("ADFlareT.txt", vflaret, 3000)
-mean(meancheckflaret < 0.05)
+mean(meancheckflaret > 0.05)
 write.table(meancheckflaret, "meancheckflaretpvalues1000.txt")
 
 meancheckpostflare <- meancheck("ADPostFlare.txt", vpostflare, 3000)
-mean(meancheckpostflare < 0.05)
+mean(meancheckpostflare > 0.05)
 write.table(meancheckpostflare, "meancheckpostflarepvalues1000.txt")
 
 ###Varcheck  
 varcheckcontrol <- variancecheck("ADControls.txt",vcontrol,3000)
-mean(varcheckcontrol < 0.05)
+mean(varcheckcontrol > 0.05)
 mean(varcheckcontrol)
 median(varcheckcontrol)
 write.table(varcheckcontrol, "varcheckcontrolpvalues1000.txt")
 
 varcheckbaseline <- variancecheck("ADBaseline.txt",vbaseline,3000)
-mean(varcheckbaseline2 < 0.05)
+mean(varcheckbaseline > 0.05)
 mean(varcheckbaseline)
 median(varcheckbaseline)
 write.table(varcheckbaseline, "varcheckbaselinepvalues1000.txt")
 
 varcheckflarent <- variancecheck("ADFlareNT.txt",vflarent,3000)
-mean(varcheckflarent < 0.05)
+mean(varcheckflarent > 0.05)
 mean(varcheckflarent)
 median(varcheckflarent)
 write.table(varcheckflarent, "varcheckflarentpvalues1000.txt")
 
 varcheckflaret <- variancecheck("ADFlareT.txt", vflaret, 3000)
-mean(varcheckflaret < 0.05)
+mean(varcheckflaret > 0.05)
 mean(varcheckflaret)
 median(varcheckflaret)
 write.table(varcheckflaret, "varcheckflaretpvalues1000.txt")
 
 varcheckpostflare <- variancecheck("ADPostFlare.txt", vpostflare, 3000)
-mean(varcheckpostflare < 0.05)
+mean(varcheckpostflare > 0.05)
 mean(varcheckpostflare)
 median(varcheckpostflare)
 write.table(varcheckpostflare, "varcheckpostflare.txt")
@@ -188,52 +188,52 @@ write.table(x=v2postflare, file="v2postflaredatasets1000.csv", sep=",")
 
 #####
 meancheckcontrol2 <- meancheck("ADControls.txt", v2control, 3000)
-mean(meancheckcontrol2 < 0.05)
+mean(meancheckcontrol2 > 0.05)
 write.table(meancheckcontrol2, "meancheckcontrol2pvalues1000.csv", sep=",")
 
 meancheckbaseline2 <- meancheck("ADBaseline.txt", v2baseline, 3000)
-mean(meancheckbaseline2 < 0.05)
+mean(meancheckbaseline2 > 0.05)
 write.table(meancheckbaseline2, "meancheckbaseline2pvalues1000.csv", sep=",")
 
 meancheckflarent2 <- meancheck("ADFlareNT.txt", v2flarent, 3000)
-mean(meancheckflarent2 < 0.05)
+mean(meancheckflarent2 > 0.05)
 write.table(meancheckflarent2, "meancheckflarent2pvalues1000.csv", sep=",")
 
 meancheckflaret2 <- meancheck("ADFlareT.txt", v2flaret, 3000)
-mean(meancheckflaret2 < 0.05)
+mean(meancheckflaret2 > 0.05)
 write.table(meancheckflaret2, "meancheckflaret2pvalues1000.csv", sep=",")
 
 meancheckpostflare2 <- meancheck("ADPostFlare.txt", v2postflare, 3000)
-mean(meancheckpostflare2 < 0.05)
+mean(meancheckpostflare2 > 0.05)
 write.table(meancheckpostflare2, "meancheckpostflare2pvalues1000.csv", sep=",")
 
 ###Varcheck  
 varcheckcontrol2 <- variancecheck("ADControls.txt",v2control,3000)
-mean(varcheckcontrol2 < 0.05)
+mean(varcheckcontrol2 > 0.05)
 mean(varcheckcontrol2)
 median(varcheckcontrol2)
 write.table(varcheckcontrol2, "varcheckcontrol2pvalues1000.csv", sep=",")
 
 varcheckbaseline2 <- variancecheck("ADBaseline.txt",v2baseline,3000)
-mean(varcheckbaseline2 < 0.05)
+mean(varcheckbaseline2 > 0.05)
 mean(varcheckbaseline2)
 median(varcheckbaseline2)
 write.table(varcheckbaseline2, "varcheckbaseline2pvalues1000.csv", sep=",")
 
 varcheckflarent2 <- variancecheck("ADFlareNT.txt",v2flarent,3000)
-mean(varcheckflarent2 < 0.05)
+mean(varcheckflarent2 > 0.05)
 mean(varcheckflarent2)
 median(varcheckflarent2)
 write.table(varcheckflarent2, "varcheckflarent2pvalues1000.csv", sep=",")
 
 varcheckflaret2 <- variancecheck("ADFlareT.txt", v2flaret, 3000)
-mean(varcheckflaret2 < 0.05)
+mean(varcheckflaret2 > 0.05)
 mean(varcheckflaret2)
 median(varcheckflaret2)
 write.table(varcheckflaret2, "varcheckflaret2pvalues1000.csv", sep=",")
 
 varcheckpostflare2 <- variancecheck("ADPostFlare.txt", v2postflare, 3000)
-mean(varcheckpostflare2 < 0.05)
+mean(varcheckpostflare2 > 0.05)
 mean(varcheckpostflare2)
 median(varcheckpostflare2)
 write.table(varcheckpostflare2, "varcheckpostflare2pvalues1000.csv", sep=",")

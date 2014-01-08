@@ -3,20 +3,47 @@
 
 Premainder <- function(x) {
   rowsize <- dim(x)[1]
-  colsize <- dim(x)[2]
-  dims <- dimnames(x)[[1]]
-  total0 <- apply(X=x, MARGIN=2, sum)
-  y <- matrix(nrow=rowsize, ncol=colsize)
-  for(i in 1:colsize){
+  dims <- rownames(x)
+  y <- matrix(nrow=rowsize, dimnames=list(dims,"Mean"))
+  for(i in 1:1){
     total <- apply(X=x,MARGIN=2,sum)[i]
-    y[i,1] <- x[i,1]/total0
+    y[i,1] <- x[i,1]/total
     total <- total - x[i,1]
     for(k in 2:rowsize){
       y[k,i] <- x[k,i]/ total
       total <- total - x[k,i]
     }
   } 
-  return(matrix(y,nrow=rowsize, ncol=colsize, dimnames=list(dims, "Mean")))
+  z <- cbind(y,x[2])
+  return(z)
+}
+
+#CALCULATE PARAMETERS OF BETA DISTRIBUTION
+##########################################
+
+getBetaParams <- function(mean, sd) {
+  m <- (1-mean)/mean
+  n <- 1 + m
+  alpha <- (1/n)*(m/(sd^2*n^2)-1)
+  beta <- m * alpha
+  params <- list(type=1, a=alpha, b=beta, location=0, scale=1)
+  return(params)
+}
+
+#CALCULATE BETA PARAMETERS FOR EACH TAXON IN DATASET
+####################################################
+
+collectParameters <- function(data) {
+  taxa <- rownames(data)
+  parameterNames <- list("type","a","b","location","scale")
+  BetaParameters <- matrix(data = NA, nrow = length(taxa), ncol = length(parameterNames), dimnames=list(taxa, parameterNames))
+  
+  for (i in 1:nrow(BetaParameters)) {
+    parameters <- getBetaParams(data[i,1],data[i,2]);
+    BetaParameters[i,] <- c(parameters$type, parameters$a, parameters$b, parameters$location, parameters$scale)
+  }
+  
+  return(BetaParameters)
 }
 
 #SIMULATE SUBJECTS WITH BROKEN-STICK MODEL FOR A GIVEN DISTRIBUTION
@@ -43,6 +70,7 @@ spaceFill <- function (dataMatrix, distParameters, subjects){
   return(Cdata)
 }
 
+
 #WRAPPER FUNCTION
 #################
 simulateBrokenStick <- function(inputFilename,outputLabel,numberSubjects=25) {
@@ -50,34 +78,27 @@ simulateBrokenStick <- function(inputFilename,outputLabel,numberSubjects=25) {
   library(PearsonDS) #use pearsons distribution library (beta distribution)
   library(HMP) #use HMP package
   
-  #(rawData <- read.table(inputFilename)) #read data from file
+  (data <- read.table(inputFilename)) #read data from file
   
-  rowsums(rawData[,1]) ##!!validate that column sums equal 1!!
+  prdata <- Premainder(data) #calculate percent remainder of taxon means
   
-  #get standard deviation of each taxon in the data set
-  (rawStdDiv <- matrix(rawData[,2],dimnames=list(rownames(rawData), "SD"))) 
+  parameters <- collectParameters(prdata) #calculate parameters of percent remainder beta distribution
   
-  #get arithmetic mean of each taxon in the dataset
-  (rawMean <- matrix(rawData[,1], nrow=1, ncol=dim(rawData)[1], dimnames=list("Mean", rownames(rawData))))
-  
-  (meanPercentRemainder <- Premainder(rawMean*100)) #get percent remainder for mean proportions of taxa
-  
-  (pR_MeanStDev <- cbind(meanPercentRemainder, rawStdDiv)) #combine percent remainder means with raw stdev
-  
-  parameters <- collectParameters(pR_MeanStDev) #calculate parameters of percent remainder beta dist
-  
-  brokenStickSim <- spaceFill(pR_MeanStDev,parameters,numberSubjects) #run the simulation
+  brokenStickSim <- spaceFill(prdata,parameters,numberSubjects) #run the simulation
   
   Barchart.data(brokenStickSim, title=outputLabel) #display data as barchart
   
-  print('Standard Deviation, simulated vs. provided data')
-  print(apply(brokenStickSim,2,sd)) #compare simulated standard deviations
-  print(apply(rawData[,2])) #to raw reported standard deviations
+  Simulated.Mean <- t(t(colMeans(brokenStickSim))) # calculate the simulated mean
+  Provided.Mean <- array(data[1]) # grabs the provided mean
+  SimVSProMean <- cbind(Simulated.Mean, Provided.Mean) #place the simulated and provided mean in a table 
   
-  print('Mean, simulated vs. provided data')
-  print(colMeans(brokenStickSim)) #compare simulated means
-  print(rawData[,1]) #to raw reported means
-  print('')
-  print('')
+  Simulated.SD <- t(t(apply(brokenStickSim,2,sd))) #calculates the simulated standard deviation
+  Provided.SD <- array(data[2]) #grabs the provided standard deviation
+  SimVSProSD <- cbind(Simulated.SD, Provided.SD) #place the simulated and provided standard deviations in a table
+  
+  listMSD <- list(SimVSProMean, SimVSProSD) #place comparisons in a list 
+  names(listMSD) <- c('Mean, simulated vs. provided data', 'Standard Deviation, simulated vs. provided data')
+  print(listMSD)
+
   return(brokenStickSim)
 }

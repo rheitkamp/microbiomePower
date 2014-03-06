@@ -18,28 +18,44 @@ pSimObsControlPvalues <- meanVarCheckPvalues(simlist=pControlDatalist, observedD
 mean(pSimObsControlPvalues)
 length(which(pSimObsControlPvalues > 0.05))/length(pSimObsControlPvalues)
 
+
 pSimObsBaselinePvalues <- meanVarCheckPvalues(simlist=pBaselineDatalist, observedData=pbaseline, reads=3000)
 mean(pSimObsBaselinePvalues)
 length(which(pSimObsBaselinePvalues > 0.05))/length(pSimObsBaselinePvalues)
+
 
 pSimObsFlarentPvalues <- meanVarCheckPvalues(simlist=pFlarentDatalist, observedData=pflarent, reads=3000)
 mean(pSimObsFlarentPvalues)
 length(which(pSimObsFlarentPvalues > 0.05))/length(pSimObsFlarentPvalues)
 
+
 pSimObsFlaretPvalues <- meanVarCheckPvalues(simlist=pFlaretDatalist, observedData=pflaret, reads=3000)
 mean(pSimObsFlaretPvalues)
 length(which(pSimObsFlaretPvalues > 0.05))/length(pSimObsFlaretPvalues)
+
 
 pSimObsPostflarePvalues <- meanVarCheckPvalues(simlist=pPostflareDatalist, observedData=ppostflare, reads=3000)
 mean(pSimObsPostflarePvalues)
 length(which(pSimObsPostflarePvalues > 0.05))/length(pSimObsPostflarePvalues)
 
-save(pcontrol, pbaseline, pflarent, pflaret, ppostflare, pControlDatalist, pBaselineDatalist, pFlarentDatalist,
-     pFlaretDatalist, pPostflareDatalist, pSimObsControlPvalues, pSimObsBaselinePvalues, pSimObsFlarentPvalues,
-     pSimObsFlaretPvalues, pSimObsPostflarePvalues, file="test.RData")
-save(pcontrol, pbaseline, pflarent, pflaret, ppostflare, pControlDatalist, pBaselineDatalist,
-     pFlarentDatalist, pFlaretDatalist, pPostflareDatalist, pSimObsControlPvalues, pSimObsBaselinePvalues,
-     pSimObsFlarentPvalues, pSimObsFlaretPvalues, pSimObsPostflarePvalues,file="test.RData")
+
+###Combined p-values using Stouffer's z-score method (survcomp package)
+combine.test(p=pSimObsControlPvalues, method="z.transform")
+combine.test(p=pSimObsBaselinePvalues, method="z.transform")
+
+pSimObsFlarentPvaluesEdited <- pSimObsFlarentPvalues
+pSimObsFlarentPvaluesEdited[pSimObsFlarentPvaluesEdited == 0] <- 0.000000000000001
+combine.test(p=pSimObsFlarentPvaluesEdited, method="z.transform") ###Change to small float value
+
+combine.test(p=pSimObsFlaretPvalues, method="z.transform")
+combine.test(p=pSimObsPostflarePvalues, method="z.transform")
+
+hist(pSimObsControlPvalues, 100)
+hist(pSimObsBaselinePvalues, 100)
+hist(pSimObsFlarentPvalues, 100)
+hist(pSimObsFlaretPvalues, 100)
+hist(pSimObsPostflarePvalues, 100)
+
 
 ###Saving data objects in .RData format
 saveRDS(object=pControlDatalist, file="pControlDatalist.RData")
@@ -79,6 +95,35 @@ sSimObsPostflarePvalues <- meanVarCheckPvalues(simlist=sPostflareDatalist, obser
 mean(sSimObsPostflarePvalues)
 length(which(sSimObsPostflarePvalues > 0.05))/length(sSimObsPostflarePvalues)
 
+########
+###Combined p-values using Stouffer's z-score method (survcomp package) ### change all 0 to small float
+###Change zeros to very small float (0.000000000000001) for the ones that produce NaN
+sSimObsControlPvaluesEdited <- sSimObsControlPvalues
+sSimObsControlPvaluesEdited[sSimObsControlPvaluesEdited == 0] <- 0.000000000000001
+combine.test(p=sSimObsControlPvaluesEdited, method="z.transform")
+
+sSimObsBaselinePvaluesEdited <- sSimObsBaselinePvalues
+sSimObsBaselinePvaluesEdited[sSimObsBaselinePvaluesEdited == 0] <- 0.000000000000001
+combine.test(p=sSimObsBaselinePvaluesEdited, method="z.transform")
+
+sSimObsFlarentPvaluesEdited <- sSimObsFlarentPvalues
+sSimObsFlarentPvaluesEdited[sSimObsFlarentPvaluesEdited == 0] <- 0.000000000000001
+combine.test(p=sSimObsFlarentPvaluesEdited, method="z.transform") 
+
+sSimObsFlaretPvaluesEdited <- sSimObsFlaretPvalues
+sSimObsFlaretPvaluesEdited[sSimObsFlaretPvaluesEdited == 0] <- 0.000000000000001
+combine.test(p=sSimObsFlaretPvaluesEdited, method="z.transform")
+
+sSimObsPostflarePvaluesEdited <- sSimObsPostflarePvalues
+sSimObsPostflarePvaluesEdited[sSimObsPostflarePvaluesEdited == 0] <- 0.000000000000001
+combine.test(p=sSimObsPostflarePvaluesEdited, method="z.transform")
+
+hist(sSimObsControlPvalues, 100)
+hist(sSimObsBaselinePvalues, 100)
+hist(sSimObsFlarentPvalues, 100)
+hist(sSimObsFlaretPvalues, 100)
+hist(sSimObsPostflarePvalues, 100)
+
 
 saveRDS(object=sControlDatalist, file="sControlDatalist.RData")
 saveRDS(object=sBaselineDatalist, file="sBaselineDatalist.RData")
@@ -94,18 +139,4 @@ saveRDS(object=sSimObsFlarentPvalues, file="sSimObsFlarentPvalues.RData")
 saveRDS(object=sSimObsFlaretPvalues, file="sSimObsFlaretPvalues.RData")
 saveRDS(object=sSimObsPostflarePvalues, file="sSimObsPostflarePvalue.RData")
 
-
-
-
-
-
-
-save(pcontrol, pbaseline, pflarent, pflaret, ppostflare, pControlDatalist, pBaselineDatalist, pFlarentDatalist,
-     pFlaretDatalist, pPostflareDatalist, pSimObsControlPvalues, pSimObsBaselinePvalues, pSimObsFlarentPvalues,
-     pSimObsFlaretPvalues, pSimObsPostflarePvalues, file="test.RData")
-save(pcontrol, pbaseline, pflarent, pflaret, ppostflare, pControlDatalist, pBaselineDatalist,
-     pFlarentDatalist, pFlaretDatalist, pPostflareDatalist, pSimObsControlPvalues, pSimObsBaselinePvalues,
-     pSimObsFlarentPvalues, pSimObsFlaretPvalues, pSimObsPostflarePvalues,file="test.RData")
-
-
-
+########################################################

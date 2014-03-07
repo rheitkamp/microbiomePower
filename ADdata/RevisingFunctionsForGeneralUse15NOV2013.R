@@ -1,10 +1,11 @@
-#CALCULATE PERCENT REMAINDER OF TAXON MEANS
+#CALCULATE PERCENT REMAINDER OF TAXON MEANS ########Fixed this!!!
 ###########################################
 
 Premainder <- function(x) {
   rowsize <- dim(x)[1]
   dims <- rownames(x)
   y <- matrix(nrow=rowsize, dimnames=list(dims,"Mean"))
+  SD <- matrix(x[,2], dimnames=list(rownames(x),"SD"))
   for(i in 1:1){
     total <- apply(X=x,MARGIN=2,sum)[i]
     y[i,1] <- x[i,1]/total
@@ -14,7 +15,7 @@ Premainder <- function(x) {
       total <- total - x[k,i]
     }
   } 
-  z <- cbind(y,x[2])
+  z <- cbind(y,SD)
   return(z)
 }
 
@@ -73,7 +74,7 @@ spaceFill <- function (dataMatrix, distParameters, subjects){
 
 #WRAPPER FUNCTION
 #################
-simulateBrokenStick <- function(inputFilename,outputLabel,numberSubjects=25) {
+simulateBrokenStick <- function(data,outputLabel,numberSubjects=25) {
   #set.seed(1234) #always use the same seed during testing
   library(PearsonDS) #use pearsons distribution library (beta distribution)
   library(HMP) #use HMP package

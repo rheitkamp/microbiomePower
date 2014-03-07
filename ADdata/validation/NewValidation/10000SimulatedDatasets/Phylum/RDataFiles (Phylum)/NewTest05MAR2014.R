@@ -1,4 +1,5 @@
 library(HMP)
+library(survcomp)
 
 
 ###Function to compare mean proportions and overdispersion using Xdc.sevsample test
@@ -140,3 +141,19 @@ saveRDS(object=sSimObsFlaretPvalues, file="sSimObsFlaretPvalues.RData")
 saveRDS(object=sSimObsPostflarePvalues, file="sSimObsPostflarePvalue.RData")
 
 ########################################################
+###RAT DATA#####
+################
+
+d2LSCpValues <- meanVarCheckPvalues(simlist=vLSCCED2, observedData=d2LSCsorted, reads=3000)
+d4LSCCpValues <- meanVarCheckPvalues(simlist=vLSCCD4, observedData=d4LSCCsorted, reads=3000)
+d4LSCEpValues <- meanVarCheckPvalues(simlist=vLSCED4, observedData=d4LSCEsorted, reads=3000)
+
+d2LSCpValuesEdited <- d2LSCpValues
+d2LSCpValuesEdited[d2LSCpValuesEdited == 0] <- 0.000000000000001
+combine.test(p=d2LSCpValuesEdited, method="z.transform")
+
+d4LSCCpValuesEdited <- d4LSCCpValues
+d4LSCCpValuesEdited[d4LSCCpValuesEdited == 0] <- 0.000000000000001
+combine.test(p=d4LSCCpValuesEdited, method="z.transform")
+
+combine.test(p=d4LSCEpValues, method="z.transform")

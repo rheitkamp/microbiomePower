@@ -79,7 +79,7 @@ simulateBrokenStick <- function(data,outputLabel,numberSubjects=25) {
   library(PearsonDS) #use pearsons distribution library (beta distribution)
   library(HMP) #use HMP package
   
-  (data <- read.table(inputFilename)) #read data from file
+  #(data <- read.table(inputFilename)) #read data from file
   
   prdata <- Premainder(data) #calculate percent remainder of taxon means
   
@@ -90,11 +90,11 @@ simulateBrokenStick <- function(data,outputLabel,numberSubjects=25) {
   Barchart.data(brokenStickSim, title=outputLabel) #display data as barchart
   
   Simulated.Mean <- t(t(colMeans(brokenStickSim))) # calculate the simulated mean
-  Provided.Mean <- array(data[1]) # grabs the provided mean
+  Provided.Mean <- array(data[,1]) # grabs the provided mean
   SimVSProMean <- cbind(Simulated.Mean, Provided.Mean) #place the simulated and provided mean in a table 
   
   Simulated.SD <- t(t(apply(brokenStickSim,2,sd))) #calculates the simulated standard deviation
-  Provided.SD <- array(data[2]) #grabs the provided standard deviation
+  Provided.SD <- array(data[,2]) #grabs the provided standard deviation
   SimVSProSD <- cbind(Simulated.SD, Provided.SD) #place the simulated and provided standard deviations in a table
   
   listMSD <- list(SimVSProMean, SimVSProSD) #place comparisons in a list 

@@ -182,3 +182,13 @@ write.table(collectParameters(Premainder(ADScontrolMSD)), "ADSControlParameters.
 write.table(collectParameters(Premainder(ADSflarentMSD)), "ADSFlarentParameters.txt", sep=",")
 write.table(collectParameters(Premainder(ADSflaretMSD)), "ADSFlaretParameters.txt", sep=",")
 write.table(collectParameters(Premainder(ADSpostflareMSD)), "ADSPostflareParameters.txt", sep=",")
+
+
+Mean <- matrix(data = c(0.70,0.15,0.10,0.04,0.01))
+SD <- matrix(data = c(0.25,0.20,0.15,0.10,0.05))
+
+MSD <- cbind(Mean,SD)
+rownames(MSD) <- c("1", "2", "3", "4", "5")
+colnames(MSD) <- c("MEAN", "SD")
+
+retroBiome(MSD,outputLabel = "test",numberOfSamplesToSimulate = 5)

@@ -1,0 +1,8 @@
+	S.aureus	S.epidermidis	NonStaphylococcusgenera	S.hominis	S.capitis	OtherStaphylococcus
+Subject1	1098	256	109	12	3	5
+Subject2	375	883	153	33	0	4
+Subject3	1185	81	84	2	86	14
+Subject4	726	584	108	0	2	7
+Subject5	1273	84	52	0	3	20
+Subject6	603	51	495	166	25	12
+Subject7	1234	109	72	5	1	4

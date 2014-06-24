@@ -1,0 +1,8 @@
+	Firmicutes	Actinobacteria	Proteobacteria	Bacteroidetes	Other
+AD02	1441	8	16	13	5
+AD03	1390	33	6	19	0
+AD04	1419	12	5	14	3
+AD05	1345	59	14	9	1
+AD07	1399	19	11	1	2
+AD10	1005	211	103	32	3
+AD11	1293	34	5	4	6

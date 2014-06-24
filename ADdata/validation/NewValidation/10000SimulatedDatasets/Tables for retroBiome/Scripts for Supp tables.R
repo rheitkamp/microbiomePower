@@ -60,6 +60,11 @@ write.table(collectParameters(Premainder(LSCED4MSD)), "RatWOundGenusExperimental
 ########################################################
 #                     AD Phylum                        #
 ########################################################
+write.table(pbaseline, "ADPBaseline.txt", sep = ",")
+write.table(pcontrol, "ADPControl.txt", sep = ",")
+write.table(pflarent, "ADPFlarent.txt", sep = ",")
+write.table(pflaret, "ADPFlaret.txt", sep = ",")
+write.table(ppostflare, "ADPPostflare.txt",sep = ",")
 
 mean <- apply(pbaseline,2,mean)
 sd <- apply(pbaseline,2,sd)
@@ -123,6 +128,11 @@ write.table(collectParameters(Premainder(ADPpostflareMSD)), "ADPPostflaretParame
 ############################################################
 #                       AD Species                         #
 ############################################################
+write.table(sbaseline, "ADSBaseline.txt", sep=",")
+write.table(scontrol, "ADSControl.txt", sep",")
+write.table(sflarent, "ADSFlarent.txt", sep=",")
+write.table(sflaret, "ADSFlaret.txt", sep = ",")
+write.table(spostflare, "ADSPostflare.txt", sep = ",")
 
 mean <- apply(sbaseline,2,mean)
 sd <- apply(sbaseline,2,sd)
@@ -184,11 +194,4 @@ write.table(collectParameters(Premainder(ADSflaretMSD)), "ADSFlaretParameters.tx
 write.table(collectParameters(Premainder(ADSpostflareMSD)), "ADSPostflareParameters.txt", sep=",")
 
 
-Mean <- matrix(data = c(0.70,0.15,0.10,0.04,0.01))
-SD <- matrix(data = c(0.25,0.20,0.15,0.10,0.05))
 
-MSD <- cbind(Mean,SD)
-rownames(MSD) <- c("1", "2", "3", "4", "5")
-colnames(MSD) <- c("MEAN", "SD")
-
-retroBiome(MSD,outputLabel = "test",numberOfSamplesToSimulate = 5)

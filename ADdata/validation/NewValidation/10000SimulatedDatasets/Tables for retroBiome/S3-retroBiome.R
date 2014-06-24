@@ -164,6 +164,7 @@ retroBiome <- function(summaryTable,outputLabel,numberOfSamplesToSimulate=25) {
   return(sampleSimulation)
 }
 
-inputData <- read.table("example.txt") #replace "example.txt" with your tab-delineated table of proportion and standard deviation
+inputData <- read.table("test.txt") #replace "example.txt" with your tab-delineated table of proportion and standard deviation
+inputData2 <- read.table("ExampleMeanSD.txt")
 outputLabel <- "Simulated Samples" #replace "Simulated Samples" with the title of your graph of simulated samples
 retroBiome(inputData, outputLabel, numberOfSamplesToSimulate=25) #if you want to simulate more than 25 samples, change "numberOfSamplesToSimulate" to the number 

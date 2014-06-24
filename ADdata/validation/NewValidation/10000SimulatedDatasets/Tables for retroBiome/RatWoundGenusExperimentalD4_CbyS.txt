@@ -1,0 +1,5 @@
+"Staphylococcus","Enterobacter","Klebsiella","Serratia","Pseudomonas","Escherichia","Shigella","Citrobacter","Achromobacter","Bacillus","Cronobacter","Acinetobacter","Paenibacillus","Alcaligenes","Clostridium","Pantoea","Aranicola","Marinobacterium","Streptococcus","Corynebacterium","Acetobacter","Enterococcus","Propionibacterium","Desulfovibrio"
+"LSCED4.1223478LWound81012.28F",4749,10,0,3,148,1,0,0,2,50,0,4,7,0,0,0,0,0,0,0,1,1,0,0
+"LSCED4.1223478L81012.28F",218,2523,851,156,29,31,0,5,56,3,18,4,0,7,0,2,2,0,0,1,0,0,1,0
+"LSCED4.1223479LWound81012.28F",1,0,0,692,540,0,0,1,0,1,0,2,0,0,0,0,0,0,0,0,0,0,0,0
+"LSCED4.1223477L82412.28F",713,941,589,0,4,380,119,66,4,0,13,9,1,0,3,0,0,2,1,0,0,0,0,1

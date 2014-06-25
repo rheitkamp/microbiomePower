@@ -129,7 +129,7 @@ write.table(collectParameters(Premainder(ADPpostflareMSD)), "ADPPostflaretParame
 #                       AD Species                         #
 ############################################################
 write.table(sbaseline, "ADSBaseline.txt", sep=",")
-write.table(scontrol, "ADSControl.txt", sep",")
+write.table(scontrol, "ADSControl.txt", sep=",")
 write.table(sflarent, "ADSFlarent.txt", sep=",")
 write.table(sflaret, "ADSFlaret.txt", sep = ",")
 write.table(spostflare, "ADSPostflare.txt", sep = ",")
